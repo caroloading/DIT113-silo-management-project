@@ -20,14 +20,12 @@ public class HomeController {
 	@Autowired
 	private GrainHeightRepository grainHeightRepository;
 
-	private Year thisYear = Year.now();
-
 	@GetMapping({"/", "/index"})
 	public String showIndex(Model model) {
 		model.addAttribute("temperature", temperatureRepository.findTopByOrderByDateTimeDesc());
 		model.addAttribute("humidity", humidityRepository.findTopByOrderByDateTimeDesc());
 		model.addAttribute("grainHeight", grainHeightRepository.findTopByOrderByDateTimeDesc());
-		model.addAttribute("thisYear", thisYear);
+		model.addAttribute("thisYear", Year.now());
 
 		return "index";
 	}
