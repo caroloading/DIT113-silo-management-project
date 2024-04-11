@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/base_layout}">
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <section layout:fragment="content"> 
+      <div class="row pgcontent justify-content-center">
+        <div class="col-auto d-flex justify-content-center">
+          <div class="card hp-card">
+            <div class="card-body">
+              <h5 class="card-title">Temperature</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">Current temperature:</h6>
+              <p class="card-text fs-2 fw-bold text-center">
+                <span id="temp-elem" th:text="${temperature.tValue}"></span> &deg;C
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto d-flex justify-content-center">
+          <div class="card hp-card">
+            <div class="card-body">
+              <h5 class="card-title">Humidity</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">Current Humidity:</h6>
+              <p class="card-text fs-2 fw-bold text-center">
+                <span id="humid-elem" th:text="${humidity.hValue}"></span>&percnt;
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto d-flex justify-content-center">
+          <div class="card hp-card">
+            <div class="card-body">
+              <h5 class="card-title">Grain Level</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">Current Level:</h6>
+              <p class="card-text fs-2 fw-bold text-center">
+                <span id="humid-elem" th:text="${grainHeight.height}"></span>&percnt;
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section layout:fragment="custom-scripts">
+      <!--<script src="/scripts/custom.js"></script>
+      <script>
+        document.onreadystatechange = function () {
+          if (document.readyState == "complete") {
+            // call JS our functions here 
+          }
+        }
+      </script>-->
+    </section>
+  </body>
+</html>
