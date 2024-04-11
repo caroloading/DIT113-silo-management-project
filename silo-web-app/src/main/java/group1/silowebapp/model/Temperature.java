@@ -24,19 +24,14 @@ public class Temperature {
     private String dateTime; 
 
     @ManyToOne
-    @JoinColumn(name = "silo_id")
-    private Silo silo;
-
-    @ManyToOne
     @JoinColumn(name = "mcu_id")
     private Mcu mcu;
 
     protected Temperature() {}
 
-    public Temperature(Double tValue, String dateTime, Silo silo, Mcu mcu) {
+    public Temperature(Double tValue, String dateTime, Mcu mcu) {
       this.tValue = tValue;
       this.dateTime = dateTime;
-      this.silo = silo;
       this.mcu = mcu;
     }
 
@@ -51,10 +46,6 @@ public class Temperature {
     public String getDateTime() {
         // Todo: format dateTime
         return dateTime;
-    }
-    
-    public Silo getSilo() {
-        return silo;
     }
 
     public Mcu getMcu() {

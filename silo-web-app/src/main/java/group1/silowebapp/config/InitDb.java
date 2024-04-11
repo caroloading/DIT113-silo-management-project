@@ -33,7 +33,7 @@ public class InitDb {
 		SiloRepository siloRepository, McuRepository mcuRepository, GrainHeightRepository grainHeightRepository, 
 		HumidityRepository humidityRepository, TemperatureRepository temperatureRepository) {
 		return (args) -> {
-
+		
         // SILO
 		// save a few Silos
 		siloRepository.save(new Silo(8.0, 4.0));
@@ -54,10 +54,14 @@ public class InitDb {
 		log.info(silo.toString());
 		log.info("");
 		
+		final Silo firstSilo = siloRepository.findById(1L);
+		final Silo secondSilo = siloRepository.findById(2L);
+		final Mcu firstMcu = mcuRepository.findById(1L);
+
 		// MCU
 		// save a few Mcus
-		mcuRepository.save(new Mcu("Wio terminal 01", "Seed Studio", "SAMD51"));
-		mcuRepository.save(new Mcu("Wio terminal 02", "Seed Studio", "SAMD51"));
+		mcuRepository.save(new Mcu("Wio terminal 01", "Seed Studio", "SAMD51", firstSilo));
+		mcuRepository.save(new Mcu("Wio terminal 02", "Seed Studio", "SAMD51", secondSilo));
 
 		// fetch all Mcus
 		log.info("Mcus found with findAll():");
@@ -76,10 +80,8 @@ public class InitDb {
 
 		// GrainHeight
 		// save a few Grain heights 
-		grainHeightRepository.save(new GrainHeight(30.19, "2024-04-10 23:58:23", 
-					siloRepository.findById(1L), mcuRepository.findById(1L)));
-		grainHeightRepository.save(new GrainHeight(33.20, "2024-04-11 00:09:40", 
-					siloRepository.findById(1L), mcuRepository.findById(1L)));
+		grainHeightRepository.save(new GrainHeight(30.19, "2024-04-10 23:58:23", firstMcu));
+		grainHeightRepository.save(new GrainHeight(33.20, "2024-04-11 00:09:40", firstMcu));
 
 		// fetch all heights
 		log.info("GrainHeights found with findAll():");
@@ -106,10 +108,8 @@ public class InitDb {
 
 		// Humidity
         // save a few Humidities
-        humidityRepository.save(new Humidity(33.32, "2024-04-11 00:01:16", 
-                    siloRepository.findById(1L), mcuRepository.findById(1L)));
-		humidityRepository.save(new Humidity(43.20, "2024-04-11 00:02:33", 
-                    siloRepository.findById(1L), mcuRepository.findById(1L)));
+        humidityRepository.save(new Humidity(33.32, "2024-04-11 00:01:16", firstMcu));
+		humidityRepository.save(new Humidity(43.20, "2024-04-11 00:02:33", firstMcu));
 
         // fetch all Humidities
         log.info("Humidities found with findAll():");
@@ -136,10 +136,8 @@ public class InitDb {
 
 		// Temperature
         // save a few Temperatures
-        temperatureRepository.save(new Temperature(36.02, "2024-04-10 23:45:41", 
-                    siloRepository.findById(1L), mcuRepository.findById(1)));
-		temperatureRepository.save(new Temperature(45.25, "2024-04-10 23:52:36", 
-                    siloRepository.findById(1L), mcuRepository.findById(1)));
+        temperatureRepository.save(new Temperature(36.02, "2024-04-10 23:45:41", firstMcu));
+		temperatureRepository.save(new Temperature(45.25, "2024-04-10 23:52:36", firstMcu));
 
         // fetch all Temperatures
         log.info("Temperatures found with findAll():");

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Mcu {
@@ -24,12 +26,17 @@ public class Mcu {
     @Column(nullable=false)
     private String prodModel;
 
+    @OneToOne
+    @JoinColumn(name = "silo_id")
+    private Silo silo;
+
     protected Mcu() {}
 
-    public Mcu(String name, String vendor, String prodModel) {
+    public Mcu(String name, String vendor, String prodModel, Silo silo) {
         this.name = name;
         this.vendor = vendor;
         this.prodModel = prodModel;
+        this.silo = silo;
     }
 
     public Long getId() {
@@ -58,6 +65,10 @@ public class Mcu {
 
     public void setProdModel(String prodModel) {
         this.prodModel = prodModel;
+    }
+
+    public Silo getSilo() {
+        return silo;
     }
 
     @Override

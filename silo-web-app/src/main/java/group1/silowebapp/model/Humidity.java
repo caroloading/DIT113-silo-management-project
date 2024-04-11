@@ -24,19 +24,14 @@ public class Humidity {
     private String dateTime; 
 
     @ManyToOne
-    @JoinColumn(name = "silo_id")
-    private Silo silo;
-
-    @ManyToOne
     @JoinColumn(name = "mcu_id")
     private Mcu mcu;
 
     protected Humidity() {}
 
-    public Humidity(Double hValue, String dateTime, Silo silo, Mcu mcu) {
+    public Humidity(Double hValue, String dateTime, Mcu mcu) {
       this.hValue = hValue;
       this.dateTime = dateTime;
-      this.silo = silo;
       this.mcu = mcu;
     }
 
@@ -51,10 +46,6 @@ public class Humidity {
     public String getDateTime() {
         //Todo: format 
         return dateTime;
-    }
-
-    public Silo getSilo() {
-        return silo;
     }
 
     public Mcu getMcu() {

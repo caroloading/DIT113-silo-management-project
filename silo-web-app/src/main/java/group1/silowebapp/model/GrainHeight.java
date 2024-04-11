@@ -24,19 +24,14 @@ public class GrainHeight {
     private String dateTime; 
 
     @ManyToOne
-    @JoinColumn(name = "silo_id")
-    private Silo silo;
-
-    @ManyToOne
     @JoinColumn(name = "mcu_id")
     private Mcu mcu;
 
     protected GrainHeight() {}
 
-    public GrainHeight(Double height, String dateTime, Silo silo, Mcu mcu) {
+    public GrainHeight(Double height, String dateTime, Mcu mcu) {
       this.height = height;
       this.dateTime = dateTime;
-      this.silo = silo;
       this.mcu = mcu;
     }
 
@@ -51,10 +46,6 @@ public class GrainHeight {
     public String getDateTime() {
         // Todo: format dateTime
         return dateTime;
-    }
-
-    public Silo getSilo() {
-        return silo;
     }
 
     public Mcu getMcu() {
