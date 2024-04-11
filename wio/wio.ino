@@ -83,5 +83,5 @@ while(WiFi.status() != WL_CONNECTED){
 }
 
 publish();
-
+delay(30000);
 }
