@@ -52,8 +52,8 @@ public class MqttBeans {
 
     @Bean
     MqttPahoMessageDrivenChannelAdapter inboundAdapter(
-            MqttPahoClientFactory clientFactory, @Value("wio/information") String topic) {
-        return new MqttPahoMessageDrivenChannelAdapter("consumer", clientFactory, topic);
+            MqttPahoClientFactory clientFactory) {
+        return new MqttPahoMessageDrivenChannelAdapter("consumer", clientFactory, "wio/temperature", "wio/humidity", "wio/height");
     }
 
     //@Bean

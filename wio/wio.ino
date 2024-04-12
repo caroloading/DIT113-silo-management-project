@@ -6,8 +6,8 @@ TFT_eSPI tft;
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 
 
-const char* ssid= "Redmi 10C";
-const char* password = "133377kolak";
+const char* ssid= "Caroline's Galaxy S10";
+const char* password = "godforsakenmess";
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 
 WiFiClient wioClient;
@@ -64,7 +64,8 @@ while (!client.connected()) {
     
 }
 
-client.publish("wio/information", "23C");
+client.publish("wio/height", "30");
+client.publish("wio/temperature", "23C");
 }
 
 
