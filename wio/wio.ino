@@ -5,13 +5,10 @@
 TFT_eSPI tft;
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 
-
-const char* ssid= "Redmi 10C";
-const char* password = "133377kolak";
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 
 WiFiClient wioClient;
-PubSubClient client(wioClient);
+PubSubClient client(wioClient); 
 
 
 void connectWiFi(){
@@ -52,24 +49,21 @@ void publish(){
   
 while (!client.connected()) {
     Serial.println("Attempting MQTT connection...");
-    // Create a random client ID
-    String clientId = "viktorWIO";
-    clientId += String(random(0xffff), HEX);
-    // Attempt to connect
+    
+    String clientId = "WIO";
+    clientId += String(random(0xffff), HEX); // Creates client ID
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
-      // Once connected, publish an announcement...
-     
     }
     
 }
 
-client.publish("wio/information", "23C");
+client.publish("wio/information", "23C");  //replace with actuall information once avalible
 }
 
 
 void setup() {
-  // put your setup code here, to run once:
+  
   Serial.begin(115200);
   connectWiFi();
 
@@ -82,6 +76,6 @@ while(WiFi.status() != WL_CONNECTED){
   connectWiFi();
 }
 
-publish();
+publish();  //publishes to the wio/information 
 delay(30000);
 }
