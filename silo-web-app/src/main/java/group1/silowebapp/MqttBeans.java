@@ -1,7 +1,6 @@
 package group1.silowebapp;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -17,6 +16,7 @@ import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.MessagingException;
 
 @Configuration
@@ -33,53 +33,116 @@ public class MqttBeans {
         return factory;
     }
 
-    @Bean
-    public MessageChannel mqttInputChannel(){
-        return new DirectChannel();
-    }
-
-    @Bean
-    IntegrationFlow inboundFlow(MqttPahoMessageDrivenChannelAdapter inboundAdapter) {
-        return IntegrationFlow
-                .from(inboundAdapter)
-                .handle((GenericHandler<String>) (payload, headers) -> {
-                    System.out.println("new message: " + payload);
-                    headers.forEach((k, v) -> System.out.println(k + "=" + v));
-                    return null;
-                })
-                .get();
-    }
-
-    @Bean
-    MqttPahoMessageDrivenChannelAdapter inboundAdapter(
-            MqttPahoClientFactory clientFactory) {
-        return new MqttPahoMessageDrivenChannelAdapter("consumer", clientFactory, "wio/temperature", "wio/humidity", "wio/height");
-    }
-
     //@Bean
-    //public MessageProducer inbound(){
-    //    MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-    //        "serverIn", mqttClientFactory(),"#");
-    //    adapter.setCompletionTimeout(5000);
-    //    adapter.setConverter(new DefaultPahoMessageConverter());
-    //    adapter.setQos(2);
-    //    adapter.setOutputChannel(mqttInputChannel());
-    //    return adapter;
+    //IntegrationFlow inboundFlow(MqttPahoMessageDrivenChannelAdapter inboundAdapter) {
+    //    return IntegrationFlow
+    //            .from(inboundAdapter)
+    //            .handle((GenericHandler<String>) (payload, headers) -> {
+    //                System.out.println("new message: " + payload);
+    //                headers.forEach((k, v) -> System.out.println(k + "=" + v));
+    //                return null;
+    //            })
+    //            .get();
     //}
 //
     //@Bean
-    //@ServiceActivator(inputChannel = "mqttInputChannel")
-    //public MessageHandler handler(){
-    //    return new MessageHandler(){
-//
-    //        @Override
-    //        public void handleMessage(Message<?> message) throws MessagingException{
-    //            String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-    //            if (topic.equals("myTopic")){
-    //                System.out.println("This is our topic!");
-    //            }
-    //            System.out.println(message.getPayload());
-    //        }
-    //    };
+    //MqttPahoMessageDrivenChannelAdapter inboundAdapter(
+    //        MqttPahoClientFactory clientFactory) {
+    //    return new MqttPahoMessageDrivenChannelAdapter("consumer", clientFactory, "wio/temperature", "wio/humidity", "wio/height");
     //}
+
+    @Bean
+	public MessageChannel temperatureInputChannel() {
+		return new DirectChannel();
+	}
+
+    @Bean
+    public MessageChannel quantityInputChannel() {
+		return new DirectChannel();
+	}
+
+    @Bean
+    public MessageChannel humidityInputChannel() {
+		return new DirectChannel();
+	}
+	
+	@Bean
+	public MessageProducer inboundTemperature() {
+		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverTemperature",
+				mqttClientFactory(), "wio/temperature");
+
+        setUpAdapterOptions(adapter);
+		adapter.setOutputChannel(temperatureInputChannel());
+		return adapter;
+	}
+
+    @Bean
+	public MessageProducer inboundHumidity() {
+		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverHumidity",
+				mqttClientFactory(), "wio/humidity");
+
+		setUpAdapterOptions(adapter);
+		adapter.setOutputChannel(humidityInputChannel());
+		return adapter;
+	}
+
+    @Bean
+	public MessageProducer inboundQuantity() {
+		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverQuantity",
+				mqttClientFactory(), "wio/quantity");
+        setUpAdapterOptions(adapter);
+		adapter.setOutputChannel(quantityInputChannel());
+		return adapter;
+	}
+	
+	private void setUpAdapterOptions(MqttPahoMessageDrivenChannelAdapter adapter){
+        adapter.setCompletionTimeout(5000);
+		adapter.setConverter(new DefaultPahoMessageConverter());
+		adapter.setQos(2);
+    }
+
+	@Bean
+	@ServiceActivator(inputChannel = "temperatureInputChannel")
+	public MessageHandler handlerTemperature() {
+		return new MessageHandler() {
+
+			@Override
+			public void handleMessage(Message<?> message) throws MessagingException {
+				MessageHeaders headers = message.getHeaders();                  //gets meta-info about message
+                headers.forEach((k, v) -> System.out.println(k + "=" + v));
+				System.out.println(message.getPayload());
+			}
+
+		};
+	}
+
+    @Bean
+	@ServiceActivator(inputChannel = "humidityInputChannel")
+	public MessageHandler handlerHumidity() {
+		return new MessageHandler() {
+
+			@Override
+			public void handleMessage(Message<?> message) throws MessagingException {
+				MessageHeaders headers = message.getHeaders();                  //gets meta-info about message
+                headers.forEach((k, v) -> System.out.println(k + "=" + v));
+				System.out.println(message.getPayload());
+			}
+
+		};
+	}
+
+    @Bean
+	@ServiceActivator(inputChannel = "quantityInputChannel")
+	public MessageHandler handlerQuantity() {
+		return new MessageHandler() {
+
+			@Override
+			public void handleMessage(Message<?> message) throws MessagingException {
+				MessageHeaders headers = message.getHeaders();                  //gets meta-info about message
+                headers.forEach((k, v) -> System.out.println(k + "=" + v));
+				System.out.println(message.getPayload());
+			}
+
+		};
+	}
 }

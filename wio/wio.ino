@@ -5,9 +5,6 @@
 TFT_eSPI tft;
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 
-
-const char* ssid= "ssid";
-const char* password = "password";
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 
 WiFiClient wioClient;
