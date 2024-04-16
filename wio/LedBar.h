@@ -14,10 +14,16 @@ enum LedOrientation
 class LedBar
 {
     public:
+        static const int MIN_LEVEL = 0;
+        static const int MAX_LEVEL = 10;
+
         LedBar(int clockPin, int dataPin, LedOrientation orientation);
-        void SetLevel(int level);
+
+        void UpdateDisplay(long value);
     private:
         Grove_LED_Bar _ledBar;
+
+        void _SetLevel(int level);
 };
 
 #endif // wioLedBar

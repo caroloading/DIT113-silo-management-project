@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Ultrasonic.h"  // External lib
+#include "LedBar.h"
 
 class Ranger 
 {
