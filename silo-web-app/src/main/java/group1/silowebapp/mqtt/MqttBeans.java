@@ -1,7 +1,6 @@
-package group1.silowebapp;
+package group1.silowebapp.mqtt;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -21,12 +20,9 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.MessagingException;
 
 
+
 @Configuration
 public class MqttBeans {
-	//@Autowired
-	//TemperatureRepository tempRepo;
-	//HumidityRepository humiRepo;
-	//GrainHeightRepository quantityRepo;
     
     @Bean
     public MqttPahoClientFactory mqttClientFactory(){
@@ -39,31 +35,13 @@ public class MqttBeans {
         return factory;
     }
 
-    //@Bean
-    //IntegrationFlow inboundFlow(MqttPahoMessageDrivenChannelAdapter inboundAdapter) {
-    //    return IntegrationFlow
-    //            .from(inboundAdapter)
-    //            .handle((GenericHandler<String>) (payload, headers) -> {
-    //                System.out.println("new message: " + payload);
-    //                headers.forEach((k, v) -> System.out.println(k + "=" + v));
-    //                return null;
-    //            })
-    //            .get();
-    //}
-//
-    //@Bean
-    //MqttPahoMessageDrivenChannelAdapter inboundAdapter(
-    //        MqttPahoClientFactory clientFactory) {
-    //    return new MqttPahoMessageDrivenChannelAdapter("consumer", clientFactory, "wio/temperature", "wio/humidity", "wio/height");
-    //}
-
     @Bean
 	public MessageChannel temperatureInputChannel() {
 		return new DirectChannel();
 	}
 
     @Bean
-    public MessageChannel quantityInputChannel() {
+    public MessageChannel distanceInputChannel() {
 		return new DirectChannel();
 	}
 
@@ -93,60 +71,30 @@ public class MqttBeans {
 	}
 
     @Bean
-	public MessageProducer inboundQuantity() {
+	public MessageProducer inboundDistance() {
 		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverQuantity",
-				mqttClientFactory(), "wio/quantity");
+				mqttClientFactory(), "wio/distance");
         setUpAdapterOptions(adapter);
-		adapter.setOutputChannel(quantityInputChannel());
+		adapter.setOutputChannel(distanceInputChannel());
 		return adapter;
 	}
 
 	@Bean
 	@ServiceActivator(inputChannel = "temperatureInputChannel")
 	public MessageHandler handlerTemperature() {
-		//return new SensorsMessageHandler<Temperature>(tempRepo);
-		return new MessageHandler() {
-
-			@Override
-			public void handleMessage(Message<?> message) throws MessagingException {
-				MessageHeaders headers = message.getHeaders();                  //gets meta-info about message
-                headers.forEach((k, v) -> System.out.println(k + "=" + v));
-				System.out.println(message.getPayload());
-			}
-
-		};
+		return new SensorsMessageHandler("Temperature");
 	}
 
     @Bean
 	@ServiceActivator(inputChannel = "humidityInputChannel")
 	public MessageHandler handlerHumidity() {
-		//return new SensorsMessageHandler<Humidity>(humiRepo);
-		return new MessageHandler() {
-
-			@Override
-			public void handleMessage(Message<?> message) throws MessagingException {
-				MessageHeaders headers = message.getHeaders();                  //gets meta-info about message
-                headers.forEach((k, v) -> System.out.println(k + "=" + v));
-				System.out.println(message.getPayload());
-			}
-
-		};
+		return new SensorsMessageHandler("Humidity");
 	}
 
     @Bean
-	@ServiceActivator(inputChannel = "quantityInputChannel")
-	public MessageHandler handlerQuantity() {
-		//return new SensorsMessageHandler<GrainHeight>(quantityRepo);
-		return new MessageHandler() {
-
-			@Override
-			public void handleMessage(Message<?> message) throws MessagingException {
-				MessageHeaders headers = message.getHeaders();                  //gets meta-info about message
-                headers.forEach((k, v) -> System.out.println(k + "=" + v));
-				System.out.println(message.getPayload());
-			}
-
-		};
+	@ServiceActivator(inputChannel = "distanceInputChannel")
+	public MessageHandler handlerDistance() {
+		return new SensorsMessageHandler("GrainHeight");
 	}
 	
 	private void setUpAdapterOptions(MqttPahoMessageDrivenChannelAdapter adapter){
