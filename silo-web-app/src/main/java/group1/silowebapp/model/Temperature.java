@@ -24,15 +24,15 @@ public class Temperature {
     private String dateTime; 
 
     @ManyToOne
-    @JoinColumn(name = "mcu_id")
-    private Mcu mcu;
+    @JoinColumn(name = "silo_id")
+    private Silo silo;
 
     protected Temperature() {}
 
-    public Temperature(Double tValue, String dateTime, Mcu mcu) {
+    public Temperature(Double tValue, String dateTime, Silo silo) {
       this.tValue = tValue;
       this.dateTime = dateTime;
-      this.mcu = mcu;
+      this.silo = silo;
     }
 
     public Long getId() {
@@ -48,8 +48,8 @@ public class Temperature {
         return dateTime;
     }
 
-    public Mcu getMcu() {
-        return mcu;
+    public Silo getSilo() {
+        return silo;
     }
 
     @Override

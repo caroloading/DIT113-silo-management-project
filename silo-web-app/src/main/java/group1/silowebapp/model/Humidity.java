@@ -24,15 +24,15 @@ public class Humidity {
     private String dateTime; 
 
     @ManyToOne
-    @JoinColumn(name = "mcu_id")
-    private Mcu mcu;
+    @JoinColumn(name = "silo_id")
+    private Silo silo;
 
     protected Humidity() {}
 
-    public Humidity(Double hValue, String dateTime, Mcu mcu) {
+    public Humidity(Double hValue, String dateTime, Silo silo) {
       this.hValue = hValue;
       this.dateTime = dateTime;
-      this.mcu = mcu;
+      this.silo = silo;
     }
 
     public Long getId() {
@@ -48,8 +48,8 @@ public class Humidity {
         return dateTime;
     }
 
-    public Mcu getMcu() {
-        return mcu;
+    public Silo getSilo() {
+        return silo;
     }
 
     @Override

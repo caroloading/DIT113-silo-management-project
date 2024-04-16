@@ -9,12 +9,10 @@ import org.springframework.context.annotation.Configuration;
 
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
-import group1.silowebapp.model.Mcu;
 import group1.silowebapp.model.Silo;
 import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
-import group1.silowebapp.repository.McuRepository;
 import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
 
@@ -30,14 +28,14 @@ public class InitDb {
 
 	@Bean("initializeDb")
 	public CommandLineRunner initDbWithData(
-		SiloRepository siloRepository, McuRepository mcuRepository, GrainHeightRepository grainHeightRepository, 
+		SiloRepository siloRepository, GrainHeightRepository grainHeightRepository, 
 		HumidityRepository humidityRepository, TemperatureRepository temperatureRepository) {
 		return (args) -> {
 		
         // SILO
 		// save a few Silos
-		siloRepository.save(new Silo(8.0, 4.0));
-		siloRepository.save(new Silo(7.0, 3.0));
+		siloRepository.save(new Silo(8.0, 4.0, "Wio terminal 01", "Seed Studio", "SAMD51"));
+		siloRepository.save(new Silo(7.0, 3.0, "Wio terminal 02", "Seed Studio", "SAMD51"));
 
 		// fetch all Silos
 		log.info("Silos found with findAll():");
@@ -55,33 +53,11 @@ public class InitDb {
 		log.info("");
 		
 		final Silo firstSilo = siloRepository.findById(1L);
-		final Silo secondSilo = siloRepository.findById(2L);
-		final Mcu firstMcu = mcuRepository.findById(1L);
-
-		// MCU
-		// save a few Mcus
-		mcuRepository.save(new Mcu("Wio terminal 01", "Seed Studio", "SAMD51", firstSilo));
-		mcuRepository.save(new Mcu("Wio terminal 02", "Seed Studio", "SAMD51", secondSilo));
-
-		// fetch all Mcus
-		log.info("Mcus found with findAll():");
-		log.info("-------------------------------");
-		mcuRepository.findAll().forEach(mcu -> {
-			log.info(mcu.toString());
-		});
-		log.info("");
-
-		// fetch an individual Mcu by ID
-		Mcu mcu = mcuRepository.findById(1L);
-		log.info("Mcu found with findById(1L):");
-		log.info("--------------------------------");
-		log.info(mcu.toString());
-		log.info("");
 
 		// GrainHeight
 		// save a few Grain heights 
-		grainHeightRepository.save(new GrainHeight(30.19, "2024-04-10 23:58:23", firstMcu));
-		grainHeightRepository.save(new GrainHeight(33.20, "2024-04-11 00:09:40", firstMcu));
+		grainHeightRepository.save(new GrainHeight(30.19, "2024-04-10 23:58:23", firstSilo));
+		grainHeightRepository.save(new GrainHeight(33.20, "2024-04-11 00:09:40", firstSilo));
 
 		// fetch all heights
 		log.info("GrainHeights found with findAll():");
@@ -108,8 +84,8 @@ public class InitDb {
 
 		// Humidity
         // save a few Humidities
-        humidityRepository.save(new Humidity(33.32, "2024-04-11 00:01:16", firstMcu));
-		humidityRepository.save(new Humidity(43.20, "2024-04-11 00:02:33", firstMcu));
+        humidityRepository.save(new Humidity(33.32, "2024-04-11 00:01:16", firstSilo));
+		humidityRepository.save(new Humidity(43.20, "2024-04-11 00:02:33", firstSilo));
 
         // fetch all Humidities
         log.info("Humidities found with findAll():");
@@ -136,8 +112,8 @@ public class InitDb {
 
 		// Temperature
         // save a few Temperatures
-        temperatureRepository.save(new Temperature(36.02, "2024-04-10 23:45:41", firstMcu));
-		temperatureRepository.save(new Temperature(45.25, "2024-04-10 23:52:36", firstMcu));
+        temperatureRepository.save(new Temperature(36.02, "2024-04-10 23:45:41", firstSilo));
+		temperatureRepository.save(new Temperature(45.25, "2024-04-10 23:52:36", firstSilo));
 
         // fetch all Temperatures
         log.info("Temperatures found with findAll():");

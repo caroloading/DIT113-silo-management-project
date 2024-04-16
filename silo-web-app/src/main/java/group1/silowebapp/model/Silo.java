@@ -21,11 +21,23 @@ public class Silo {
     @Column(nullable=false)
     private Double height;
 
+    @Column(nullable=false)
+    private String mcuName;
+
+    @Column(nullable=false)
+    private String mcuVendor;
+
+    @Column(nullable=false)
+    private String mcuModel;
+
     protected Silo() {}
 
-    public Silo(Double height, Double radius) {
+    public Silo(Double height, Double radius, String mcuName, String mcuVendor, String mcuModel) {
         this.height = height;
         this.radius = radius;
+        this.mcuName = mcuName;
+        this.mcuVendor = mcuVendor;
+        this.mcuModel = mcuModel;
     }
 
     public Long getId() {
@@ -46,6 +58,30 @@ public class Silo {
 
     public void setRadius(Double radius) {
         this.radius = radius;
+    }
+
+    public String getMcuName() {
+        return mcuName;
+    }
+
+    public void settMcuName(String mcuName) {
+        this.mcuName = mcuName;
+    }
+
+    public String getMcuVendor() {
+        return mcuName;
+    }
+
+    public void settMcuVendor(String mcuVendor) {
+        this.mcuVendor = mcuVendor;
+    }
+
+    public String getMcuModel() {
+        return mcuModel;
+    }
+
+    public void settMcuModel(String mcuModel) {
+        this.mcuModel = mcuModel;
     }
 
     @Override
