@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base_layout}">
+    <head>
+        <title>Grain Heights</title>
+    </head>
+    <body>
+
+      <section layout:fragment="content"> 
+        <div class="row pgcontent">
+          <div class="col">
+            <h3>Grain Heights Readings</h3>
+            <table class="table table-striped table-sm caption-top w-auto">
+              <caption>Grain Heights Readings</caption>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Grain Height</th>
+                  <th>Datetime</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="grainHeight : ${grainHeights}">
+                  <td th:text="${grainHeight.id}"></td>
+                  <td th:text="${grainHeight.height}"></td>
+                  <td th:text="${grainHeight.dateTime}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      
+    </body>
+</html>
