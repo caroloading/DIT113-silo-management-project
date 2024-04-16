@@ -1,6 +1,7 @@
 package group1.silowebapp;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -19,8 +20,13 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.MessagingException;
 
+
 @Configuration
 public class MqttBeans {
+	//@Autowired
+	//TemperatureRepository tempRepo;
+	//HumidityRepository humiRepo;
+	//GrainHeightRepository quantityRepo;
     
     @Bean
     public MqttPahoClientFactory mqttClientFactory(){
@@ -94,16 +100,11 @@ public class MqttBeans {
 		adapter.setOutputChannel(quantityInputChannel());
 		return adapter;
 	}
-	
-	private void setUpAdapterOptions(MqttPahoMessageDrivenChannelAdapter adapter){
-        adapter.setCompletionTimeout(5000);
-		adapter.setConverter(new DefaultPahoMessageConverter());
-		adapter.setQos(2);
-    }
 
 	@Bean
 	@ServiceActivator(inputChannel = "temperatureInputChannel")
 	public MessageHandler handlerTemperature() {
+		//return new SensorsMessageHandler<Temperature>(tempRepo);
 		return new MessageHandler() {
 
 			@Override
@@ -119,6 +120,7 @@ public class MqttBeans {
     @Bean
 	@ServiceActivator(inputChannel = "humidityInputChannel")
 	public MessageHandler handlerHumidity() {
+		//return new SensorsMessageHandler<Humidity>(humiRepo);
 		return new MessageHandler() {
 
 			@Override
@@ -134,6 +136,7 @@ public class MqttBeans {
     @Bean
 	@ServiceActivator(inputChannel = "quantityInputChannel")
 	public MessageHandler handlerQuantity() {
+		//return new SensorsMessageHandler<GrainHeight>(quantityRepo);
 		return new MessageHandler() {
 
 			@Override
@@ -145,4 +148,10 @@ public class MqttBeans {
 
 		};
 	}
+	
+	private void setUpAdapterOptions(MqttPahoMessageDrivenChannelAdapter adapter){
+        adapter.setCompletionTimeout(5000);
+		adapter.setConverter(new DefaultPahoMessageConverter());
+		adapter.setQos(2);
+    }
 }
