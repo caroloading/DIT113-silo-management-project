@@ -4,10 +4,10 @@
 #include <PubSubClient.h>
 #include "rpcWiFi.h"
 
-class MqttBroker
+class MqttClient
 {
   public:
-    MqttBroker(const char* mqtt_server = "broker.mqtt-dashboard.com",const char* clientId = "grainGuard",int serverPort = 1883);
+    MqttClient(const char* mqtt_server = "broker.mqtt-dashboard.com",const char* clientId = "grainGuard",int serverPort = 1883);
     void connect();
     void publish(const char* topic,const char* message);
 
