@@ -40,7 +40,7 @@ while(wifi.getWiFiStatus() != true){
 }
 
 mqtt.publish("wio/temperature","23.01/2024-04-17 09:23:21");//publishes to the broker
-//mqtt.publish("wio/heigth",heigth);
-//mqtt.publish("wio/humidity",humidity);
-delay(30000);
+mqtt.publish("wio/distance","12.3/2024-04-17 09:24:22");
+mqtt.publish("wio/humidity","58.00/2024-04-17 09:24:22");
+delay(15000);
 }
