@@ -11,7 +11,6 @@ class Ranger
         Ranger(int pin);
         long MeasureRange();
     private:
-        int _pin;
         Ultrasonic _ultrasonic;
 };
 

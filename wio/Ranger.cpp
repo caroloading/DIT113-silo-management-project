@@ -3,7 +3,6 @@
 
 Ranger::Ranger(int pin) : _ultrasonic(pin)
 {
-    _pin = pin;
     _ultrasonic = Ultrasonic(pin);
 };
 
