@@ -2,6 +2,7 @@
 #define wioLedBar
 
 #include "Grove_LED_Bar.h"
+#include <map>
 
 
 enum LedOrientation
@@ -10,19 +11,27 @@ enum LedOrientation
     GREEN_FIRST = 1,
 };
 
+struct LevelRange
+{
+    int level;
+    float lowerBound;
+};
 
 class LedBar
 {
     public:
-        static const int MIN_LEVEL = 0;
+        static const int MIN_LEVEL = 1;  // NOTE: We want to have at minimum 1 LED to always be on
         static const int MAX_LEVEL = 10;
 
-        LedBar(int clockPin, int dataPin, LedOrientation orientation);
+        LedBar(int clockPin, int dataPin, LedOrientation orientation, int minDisplayRange = 2, int maxDisplayRange = 16);
 
         void UpdateDisplay(long value);
     private:
         Grove_LED_Bar _ledBar;
-
+        float _minDisplayRange;
+        float _maxDisplayRange;
+        
+        int _FindDisplayLevel(float value);
         void _SetLevel(int level);
 };
 
