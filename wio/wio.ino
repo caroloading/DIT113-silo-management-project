@@ -23,7 +23,7 @@ void setup() {
 void loop() {
   if (!pauseButton.IsEnabled()){
     long distance = ranger.MeasureRange();
-    ledBar.UpdateDisplay(14);
+    ledBar.UpdateDisplay(distance);
     Serial.println(distance);
   } else {
     Serial.println("Paused for maintenance.");
