@@ -4,7 +4,6 @@
 #include "CustomWiFi.h"
 
 
-
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 
 TFT_eSPI tft;

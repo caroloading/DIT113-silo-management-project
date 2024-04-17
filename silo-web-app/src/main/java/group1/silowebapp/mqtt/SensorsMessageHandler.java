@@ -36,7 +36,6 @@ public class SensorsMessageHandler implements MessageHandler {
         headers.forEach((k, v) -> System.out.println(k + "=" + v));
 		System.out.println(message.getPayload());
 
-
         String content = message.getPayload().toString();
         String[] splitContent = content.split("/");
         Double reading = Double.valueOf(splitContent[0]);
