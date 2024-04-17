@@ -1,20 +1,26 @@
-#include "ThermometerAndHumidity.h"
+#include "Thermometre.h"
 
-wioEnvironment::wioEnvironment() : dht(DHTPIN, DHTTYPE){
-}
+ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE){
+   float humidity = humidity;
+   float temperature = temperature;
+   DHT dht = dht;
+  }
 
-void wioEnvironment::setup(){
+void ThermometerAndHumidity::setup(){
     Serial.begin(9600);
     dht.begin();
-    tft.begin();
-    tft.setRotation(3);
-    tft.setCursor(0, 0);
-    tft.setTextFont(4);
 }
 
-void wioEnvironment::loop(){
+void ThermometerAndHumidity::read(){
+  
+}
+
+float ThermometerAndHumidity::getTemperature(){
     temperature = dht.readTemperature();
-    humidity = dht.readHumidity();
-    delay(30000);
-}
+    return temperature;
+  }
 
+float ThermometerAndHumidity::getHumidity(){
+    humidity = dht.readHumidity();
+    return humidity;
+  }

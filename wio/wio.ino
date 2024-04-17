@@ -1,11 +1,13 @@
-#include <iostream>
+#include "Thermometre.h"
 
-void setup() {
-  // put your setup code here, to run once:
+ThermometerAndHumidity thermometerhumidity;
 
-}
+void setup(){
+  thermometerhumidity.setup();
+  }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  std::cout << "Hello, World!" << std::endl;
-}
+void loop(){
+    Serial.println(thermometerhumidity.getTemperature());
+    Serial.println(thermometerhumidity.getHumidity());
+    delay(1000);
+  }
