@@ -1,19 +1,15 @@
-#include "MqttBroker.h"
+#include "MqttClient.h"
 
 WiFiClient wioClient;
 PubSubClient mqttClient(wioClient); 
 
-MqttBroker::MqttBroker(const char* mqtt_server){
+MqttClient::MqttClient(const char* mqtt_server,const char* clientId, int serverPort ){
 _mqtt_server = mqtt_server;
-_clientId = "grainGuard";
-_serverPort = 1883;
-
-
-
-
+_clientId = clientId;
+_serverPort = serverPort;
 }
 
-void MqttBroker::connect(){
+void MqttClient::connect(){
 mqttClient.setServer(_mqtt_server,_serverPort);
 while (!mqttClient.connected()) {
     Serial.println("Attempting MQTT connection...");
@@ -27,7 +23,7 @@ while (!mqttClient.connected()) {
   return;
 }
 
-void MqttBroker::publish(const char* topic,const char* message){
+void MqttClient::publish(const char* topic,const char* message){
  if (!mqttClient.connected()) {
     Serial.println("Not connected to MQTT, cannot publish");
     return;

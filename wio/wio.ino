@@ -8,7 +8,7 @@
 
 TFT_eSPI tft;
 CustomWiFi wifi(ssid, password);
-MqttBroker mqtt("broker.mqtt-dashboard.com");
+MqttClient mqtt();
 
 
 void setup() {
