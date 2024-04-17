@@ -20,6 +20,7 @@ class ThermometerAndHumidity{
 
   private:
     DHT dht;
+    TFT_eSPI tft;
     //variables
     float humidity;
     float temperature;
