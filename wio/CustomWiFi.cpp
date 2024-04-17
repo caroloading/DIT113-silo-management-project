@@ -19,6 +19,8 @@ void CustomWiFi::connectToWiFi(){
    while(WiFi.status() != WL_CONNECTED){
         delay(5000);
         Serial.println("trying to connect");
+         WiFi.begin(_ssid, _password);
+
    }
 
   Serial.println("wifi connected");

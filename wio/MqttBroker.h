@@ -12,8 +12,8 @@ class MqttBroker
     void publish(const char* topic,const char* message);
 
   private:
-    WiFiClient wioClient;
-    PubSubClient mqttClient;
+    //WiFiClient wioClient;
+    //PubSubClient mqttClient;
     const char* _mqtt_server;
     int _serverPort;
     const char* _clientId;
