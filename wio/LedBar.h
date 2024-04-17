@@ -31,7 +31,6 @@ class LedBar
         float _minDisplayRange;
         float _maxDisplayRange;
         
-        int _FindDisplayLevel(float value);
         void _SetLevel(int level);
 };
 

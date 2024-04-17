@@ -24,38 +24,7 @@ void LedBar::_SetLevel(int level)
     _ledBar.setLevel(level);
 };
 
-int LedBar::_FindDisplayLevel(float value)
-{
-    LevelRange upperLevelRange { LedBar::MAX_LEVEL, _maxDisplayRange };
-    LevelRange lowerLevelRange { LedBar::MIN_LEVEL, _minDisplayRange };
-
-    float levelRangeStep = (_maxDisplayRange - _minDisplayRange) / LedBar::MAX_LEVEL;
-
-    int currentLevel = LedBar::MIN_LEVEL;
-
-    if (value > upperLevelRange.lowerBound) {
-        currentLevel = LedBar::MIN_LEVEL;
-    } else if (value <= levelRangeStep) {
-        currentLevel = LedBar::MAX_LEVEL;
-    } else {
-        float currentLowerBound = _maxDisplayRange - levelRangeStep;
-        for (int i = lowerLevelRange.level; i <= upperLevelRange.level; i++) {
-            float currentUpperBound = currentLowerBound + levelRangeStep;
-
-            if (value > currentLowerBound && value <= currentUpperBound) {
-                currentLevel = i;
-                break;
-            }
-            
-            currentLowerBound = currentLowerBound - levelRangeStep;
-        }
-    }
-
-    return currentLevel;
-};
-
-
 void LedBar::UpdateDisplay(long value)
 {
-  _SetLevel(_FindDisplayLevel((float)value));
+  _SetLevel(LedBar::MAX_LEVEL - (int)((value * LedBar::MAX_LEVEL) /_maxDisplayRange));
 };
