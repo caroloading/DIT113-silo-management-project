@@ -11,6 +11,7 @@ TFT_eSPI tft;
 CustomWiFi wifi(ssid, password);
 MqttBroker mqtt("broker.mqtt-dashboard.com");
 
+
 void setup() {
   tft.begin();
   tft.setRotation(3);
@@ -23,6 +24,7 @@ void setup() {
   Serial.begin(115200);
   wifi.connectToWiFi();
   if(wifi.getWiFiStatus() == true){
+    tft.fillScreen(TFT_GREEN);
     tft.println("connected to wifi");
     tft.println("IP Adress: "+ WiFi.localIP().toString());
   }
@@ -37,7 +39,7 @@ while(wifi.getWiFiStatus() != true){
     wifi.connectToWiFi();
 }
 
-//mqtt.publish("wio/temperature",temperature);//publishes to the broker
+mqtt.publish("wio/temperature","23.01/2024-04-17 09:23:21");//publishes to the broker
 //mqtt.publish("wio/heigth",heigth);
 //mqtt.publish("wio/humidity",humidity);
 delay(30000);
