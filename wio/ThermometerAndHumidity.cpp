@@ -18,16 +18,20 @@ void ThermometerAndHumidity::setup(){
     tft.fillScreen(TFT_RED);
 }
 
-void ThermometerAndHumidity::read(){
-  
-}
+const char* ThermometerAndHumidity::convertReadings(){
+   String convertedTemperature = String(getTemperature());
+   String convertedHumidity = String(getHumidity());
+
+   String environmentReadings = ""+convertedTemperature +"C "+ convertedHumidity+"% ";
+   return environmentReadings.c_str();
+  }
 
 float ThermometerAndHumidity::getTemperature(){
-    temperature = dht.readTemperature();
+    float temperature = dht.readTemperature();
     return temperature;
   }
 
 float ThermometerAndHumidity::getHumidity(){
-    humidity = dht.readHumidity();
+    float humidity = dht.readHumidity();
     return humidity;
   }
