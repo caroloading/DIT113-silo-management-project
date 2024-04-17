@@ -1,5 +1,5 @@
-#ifndef mqqtBroker
-#define mqqtBroker
+#ifndef mqqtClient
+#define mqqtClient
 
 #include <PubSubClient.h>
 #include "rpcWiFi.h"
