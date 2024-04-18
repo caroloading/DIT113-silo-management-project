@@ -16,6 +16,6 @@ bool ModeButton::ChangeIfPressed(){
   }
 }
 
-bool ModeButton::IsEnabled(){
+bool ModeButton::isEnabled(){
   return _isEnabled;
 }

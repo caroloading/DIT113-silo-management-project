@@ -8,7 +8,7 @@ class ModeButton
     public:
         ModeButton(int pin);
         bool ChangeIfPressed();
-        bool IsEnabled();
+        bool isEnabled();
     private:
         bool _isEnabled;
         int _pin;
