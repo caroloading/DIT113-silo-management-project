@@ -15,11 +15,9 @@ import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 
 public class SensorsMessageHandler implements MessageHandler {
 
