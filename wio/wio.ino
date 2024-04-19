@@ -64,6 +64,8 @@ void publish(char* distance, char* temperature, char* humidity){
 
 void displayOnTerminal(long distance, long temperature, long humidity){
   ledBar.UpdateDisplay(distance);
+  tft.fillScreen(TFT_GREEN);
+  tft.setCursor(10, 10);
   tft.print("Distance: ");
   tft.println(distance);
   tft.print("Temp: ");
