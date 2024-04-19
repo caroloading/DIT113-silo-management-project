@@ -13,7 +13,6 @@
 class ThermometerAndHumidity{
   public:
     ThermometerAndHumidity();
-    void setup();
     const char* convertReadings();
     float getTemperature();
     float getHumidity();
