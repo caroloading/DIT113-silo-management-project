@@ -1,3 +1,5 @@
+#include <ArduinoJson.h>
+#include <ArduinoJson.hpp>
 #include "MqttClient.h"
 #include "TFT_eSPI.h"
 #include "secrets.h"
@@ -42,13 +44,13 @@ void loop() {
       tft.println("connecting to wifi");
       wifi.connectToWiFi();
     }
-    long distance = ranger.MeasureRange();
-    
-    mqtt.publish("wio/temperature","23.01/2024-04-17 09:23:21");//publishes to the broker
-    mqtt.publish("wio/distance", "24.56/2024-04-17 09:23:21");
-    mqtt.publish("wio/humidity","58.00/2024-04-17 09:24:22");
+    std::string distanceData = ranger.getRangeData();
+    std::string tempData = "{\"value\": 23.01}";
+    std::string humidityData = "{\"value\": 56.01}";
+    publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
+   
 
-    displayOnTerminal(distance, 0, 0);
+    displayOnTerminal(readValue(distanceData), 0, 0);
   } else {
     Serial.println("Paused for maintenance.");
   }
@@ -58,8 +60,10 @@ void loop() {
   delay(15000);
 }
 
-void publish(char* distance, char* temperature, char* humidity){
-  //TO-DO: PUBLISH JSON STRINGS
+void publish(const char* distanceData, const char* temperatureData, const char* humidityData){
+  mqtt.publish("wio/temperature", temperatureData);//publishes to the broker
+  mqtt.publish("wio/distance", distanceData);
+  mqtt.publish("wio/humidity", humidityData);
 }
 
 void displayOnTerminal(long distance, long temperature, long humidity){
@@ -73,4 +77,10 @@ void displayOnTerminal(long distance, long temperature, long humidity){
   tft.println("°C");
   tft.print("Humidity: ");
   tft.println(humidity);
+}
+
+long readValue(std::string jsonString){
+  JsonDocument doc;
+  deserializeJson(doc, jsonString);
+  return doc["value"];
 }

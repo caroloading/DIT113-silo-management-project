@@ -8,10 +8,11 @@
 class Ranger 
 {
     public:
-        Ranger(int pin);
-        long MeasureRange();
-    private:
-        Ultrasonic _ultrasonic;
+      Ranger(int pin);
+      std::string getRangeData();
+    private:    
+      long measureRange();
+      Ultrasonic _ultrasonic;
 };
 
 #endif // wioRanger

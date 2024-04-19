@@ -8,11 +8,7 @@ ModeButton::ModeButton(int pin){
 
 bool ModeButton::ChangeIfPressed(){
   if (digitalRead(_pin) == LOW){
-    if (_isEnabled){
-      _isEnabled = false;
-    } else {
-      _isEnabled = true;
-    }
+    _isEnabled = !_isEnabled;
   }
 }
 
