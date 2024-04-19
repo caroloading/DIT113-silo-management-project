@@ -8,7 +8,7 @@
 #define DHTTYPE DHT11
 
 //Define used pin
-#define DHTPIN 0
+#define DHTPIN PIN_WIRE_SCL
 
 class ThermometerAndHumidity{
   public:
