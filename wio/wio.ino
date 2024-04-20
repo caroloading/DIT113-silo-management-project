@@ -9,6 +9,8 @@
 #include "ModeButton.h"
 
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
+#define CHECK_BUTTONS_INTERVAL 1000
+#define PUBLISH_INTERVAL 15000
 
 TFT_eSPI tft;
 CustomWiFi wifi(ssid, password);
@@ -16,6 +18,10 @@ MqttClient mqtt;
 LedBar ledBar(1, 0, GREEN_FIRST);
 Ranger ranger(2);
 ModeButton pauseButton(BUTTON_1);
+
+unsigned long lastExecutedCheckButtons = 0;
+unsigned long lastExecutedPublish = 0;
+
 
 void setup() {
   tft.begin();
@@ -39,11 +45,22 @@ void setup() {
 }
 
 void loop() {
-  if (!pauseButton.isEnabled()){
-    while(!wifi.isConnected()){
-      tft.println("connecting to wifi");
-      wifi.connectToWiFi();
-    }
+  unsigned long currMillis = millis();
+
+  if (currMillis - lastExecutedCheckButtons >= CHECK_BUTTONS_INTERVAL){
+    lastExecutedCheckButtons = currMillis;
+    
+    pauseButton.ChangeIfPressed();
+  }
+  
+  if (currMillis - lastExecutedPublish >= PUBLISH_INTERVAL){
+    lastExecutedPublish = currMillis;
+    
+    if (!pauseButton.isEnabled()){
+      while(!wifi.isConnected()){
+        tft.println("connecting to wifi");
+        wifi.connectToWiFi();
+      }
     std::string distanceData = ranger.getRangeData();
     std::string tempData = "{\"value\": 23.01}";
     std::string humidityData = "{\"value\": 56.01}";
@@ -51,13 +68,10 @@ void loop() {
    
 
     displayOnTerminal(readValue(distanceData), 0, 0);
-  } else {
-    Serial.println("Paused for maintenance.");
+    } else {
+      Serial.println("Paused for maintenance.");
+    }
   }
-  
-  pauseButton.ChangeIfPressed();
-
-  delay(15000);
 }
 
 void publish(const char* distanceData, const char* temperatureData, const char* humidityData){
