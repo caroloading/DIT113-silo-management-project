@@ -22,7 +22,6 @@ ModeButton pauseButton(BUTTON_1);
 unsigned long lastExecutedCheckButtons = 0;
 unsigned long lastExecutedPublish = 0;
 
-
 void setup() {
   tft.begin();
   tft.setRotation(3);
@@ -39,9 +38,8 @@ void setup() {
     tft.println("connected to wifi");
     tft.println("IP Adress: "+ WiFi.localIP().toString());
   }
+
   mqtt.connect(); // Connect the MQTT Server
-    
- 
 }
 
 void loop() {
@@ -57,17 +55,16 @@ void loop() {
     lastExecutedPublish = currMillis;
     
     if (!pauseButton.isEnabled()){
-      while(!wifi.isConnected()){
-        tft.println("connecting to wifi");
-        wifi.connectToWiFi();
-      }
-    std::string distanceData = ranger.getRangeData();
-    std::string tempData = "{\"value\": 23.01}";
-    std::string humidityData = "{\"value\": 56.01}";
-    publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
-   
 
-    displayOnTerminal(readValue(distanceData), 0, 0);
+      if (!wifi.isConnected()){ wifi.connectToWiFi(); }
+      if (!mqtt.isConnected()){ mqtt.connect(); }
+
+      std::string distanceData = ranger.getRangeData();
+      std::string tempData = "{\"value\": 23.01}";
+      std::string humidityData = "{\"value\": 56.01}";
+      publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
+  
+      displayOnTerminal(readValue(distanceData), 0, 0);
     }
   }
 }
