@@ -9,7 +9,7 @@
 #include "ModeButton.h"
 
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
-#define CHECK_BUTTONS_INTERVAL 1000
+#define CHECK_BUTTONS_INTERVAL 200
 #define PUBLISH_INTERVAL 15000
 
 TFT_eSPI tft;
@@ -68,8 +68,6 @@ void loop() {
    
 
     displayOnTerminal(readValue(distanceData), 0, 0);
-    } else {
-      Serial.println("Paused for maintenance.");
     }
   }
 }
@@ -88,7 +86,7 @@ void displayOnTerminal(long distance, long temperature, long humidity){
   tft.println(distance);
   tft.print("Temp: ");
   tft.print(temperature);
-  tft.println("°C");
+  tft.println("C");
   tft.print("Humidity: ");
   tft.println(humidity);
 }

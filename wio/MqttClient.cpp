@@ -25,8 +25,7 @@ while (!mqttClient.connected()) {
 
 void MqttClient::publish(const char* topic,const char* message){
  if (!mqttClient.connected()) {
-    Serial.println("Not connected to MQTT, cannot publish");
-    return;
+    connect();
   }
   mqttClient.publish(topic, message);
 
