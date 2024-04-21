@@ -6,16 +6,15 @@
 #include <ArduinoJson.hpp>
 #include "MqttClient.h"
 #include "TFT_eSPI.h"
-#include "MqttClient.h"
 #include "secrets.h"
 #include "CustomWiFi.h"
-
-TFT_eSPI tft;
-RTC_SAMD51 rtc;
-
 #include "Ranger.h"
 #include "LedBar.h"
 #include "ModeButton.h"
+#include "ImperialButton.h"
+
+TFT_eSPI tft;
+RTC_SAMD51 rtc;
 
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 #define CHECK_BUTTONS_INTERVAL 200
@@ -27,6 +26,7 @@ ThermometerAndHumidity thermometerhumidity;
 LedBar ledBar(1, 0, GREEN_FIRST);
 Ranger ranger(2);
 ModeButton pauseButton(BUTTON_1);
+ImperialButton imperialButton(BUTTON_2);
 
 unsigned long lastExecutedCheckButtons = 0;
 unsigned long lastExecutedPublish = 0;
@@ -64,6 +64,8 @@ unsigned long currMillis = millis();
     lastExecutedCheckButtons = currMillis;
     
     pauseButton.ChangeIfPressed();
+    imperialButton.ChangeIfPressed();
+    Serial.println("--");
   }
   
   if (currMillis - lastExecutedPublish >= PUBLISH_INTERVAL){
@@ -79,7 +81,9 @@ unsigned long currMillis = millis();
       std::string humidityData = thermometerhumidity.getHumidityData();
       publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
   
-      displayOnTerminal(readValue(distanceData), readValue(tempData), readValue(humidityData);
+      displayOnTerminal(readValue(distanceData), readValue(tempData), readValue(humidityData));
+    } else {
+      displayPause();
     }
   }
 }
@@ -95,13 +99,36 @@ void displayOnTerminal(long distance, long temperature, long humidity){
   DateTime now = rtc.now();
   tft.fillScreen(TFT_GREEN);
   tft.setCursor(10, 10);
-  tft.print("Distance: ");
-  tft.println(distance);
+
+  if(temperature < 20.0 || temperature > 35.0){
+    tft.println("WARNING: Temperature out of bounds!!!");
+  }
+  else if(humidity < 25.0 || humidity > 40.0){
+    tft.println("WARNING: Humidity out of bounds!!!");
+  }
+  
   tft.print("Temp: ");
-  tft.print(temperature);
-  tft.println("C");
+  if (imperialButton.isEnabled()){
+    temperature = imperialButton.convertToFahrenheit(temperature);
+    tft.print(temperature);
+    tft.println("F");
+  } else {
+    tft.print(temperature);
+    tft.println("C");
+  }
+  
   tft.print("Humidity: ");
   tft.println(humidity);
+
+  tft.print("Distance: ");
+  if (imperialButton.isEnabled()){
+    distance = imperialButton.convertToInches(distance);
+    tft.print(distance);
+    tft.println(" inches");
+  } else {
+    tft.print(distance);
+    tft.println(" cm");
+  }
 
   tft.print(" Date: ");
   tft.print(now.year(), DEC);
@@ -115,13 +142,12 @@ void displayOnTerminal(long distance, long temperature, long humidity){
   tft.print(now.minute(), DEC);
   tft.println();
 
- if(temperature < 20.0 || temperature > 35.0){
-    tft.println("WARNING: Temperature out of bounds!!!");
-  }
-  else if(humidity < 25.0 || humidity > 40.0){
-    tft.println("WARNING: Humidity out of bounds!!!");
-  }
+}
 
+void displayPause(){
+  tft.fillScreen(TFT_GREEN);
+  tft.setCursor(10, 10);
+  tft.println("Paused for maintenance.");
 }
 
 long readValue(std::string jsonString){

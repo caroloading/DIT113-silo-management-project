@@ -1,6 +1,7 @@
 #ifndef wioEnvironment
 #define wioEnvironment
 
+#include <iostream>
 #include "Grove_Temperature_And_Humidity_Sensor.h"
 #include "TFT_eSPI.h"
 
