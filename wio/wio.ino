@@ -1,9 +1,18 @@
+
+#include <DateTime.h>
+#include <RTC_SAMD51.h>
+#include "ThermometerAndHumidity.h"
 #include <ArduinoJson.h>
 #include <ArduinoJson.hpp>
 #include "MqttClient.h"
 #include "TFT_eSPI.h"
+#include "MqttClient.h"
 #include "secrets.h"
 #include "CustomWiFi.h"
+
+TFT_eSPI tft;
+RTC_SAMD51 rtc;
+
 #include "Ranger.h"
 #include "LedBar.h"
 #include "ModeButton.h"
@@ -12,9 +21,9 @@
 #define CHECK_BUTTONS_INTERVAL 200
 #define PUBLISH_INTERVAL 15000
 
-TFT_eSPI tft;
 CustomWiFi wifi(ssid, password);
 MqttClient mqtt;
+ThermometerAndHumidity thermometerhumidity;
 LedBar ledBar(1, 0, GREEN_FIRST);
 Ranger ranger(2);
 ModeButton pauseButton(BUTTON_1);
@@ -23,6 +32,10 @@ unsigned long lastExecutedCheckButtons = 0;
 unsigned long lastExecutedPublish = 0;
 
 void setup() {
+  rtc.begin();
+  DateTime now = DateTime(F(__DATE__), F(__TIME__));
+  rtc.adjust(now);
+
   tft.begin();
   tft.setRotation(3);
   tft.setCursor(50,100);
@@ -42,8 +55,10 @@ void setup() {
   mqtt.connect(); // Connect the MQTT Server
 }
 
+
 void loop() {
-  unsigned long currMillis = millis();
+
+unsigned long currMillis = millis();
 
   if (currMillis - lastExecutedCheckButtons >= CHECK_BUTTONS_INTERVAL){
     lastExecutedCheckButtons = currMillis;
@@ -60,11 +75,11 @@ void loop() {
       if (!mqtt.isConnected()){ mqtt.connect(); }
 
       std::string distanceData = ranger.getRangeData();
-      std::string tempData = "{\"value\": 23.01}";
-      std::string humidityData = "{\"value\": 56.01}";
+      std::string tempData = thermometerhumidity.getTempData();
+      std::string humidityData = thermometerhumidity.getHumidityData();
       publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
   
-      displayOnTerminal(readValue(distanceData), 0, 0);
+      displayOnTerminal(readValue(distanceData), readValue(tempData), readValue(humidityData);
     }
   }
 }
@@ -77,6 +92,7 @@ void publish(const char* distanceData, const char* temperatureData, const char* 
 
 void displayOnTerminal(long distance, long temperature, long humidity){
   ledBar.UpdateDisplay(distance);
+  DateTime now = rtc.now();
   tft.fillScreen(TFT_GREEN);
   tft.setCursor(10, 10);
   tft.print("Distance: ");
@@ -86,6 +102,26 @@ void displayOnTerminal(long distance, long temperature, long humidity){
   tft.println("C");
   tft.print("Humidity: ");
   tft.println(humidity);
+
+  tft.print(" Date: ");
+  tft.print(now.year(), DEC);
+  tft.print('/');
+  tft.print(now.month(), DEC);
+  tft.print('/');
+  tft.print(now.day(), DEC);
+  tft.print("   ");
+  tft.print(now.hour(), DEC);
+  tft.print(':');
+  tft.print(now.minute(), DEC);
+  tft.println();
+
+ if(temperature < 20.0 || temperature > 35.0){
+    tft.println("WARNING: Temperature out of bounds!!!");
+  }
+  else if(humidity < 25.0 || humidity > 40.0){
+    tft.println("WARNING: Humidity out of bounds!!!");
+  }
+
 }
 
 long readValue(std::string jsonString){
@@ -93,3 +129,4 @@ long readValue(std::string jsonString){
   deserializeJson(doc, jsonString);
   return doc["value"];
 }
+
