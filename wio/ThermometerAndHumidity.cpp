@@ -1,8 +1,8 @@
 #include "ThermometerAndHumidity.h"
 
 ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE){
-   float humidity = humidity;
-   float temperature = temperature;
+   long humidity = humidity;
+   long temperature = temperature;
    DHT dht = dht;
    TFT_eSPI tft = tft;
 }
@@ -15,12 +15,20 @@ const char* ThermometerAndHumidity::convertReadings(){
   return environmentReadings.c_str();
 }
 
-float ThermometerAndHumidity::getTemperature(){
-  float temperature = dht.readTemperature();
+long ThermometerAndHumidity::getTemperature(){
+  long temperature = dht.readTemperature();
   return temperature;
 }
 
-float ThermometerAndHumidity::getHumidity(){
-  float humidity = dht.readHumidity();
+long ThermometerAndHumidity::getHumidity(){
+  long humidity = dht.readHumidity();
   return humidity;
+}
+
+std::string ThermometerAndHumidity::getTempData(){
+    return "{\"value\": " + std::to_string(getTemperature()) + "}";
+}
+
+std::string ThermometerAndHumidity::getHumidityData(){
+    return "{\"value\": " + std::to_string(getHumidity()) + "}";
 }

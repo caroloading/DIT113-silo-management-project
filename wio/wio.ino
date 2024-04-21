@@ -1,7 +1,10 @@
+
 #include <DateTime.h>
 #include <RTC_SAMD51.h>
-
 #include "ThermometerAndHumidity.h"
+#include <ArduinoJson.h>
+#include <ArduinoJson.hpp>
+#include "MqttClient.h"
 #include "TFT_eSPI.h"
 #include "MqttClient.h"
 #include "secrets.h"
@@ -9,12 +12,24 @@
 
 TFT_eSPI tft;
 RTC_SAMD51 rtc;
+
+#include "Ranger.h"
+#include "LedBar.h"
+#include "ModeButton.h"
+
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
+#define CHECK_BUTTONS_INTERVAL 200
+#define PUBLISH_INTERVAL 15000
 
 CustomWiFi wifi(ssid, password);
 MqttClient mqtt;
-
 ThermometerAndHumidity thermometerhumidity;
+LedBar ledBar(1, 0, GREEN_FIRST);
+Ranger ranger(2);
+ModeButton pauseButton(BUTTON_1);
+
+unsigned long lastExecutedCheckButtons = 0;
+unsigned long lastExecutedPublish = 0;
 
 void setup() {
   rtc.begin();
@@ -31,31 +46,63 @@ void setup() {
 
   Serial.begin(115200);
   wifi.connectToWiFi();
-  if(wifi.getWiFiStatus() == true){
+  if(wifi.isConnected()){
     tft.fillScreen(TFT_GREEN);
     tft.println("connected to wifi");
     tft.println("IP Adress: "+ WiFi.localIP().toString());
   }
+
   mqtt.connect(); // Connect the MQTT Server
 }
 
 
 void loop() {
-  tft.setCursor(0,0);
-  tft.fillScreen(TFT_RED);
 
-  DateTime now = rtc.now();
-  tft.setTextSize(1);
-  float tempreading = thermometerhumidity.getTemperature();
-  float humreading = thermometerhumidity.getHumidity();
+unsigned long currMillis = millis();
+
+  if (currMillis - lastExecutedCheckButtons >= CHECK_BUTTONS_INTERVAL){
+    lastExecutedCheckButtons = currMillis;
     
-  if(tempreading < 20.0 || tempreading > 35.0){
-    tft.println("WARNING: Temperature out of bounds!!!");
+    pauseButton.ChangeIfPressed();
   }
-  else if(humreading < 25.0 || humreading > 40.0){
-    tft.println("WARNING: Humidity out of bounds!!!");
+  
+  if (currMillis - lastExecutedPublish >= PUBLISH_INTERVAL){
+    lastExecutedPublish = currMillis;
+    
+    if (!pauseButton.isEnabled()){
+
+      if (!wifi.isConnected()){ wifi.connectToWiFi(); }
+      if (!mqtt.isConnected()){ mqtt.connect(); }
+
+      std::string distanceData = ranger.getRangeData();
+      std::string tempData = thermometerhumidity.getTempData();
+      std::string humidityData = thermometerhumidity.getHumidityData();
+      publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
+  
+      displayOnTerminal(readValue(distanceData), readValue(tempData), readValue(humidityData);
+    }
   }
-  tft.print(thermometerhumidity.convertReadings());
+}
+
+void publish(const char* distanceData, const char* temperatureData, const char* humidityData){
+  mqtt.publish("wio/temperature", temperatureData);//publishes to the broker
+  mqtt.publish("wio/distance", distanceData);
+  mqtt.publish("wio/humidity", humidityData);
+}
+
+void displayOnTerminal(long distance, long temperature, long humidity){
+  ledBar.UpdateDisplay(distance);
+  DateTime now = rtc.now();
+  tft.fillScreen(TFT_GREEN);
+  tft.setCursor(10, 10);
+  tft.print("Distance: ");
+  tft.println(distance);
+  tft.print("Temp: ");
+  tft.print(temperature);
+  tft.println("C");
+  tft.print("Humidity: ");
+  tft.println(humidity);
+
   tft.print(" Date: ");
   tft.print(now.year(), DEC);
   tft.print('/');
@@ -66,18 +113,20 @@ void loop() {
   tft.print(now.hour(), DEC);
   tft.print(':');
   tft.print(now.minute(), DEC);
-  tft.println();  
-   
+  tft.println();
 
-  while(wifi.getWiFiStatus() != true){
-    tft.println("connecting to wifi");
-    wifi.connectToWiFi();
+ if(temperature < 20.0 || temperature > 35.0){
+    tft.println("WARNING: Temperature out of bounds!!!");
+  }
+  else if(humidity < 25.0 || humidity > 40.0){
+    tft.println("WARNING: Humidity out of bounds!!!");
   }
 
-  mqtt.publish("wio/temperature","23.01/2024-04-17 09:23:21");//publishes to the broker
-  mqtt.publish("wio/distance","12.3/2024-04-17 09:24:22");
-  mqtt.publish("wio/humidity","58.00/2024-04-17 09:24:22");
-  delay(15000);
 }
 
+long readValue(std::string jsonString){
+  JsonDocument doc;
+  deserializeJson(doc, jsonString);
+  return doc["value"];
+}
 

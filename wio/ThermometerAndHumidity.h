@@ -14,15 +14,17 @@ class ThermometerAndHumidity{
   public:
     ThermometerAndHumidity();
     const char* convertReadings();
-    float getTemperature();
-    float getHumidity();
+    std::string getTempData();
+    std::string getHumidityData();
+    long getTemperature();
+    long getHumidity();
 
   private:
     DHT dht;
     TFT_eSPI tft;
     //variables
-    float humidity;
-    float temperature;
+    long humidity;
+    long temperature;
 };
 
 #endif

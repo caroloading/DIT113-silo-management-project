@@ -9,6 +9,7 @@ class MqttClient
   public:
     MqttClient(const char* mqtt_server = "broker.mqtt-dashboard.com",const char* clientId = "grainGuard",int serverPort = 1883);
     void connect();
+    bool isConnected();
     void publish(const char* topic,const char* message);
 
   private:
