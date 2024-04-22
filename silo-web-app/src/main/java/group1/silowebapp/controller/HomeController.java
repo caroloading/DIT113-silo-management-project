@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import group1.silowebapp.model.GrainHeight;
+import group1.silowebapp.model.Humidity;
+import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
+import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
 
 @Controller
@@ -19,12 +23,24 @@ public class HomeController {
 	private HumidityRepository humidityRepository;
 	@Autowired
 	private GrainHeightRepository grainHeightRepository;
+	@Autowired
+	private SiloRepository siloRepository;
 
 	@GetMapping({"/", "/index"})
 	public String showIndex(Model model) {
-		model.addAttribute("temperature", temperatureRepository.findTopByOrderByDateTimeDesc());
-		model.addAttribute("humidity", humidityRepository.findTopByOrderByDateTimeDesc());
-		model.addAttribute("grainHeight", grainHeightRepository.findTopByOrderByDateTimeDesc());
+
+		Temperature topTemp = temperatureRepository.findTopByOrderByDateTimeDesc();
+		topTemp = topTemp == null? new Temperature(0.0, "", siloRepository.findById(1L)) : topTemp;
+
+		Humidity topHumidity = humidityRepository.findTopByOrderByDateTimeDesc();
+		topHumidity = topHumidity == null? new Humidity(0.0, "", siloRepository.findById(1L)) : topHumidity;
+		
+		GrainHeight topGrainHeight = grainHeightRepository.findTopByOrderByDateTimeDesc();
+		topGrainHeight = topGrainHeight == null? new GrainHeight(0.0, "", siloRepository.findById(1L)) : topGrainHeight;
+		
+		model.addAttribute("temperature", topTemp);
+		model.addAttribute("humidity", topHumidity);
+		model.addAttribute("grainHeight", topGrainHeight);
 		model.addAttribute("thisYear", Year.now());
 
 		return "index";

@@ -9,14 +9,18 @@ ModeButton::ModeButton(int pin){
 bool ModeButton::ChangeIfPressed(){
   if (digitalRead(_pin) == LOW){
     _isEnabled = !_isEnabled;
-    if (_isEnabled){
-      Serial.println("Paused for maintenance.");
-    } else {
-      Serial.println("Resuming measures.");
-    }
-  }
+  } 
+  printStatus();
 }
 
 bool ModeButton::isEnabled(){
   return _isEnabled;
+}
+
+void ModeButton::printStatus(){
+  if (_isEnabled){
+    Serial.println("Paused for maintenance.");
+  } else {
+    Serial.println("Measuring.");
+  }
 }

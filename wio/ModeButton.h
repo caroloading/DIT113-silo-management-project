@@ -12,6 +12,7 @@ class ModeButton
     private:
         bool _isEnabled;
         int _pin;
+        virtual void printStatus();
 };
 
 #endif
