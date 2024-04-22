@@ -28,14 +28,15 @@ public class HomeController {
 
 	@GetMapping({"/", "/index"})
 	public String showIndex(Model model) {
-		Temperature topTemp = temperatureRepository.findTopByOrderByDateTimeDesc() == null? 
-			new Temperature(0.0, "", siloRepository.findById(1L)) : temperatureRepository.findTopByOrderByDateTimeDesc();
 
-		Humidity topHumidity = humidityRepository.findTopByOrderByDateTimeDesc() == null? 
-			new Humidity(0.0, "", siloRepository.findById(1L)) : humidityRepository.findTopByOrderByDateTimeDesc();
+		Temperature topTemp = temperatureRepository.findTopByOrderByDateTimeDesc();
+		topTemp = topTemp == null? new Temperature(0.0, "", siloRepository.findById(1L)) : topTemp;
+
+		Humidity topHumidity = humidityRepository.findTopByOrderByDateTimeDesc();
+		topHumidity = topHumidity == null? new Humidity(0.0, "", siloRepository.findById(1L)) : topHumidity;
 		
-		GrainHeight topGrainHeight = grainHeightRepository.findTopByOrderByDateTimeDesc() == null? 
-			new GrainHeight(0.0, "", siloRepository.findById(1L)) : grainHeightRepository.findTopByOrderByDateTimeDesc();
+		GrainHeight topGrainHeight = grainHeightRepository.findTopByOrderByDateTimeDesc();
+		topGrainHeight = topGrainHeight == null? new GrainHeight(0.0, "", siloRepository.findById(1L)) : topGrainHeight;
 		
 		model.addAttribute("temperature", topTemp);
 		model.addAttribute("humidity", topHumidity);

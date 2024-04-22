@@ -103,7 +103,7 @@ void displayOnTerminal(long distance, long temperature, long humidity){
   if(temperature < 20.0 || temperature > 35.0){
     tft.println("WARNING: Temperature out of bounds!!!");
   }
-  else if(humidity < 25.0 || humidity > 40.0){
+  if(humidity < 25.0 || humidity > 40.0){
     tft.println("WARNING: Humidity out of bounds!!!");
   }
   
