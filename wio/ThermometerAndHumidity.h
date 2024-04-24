@@ -5,27 +5,26 @@
 #include "Grove_Temperature_And_Humidity_Sensor.h"
 #include "TFT_eSPI.h"
 
-//Define sensor version
-#define DHTTYPE DHT11
+#define DHT_TYPE DHT11
+#define DHT_PIN PIN_WIRE_SCL
 
-//Define used pin
-#define DHTPIN PIN_WIRE_SCL
 
-class ThermometerAndHumidity{
+class ThermometerAndHumidity
+{
   public:
     ThermometerAndHumidity();
-    const char* convertReadings();
-    std::string getTempData();
-    std::string getHumidityData();
-    long getTemperature();
-    long getHumidity();
+    const char* ConvertReadings();
+    std::string GetTempData();
+    std::string GetHumidityData();
+    long        GetTemperature();
+    long        GetHumidity();
 
   private:
-    DHT dht;
-    TFT_eSPI tft;
-    //variables
-    long humidity;
-    long temperature;
+    DHT      _dht;
+    TFT_eSPI _tft;
+
+    long _humidity;
+    long _temperature;
 };
 
 #endif

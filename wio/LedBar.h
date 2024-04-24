@@ -28,8 +28,8 @@ class LedBar
         void UpdateDisplay(long value);
     private:
         Grove_LED_Bar _ledBar;
-        float _minDisplayRange;
-        float _maxDisplayRange;
+        float         _minDisplayRange;
+        float         _maxDisplayRange;
         
         void _SetLevel(int level);
 };

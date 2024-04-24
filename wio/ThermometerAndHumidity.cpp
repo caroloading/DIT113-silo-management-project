@@ -1,34 +1,44 @@
 #include "ThermometerAndHumidity.h"
 
-ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE){
-   long humidity = humidity;
-   long temperature = temperature;
-   DHT dht = dht;
-   TFT_eSPI tft = tft;
+
+ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE)
+{
+   _humidity = humidity;
+   _temperature = temperature;
+   _dht = dht;
+   _tft = tft;
 }
 
-const char* ThermometerAndHumidity::convertReadings(){
-  String convertedTemperature = String(getTemperature());
+const char* ThermometerAndHumidity::ConvertReadings()
+{
+  String convertedTemperature = String(GetTemperature());
   String convertedHumidity = String(getHumidity());
 
   String environmentReadings = ""+convertedTemperature +"C "+ convertedHumidity+"% ";
+
   return environmentReadings.c_str();
 }
 
-long ThermometerAndHumidity::getTemperature(){
+long ThermometerAndHumidity::GetTemperature()
+{
   long temperature = dht.readTemperature();
+
   return temperature;
 }
 
-long ThermometerAndHumidity::getHumidity(){
+long ThermometerAndHumidity::GetHumidity()
+{
   long humidity = dht.readHumidity();
+
   return humidity;
 }
 
-std::string ThermometerAndHumidity::getTempData(){
-    return "{\"value\": " + std::to_string(getTemperature()) + "}";
+std::string ThermometerAndHumidity::GetTempData()
+{
+    return "{\"value\": " + std::to_string(GetTemperature()) + "}";
 }
 
-std::string ThermometerAndHumidity::getHumidityData(){
-    return "{\"value\": " + std::to_string(getHumidity()) + "}";
+std::string ThermometerAndHumidity::GetHumidityData()
+{
+    return "{\"value\": " + std::to_string(GetHumidity()) + "}";
 }

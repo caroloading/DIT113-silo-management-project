@@ -6,11 +6,12 @@ Ranger::Ranger(int pin) : _ultrasonic(pin)
     _ultrasonic = Ultrasonic(pin);
 };
 
-long Ranger::measureRange()
+long Ranger::_MeasureRange()
 {
   return _ultrasonic.MeasureInCentimeters();
 };
 
-std::string Ranger::getRangeData(){
-    return "{\"value\": " + std::to_string(measureRange()) + "}";
+std::string Ranger::GetRangeData()
+{
+    return "{\"value\": " + std::to_string(_MeasureRange()) + "}";
 }

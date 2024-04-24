@@ -2,16 +2,18 @@
 #define wioRanger
 
 #include <iostream>
-#include "Ultrasonic.h"  // External lib
+#include "Ultrasonic.h"
 #include "LedBar.h"
+
 
 class Ranger 
 {
     public:
       Ranger(int pin);
-      std::string getRangeData();
+      std::string GetRangeData();
     private:    
-      long measureRange();
+      long _MeasureRange();
+
       Ultrasonic _ultrasonic;
 };
 

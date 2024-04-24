@@ -1,5 +1,6 @@
 #include "LedBar.h"
 
+
 LedBar::LedBar(
     int clockPin, int dataPin, LedOrientation orientation, int minDisplayRange, int maxDisplayRange
 ): _ledBar(clockPin, dataPin, orientation, LedType::LED_BAR_10) 
