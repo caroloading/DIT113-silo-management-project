@@ -28,7 +28,7 @@
 TFT_eSPI tft;
 RTC_SAMD51 rtc;
 
-CustomWiFi wifi(ssid, password);
+CustomWiFi wifi(SECRET_SSID, SECRET_PASSWORD);
 MqttClient mqtt;
 
 ThermometerAndHumidity thermometerhumidity;
@@ -178,4 +178,3 @@ long readValue(std::string jsonString) {
 
    return doc["value"];
 }
-
