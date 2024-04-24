@@ -1,12 +1,13 @@
-
 #include <DateTime.h>
-#include <RTC_SAMD51.h>
-#include "ThermometerAndHumidity.h"
 #include <ArduinoJson.h>
 #include <ArduinoJson.hpp>
+#include <RTC_SAMD51.h>
+
+#include "secrets.h"
+
+#include "ThermometerAndHumidity.h"
 #include "MqttClient.h"
 #include "TFT_eSPI.h"
-#include "secrets.h"
 #include "CustomWiFi.h"
 #include "Ranger.h"
 #include "LedBar.h"
@@ -20,7 +21,7 @@ RTC_SAMD51 rtc;
 #define CHECK_BUTTONS_INTERVAL 200
 #define PUBLISH_INTERVAL 15000
 
-CustomWiFi wifi(ssid, password);
+CustomWiFi wifi(SECRET_SSID, SECRET_PASSWORD);
 MqttClient mqtt;
 ThermometerAndHumidity thermometerhumidity;
 LedBar ledBar(1, 0, GREEN_FIRST);
@@ -155,4 +156,3 @@ long readValue(std::string jsonString){
   deserializeJson(doc, jsonString);
   return doc["value"];
 }
-
