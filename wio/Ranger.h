@@ -5,6 +5,8 @@
 #include "Ultrasonic.h"  // External lib
 #include "LedBar.h"
 
+#include <RTC_SAMD51.h>
+
 class Ranger 
 {
     public:
