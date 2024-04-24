@@ -1,17 +1,10 @@
 #include "./Ranger.h"
 
 
-Ranger::Ranger(int pin) : _ultrasonic(pin)
-{
-    _ultrasonic = Ultrasonic(pin);
-};
+Ranger::Ranger(int pin) : _ultrasonic(pin) { }
 
-long Ranger::_MeasureRange()
+long Ranger::MeasureRange()
 {
   return _ultrasonic.MeasureInCentimeters();
-};
-
-std::string Ranger::GetRangeData()
-{
-    return "{\"value\": " + std::to_string(_MeasureRange()) + "}";
 }
+

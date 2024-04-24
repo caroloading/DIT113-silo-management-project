@@ -2,15 +2,18 @@
 
 
 LedBar::LedBar(
-    int clockPin, int dataPin, LedOrientation orientation, int minDisplayRange, int maxDisplayRange
+    int clockPin,
+    int dataPin,
+    LedOrientation orientation,
+    int minDisplayRange,
+    int maxDisplayRange
 ): _ledBar(clockPin, dataPin, orientation, LedType::LED_BAR_10) 
 {
-    _ledBar = Grove_LED_Bar(clockPin, dataPin, orientation, LedType::LED_BAR_10);
     _ledBar.begin();
 
     _minDisplayRange = minDisplayRange;
     _maxDisplayRange = maxDisplayRange;
-};
+}
 
 void LedBar::_SetLevel(int level)
 {
@@ -23,9 +26,10 @@ void LedBar::_SetLevel(int level)
     }
 
     _ledBar.setLevel(level);
-};
+}
 
 void LedBar::UpdateDisplay(long value)
 {
-  _SetLevel(LedBar::MAX_LEVEL - (int)((value * LedBar::MAX_LEVEL) /_maxDisplayRange));
-};
+    _SetLevel(LedBar::MAX_LEVEL - (int)((value * LedBar::MAX_LEVEL) /_maxDisplayRange));
+}
+

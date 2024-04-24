@@ -13,6 +13,9 @@
 #include "LedBar.h"
 #include "ModeButton.h"
 #include "ImperialButton.h"
+#include "SensorManager.h"
+#include "WioDisplay.h"
+#include "RealTimeClock.h"
 
 
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD // NOTE: Is this define necessary?
@@ -26,10 +29,12 @@
 
 
 TFT_eSPI tft;
-RTC_SAMD51 rtc;
+
+RealTimeClock realTimeClock;
 
 CustomWiFi wifi(SECRET_SSID, SECRET_PASSWORD);
 MqttClient mqtt;
+WioDisplay wioDisplay;
 
 ThermometerAndHumidity thermometerhumidity;
 LedBar ledBar(LED_BAR_CLOCK_PIN, LED_BAR_DATA_PIN, GREEN_FIRST);
@@ -38,16 +43,20 @@ Ranger ranger(RANGER_PIN);
 ModeButton pauseButton(BUTTON_1);
 ImperialButton imperialButton(BUTTON_2);
 
+SensorManager sensorManager(
+    &ranger,
+    &ledBar,
+    &pauseButton,
+    &imperialButton,
+    &thermometerhumidity
+);
+
 unsigned long lastExecutedCheckButtons = 0;
 unsigned long lastExecutedPublish = 0;
 
 
 void setup()
 {
-    rtc.begin();
-    DateTime now = DateTime(F(__DATE__), F(__TIME__));
-    rtc.adjust(now);
-
     tft.begin();
     tft.setRotation(3);
     tft.setCursor(50,100);
@@ -91,33 +100,24 @@ void loop()
                 mqtt.Connect(); 
             }
 
-            std::string distanceData = ranger.GetRangeData();
-            std::string tempData = thermometerhumidity.GetTempData();
-            std::string humidityData = thermometerhumidity.GetHumidityData();
-            publish(distanceData.c_str(), tempData.c_str(), humidityData.c_str());
+            PublishedMeasurements measurements = sensorManager.PublishMeasurements(&mqtt);
              
             displayOnTerminal(
-                readValue(distanceData),
-                readValue(tempData), 
-                readValue(humidityData)
+                measurements.distance,
+                measurements.temperature,
+                measurements.humidity
             );
         } else {
-            displayPause();
+            wioDisplay.DisplayPause();
         }
     }
 }
 
 
-void publish(const char* distanceData, const char* temperatureData, const char* humidityData) {
-   mqtt.Publish("wio/temperature", temperatureData);
-   mqtt.Publish("wio/distance", distanceData);
-   mqtt.Publish("wio/humidity", humidityData);
-}
-
-
-void displayOnTerminal(long distance, long temperature, long humidity) {
+void displayOnTerminal(long distance, long temperature, long humidity) 
+{
     ledBar.UpdateDisplay(distance);
-    DateTime now = rtc.now();
+    DateTime now = realTimeClock.GetNow();
     tft.fillScreen(TFT_GREEN);
     tft.setCursor(10, 10);
 
@@ -164,17 +164,3 @@ void displayOnTerminal(long distance, long temperature, long humidity) {
     tft.println();
 }
 
-
-void displayPause() {
-   tft.fillScreen(TFT_GREEN);
-   tft.setCursor(10, 10);
-   tft.println("Paused for maintenance.");
-}
-
-
-long readValue(std::string jsonString) {
-   JsonDocument doc;
-   deserializeJson(doc, jsonString);
-
-   return doc["value"];
-}

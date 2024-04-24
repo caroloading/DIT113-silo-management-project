@@ -4,17 +4,17 @@
 #include <iostream>
 #include "Ultrasonic.h"
 #include "LedBar.h"
+#include "JsonSerializable.h"
 
 
-class Ranger 
+class Ranger : public JsonSerializable
 {
     public:
       Ranger(int pin);
-      std::string GetRangeData();
-    private:    
-      long _MeasureRange();
-
+      long MeasureRange();
+    private:
       Ultrasonic _ultrasonic;
 };
+
 
 #endif // wioRanger

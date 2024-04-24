@@ -1,44 +1,34 @@
 #include "ThermometerAndHumidity.h"
+#include <cstdio>
 
 
-ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE)
-{
-   _humidity = humidity;
-   _temperature = temperature;
-   _dht = dht;
-   _tft = tft;
-}
+ThermometerAndHumidity::ThermometerAndHumidity() : _dht(DHT_PIN, DHT_TYPE) { }
 
 const char* ThermometerAndHumidity::ConvertReadings()
 {
-  String convertedTemperature = String(GetTemperature());
-  String convertedHumidity = String(getHumidity());
+    // NOTE: allocate memory on the heap instead of the stack to avoid potential
+    // problems of loosing the data once the 'readingsBuffer' goes out of scope.
+    char* readingsBuffer = new char[50];
 
-  String environmentReadings = ""+convertedTemperature +"C "+ convertedHumidity+"% ";
+    long temperatures = GetTemperature();
+    long humidity = GetHumidity();
 
-  return environmentReadings.c_str();
+    std::sprintf(readingsBuffer, "%ldC %ld%%", temperatures, humidity);
+    
+    return readingsBuffer;
 }
 
 long ThermometerAndHumidity::GetTemperature()
 {
-  long temperature = dht.readTemperature();
+    long temperature = _dht.readTemperature();
 
-  return temperature;
+    return temperature;
 }
 
 long ThermometerAndHumidity::GetHumidity()
 {
-  long humidity = dht.readHumidity();
+    long humidity = _dht.readHumidity();
 
-  return humidity;
+    return humidity;
 }
 
-std::string ThermometerAndHumidity::GetTempData()
-{
-    return "{\"value\": " + std::to_string(GetTemperature()) + "}";
-}
-
-std::string ThermometerAndHumidity::GetHumidityData()
-{
-    return "{\"value\": " + std::to_string(GetHumidity()) + "}";
-}
