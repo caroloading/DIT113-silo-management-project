@@ -15,12 +15,12 @@ import org.springframework.messaging.MessageHandler;
 
 @Configuration
 public class MqttBeans {
-    
+
     @Bean
-    public MqttPahoClientFactory mqttClientFactory(){
+    public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[] {"tcp://broker.mqtt-dashboard.com:1883"});
+        options.setServerURIs(new String[]{"tcp://broker.mqtt-dashboard.com:1883"});
         options.setCleanSession(true);
         factory.setConnectionOptions(options);
 
@@ -28,70 +28,70 @@ public class MqttBeans {
     }
 
     @Bean
-	public MessageChannel temperatureInputChannel() {
-		return new DirectChannel();
-	}
+    public MessageChannel temperatureInputChannel() {
+        return new DirectChannel();
+    }
 
     @Bean
     public MessageChannel distanceInputChannel() {
-		return new DirectChannel();
-	}
+        return new DirectChannel();
+    }
 
     @Bean
     public MessageChannel humidityInputChannel() {
-		return new DirectChannel();
-	}
-	
-	@Bean
-	public MessageProducer inboundTemperature() {
-		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverTemperature",
-				mqttClientFactory(), "wio/temperature");
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageProducer inboundTemperature() {
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverTemperature",
+                mqttClientFactory(), "wio/temperature");
 
         setUpAdapterOptions(adapter);
-		adapter.setOutputChannel(temperatureInputChannel());
-		return adapter;
-	}
+        adapter.setOutputChannel(temperatureInputChannel());
+        return adapter;
+    }
 
     @Bean
-	public MessageProducer inboundHumidity() {
-		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverHumidity",
-				mqttClientFactory(), "wio/humidity");
+    public MessageProducer inboundHumidity() {
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverHumidity",
+                mqttClientFactory(), "wio/humidity");
 
-		setUpAdapterOptions(adapter);
-		adapter.setOutputChannel(humidityInputChannel());
-		return adapter;
-	}
-
-    @Bean
-	public MessageProducer inboundDistance() {
-		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverDistance",
-				mqttClientFactory(), "wio/distance");
         setUpAdapterOptions(adapter);
-		adapter.setOutputChannel(distanceInputChannel());
-		return adapter;
-	}
-
-	@Bean
-	@ServiceActivator(inputChannel = "temperatureInputChannel")
-	public MessageHandler handlerTemperature() {
-		return new SensorsMessageHandler("Temperature");
-	}
+        adapter.setOutputChannel(humidityInputChannel());
+        return adapter;
+    }
 
     @Bean
-	@ServiceActivator(inputChannel = "humidityInputChannel")
-	public MessageHandler handlerHumidity() {
-		return new SensorsMessageHandler("Humidity");
-	}
+    public MessageProducer inboundDistance() {
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverDistance",
+                mqttClientFactory(), "wio/distance");
+        setUpAdapterOptions(adapter);
+        adapter.setOutputChannel(distanceInputChannel());
+        return adapter;
+    }
 
     @Bean
-	@ServiceActivator(inputChannel = "distanceInputChannel")
-	public MessageHandler handlerDistance() {
-		return new SensorsMessageHandler("GrainHeight");
-	}
-	
-	private void setUpAdapterOptions(MqttPahoMessageDrivenChannelAdapter adapter){
+    @ServiceActivator(inputChannel = "temperatureInputChannel")
+    public MessageHandler handlerTemperature() {
+        return new SensorsMessageHandler("Temperature");
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "humidityInputChannel")
+    public MessageHandler handlerHumidity() {
+        return new SensorsMessageHandler("Humidity");
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "distanceInputChannel")
+    public MessageHandler handlerDistance() {
+        return new SensorsMessageHandler("GrainHeight");
+    }
+
+    private void setUpAdapterOptions(MqttPahoMessageDrivenChannelAdapter adapter) {
         adapter.setCompletionTimeout(5000);
-		adapter.setConverter(new DefaultPahoMessageConverter());
-		adapter.setQos(2);
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setQos(2);
     }
 }

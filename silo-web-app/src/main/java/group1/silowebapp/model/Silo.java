@@ -1,36 +1,33 @@
 package group1.silowebapp.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Silo {
-    /* Define the ORM. JPA/Hibernate converts the definitions to the  
+    /* Define the ORM. JPA/Hibernate converts the definitions to the
      * appropriate SQL DDL statements
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Double radius;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Double height;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String mcuName;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String mcuVendor;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String mcuModel;
 
-    protected Silo() {}
+    protected Silo() {
+    }
 
     public Silo(Double height, Double radius, String mcuName, String mcuVendor, String mcuModel) {
         this.height = height;
@@ -88,6 +85,6 @@ public class Silo {
     public String toString() {
         return String.format("Silo[id=%d, height='%.2f', radius='%.2f']", id, height, radius);
     }
-    
+
 
 }
