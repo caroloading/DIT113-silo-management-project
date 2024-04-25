@@ -45,10 +45,20 @@ void SensorManager::UpdateDisplayWithSensorData(WioDisplay* display, PublishedMe
     if (_IsHumidityOutOfBounds(measurements->humidity)) {
         display->DisplayWarning("Humidity out of bounds");
     }
+    
+    const char* temperatureUnit = "C";
+    const char* distanceUnit = " cm";
 
     if (_imperialButton->IsEnabled()) {
         measurements->temperature = _imperialButton->ConvertToFahrenheit(measurements->temperature);
+        measurements->distance = _imperialButton->ConvertToInches(measurements->distance);
+        temperatureUnit = "F";
+        distanceUnit = " inches";
     }
+
+    display->DisplayMeasurement("Temperature", temperatureUnit, measurements->temperature);
+    display->DisplayMeasurement("Humidity", "", measurements->humidity);
+    display->DisplayMeasurement("Distance", distanceUnit, measurements->distance);
 }
 
 bool SensorManager::_IsTemperatureOutOfBounds(long temperature)

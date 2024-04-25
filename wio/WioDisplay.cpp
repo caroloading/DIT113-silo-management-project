@@ -61,6 +61,6 @@ void WioDisplay::DisplayWarning(const char* text)
 void WioDisplay::DisplayMeasurement(const char* preValue, const char* postValue, long measurement)
 {
     char* measurementBuffer = new char[100];
-    std::sprintf(measurementBuffer, "%s: %ld %s", preValue, measurement, postValue);
+    std::sprintf(measurementBuffer, "%s: %ld%s", preValue, measurement, postValue);
     _tft.println(measurementBuffer);
 }
