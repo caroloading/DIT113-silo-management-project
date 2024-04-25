@@ -1,4 +1,4 @@
-package group1.silowebapp.config;
+/* package group1.silowebapp.config;
 
 
 import group1.silowebapp.model.Silo;
@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * This class initializes the database with mockup data for testing purpose.
  * It will be removed in production mode.
  */
+/*
 @Configuration
 public class InitDb {
 
@@ -47,7 +48,7 @@ public class InitDb {
             log.info("--------------------------------");
             log.info(silo.toString());
             log.info("");
-
+*/
             //final Silo firstSilo = siloRepository.findById(1L);
 
             // GrainHeight
@@ -133,7 +134,7 @@ public class InitDb {
             //    log.info(temp.toString());
             //});
             //log.info("");
-        };
-    }
-}
+ //       };
+  //  }
+//}
  
