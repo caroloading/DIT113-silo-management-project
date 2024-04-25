@@ -21,10 +21,22 @@ struct PublishedMeasurements
 class SensorManager
 {
     public:
-        SensorManager(Ranger* ranger, LedBar* ledBar, ModeButton* modeButton, ImperialButton* imperialButton, ThermometerAndHumidity* temphum);
+        SensorManager(
+            Ranger* ranger, 
+            LedBar* ledBar, 
+            ModeButton* modeButton, 
+            ImperialButton* imperialButton, 
+            ThermometerAndHumidity* temphum
+        );
         PublishedMeasurements PublishMeasurements(MqttClient* client);
-        void UpdateDisplayWithSensorData(WioDisplay* display, PublishedMeasurements* measurements);
-        void PublishAndUpdateSensorMeasurements(MqttClient* client, WioDisplay* display);
+        void UpdateDisplayWithSensorData(
+            WioDisplay* display, 
+            PublishedMeasurements* measurements
+        );
+        void PublishAndUpdateSensorMeasurements(
+            MqttClient* client, 
+            WioDisplay* display
+        );
     private:
         Ranger*                 _ranger;
         LedBar*                 _ledBar;

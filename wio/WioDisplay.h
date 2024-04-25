@@ -13,7 +13,11 @@ class WioDisplay {
         void DisplayConnectedToWiFi(String ipAddress);
         void DisplayCurrentTime(DateTime now);
         void DisplayWarning(const char *text);
-        void DisplayMeasurement(const char* preValue, const char* postValue, long measurement);
+        void DisplayMeasurement(
+            const char* preValue, 
+            const char* postValue, 
+            long measurement
+        );
         void SetDefaultPreset();
     private:
         TFT_eSPI _tft;
