@@ -20,12 +20,14 @@ class MqttClient
       void Connect();
       bool IsConnected();
       void Publish(Topic topic, const char* message);
-
+      void CheckConnection();
   private:
       std::map<Topic, const char*>     _registeredTopics;
       const char*                      _mqtt_server;
       int                              _serverPort;
       const char*                      _clientId;
+
+      void _RegisterTopic(Topic topic, const char* topicPath);
 };
 
 

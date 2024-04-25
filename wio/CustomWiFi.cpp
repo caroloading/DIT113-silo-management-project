@@ -12,21 +12,33 @@ void CustomWiFi::ConnectToWiFi()
     WiFi.mode(WIFI_STA);
     WiFi.disconnect();
     
-    Serial.println("connecting to WiFi");
-    WiFi.begin(_ssid, _password);
-
-    while(!IsConnected()) {
-        delay(5000);
+    int retries = 0;
+    do {
         Serial.println("connecting to WiFi");
         WiFi.begin(_ssid, _password);
-    }
-
-    Serial.println("wifi connected");
-    Serial.println("IP Adress: "+ WiFi.localIP().toString());
+        if (retries > 0) {
+            delay(5000);
+        }
+        retries += 1;
+    } while (!IsConnected());
 }
 
 bool CustomWiFi::IsConnected()
 {
     return WiFi.status() == WL_CONNECTED;
+}
+
+String CustomWiFi::GetLocalIpAddress()
+{
+    return WiFi.localIP().toString();
+}
+
+void CustomWiFi::CheckConnection()
+{
+    if (IsConnected()) {
+        return;
+    }
+
+    ConnectToWiFi();
 }
 

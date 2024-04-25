@@ -6,18 +6,16 @@ PubSubClient mqttClient(wioClient);
 
 MqttClient::MqttClient(const char* mqtt_server, const char* clientId, int serverPort)
 {
-    _registeredTopics = {
-        {Topic::HUMIDITY, "wio/humidity"},
-        {Topic::TEMPERATURE, "wio/temperature"},
-        {Topic::DISTANCE, "wio/distance"}
-    };
-
+    _registeredTopics = std::map<Topic, const char*>();
     _mqtt_server = mqtt_server;
     _clientId = clientId;
     _serverPort = serverPort;
+
+    _RegisterTopic(Topic::HUMIDITY, "wio/humidity");
+    _RegisterTopic(Topic::TEMPERATURE, "wio/temperature");
+    _RegisterTopic(Topic::DISTANCE, "wio/distance");
 }
 
-// TODO: this could be re-written to avoid early returns
 void MqttClient::Connect()
 {
     mqttClient.setServer(_mqtt_server, _serverPort);
@@ -44,3 +42,17 @@ bool MqttClient::IsConnected()
     return mqttClient.connected();
 }
 
+void MqttClient::CheckConnection()
+{
+    if (IsConnected()) {
+        return;
+    }
+
+    Connect();
+}
+
+void MqttClient::_RegisterTopic(Topic topic, const char* topicPath)
+{
+    // NOTE: this will overwrite the topic in the map if it already exists
+    _registeredTopics[topic] = topicPath;
+}

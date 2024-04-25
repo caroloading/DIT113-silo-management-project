@@ -57,22 +57,11 @@ unsigned long lastExecutedPublish = 0;
 
 void setup()
 {
-    tft.begin();
-    tft.setRotation(3);
-    tft.setCursor(50,100);
-    tft.setTextColor(TFT_BLACK);
-    tft.setTextSize(2);
-    tft.fillScreen(TFT_RED);
-    tft.println("connecting to wifi..");
-
     Serial.begin(115200);
+    tft.begin();
+    wioDisplay.DisplayConnectingToWiFi();
     wifi.ConnectToWiFi();
-    if(wifi.IsConnected()){
-        tft.fillScreen(TFT_GREEN);
-        tft.println("connected to wifi");
-        tft.println("IP Adress: "+ WiFi.localIP().toString());
-    }
-
+    wioDisplay.DisplayConnectedToWiFi(wifi.GetLocalIpAddress());
     mqtt.Connect();
 }
 
@@ -93,20 +82,11 @@ void loop()
         lastExecutedPublish = currMillis;
         
         if (!pauseButton.IsEnabled()) {
-            if (!wifi.IsConnected()) { 
-                wifi.ConnectToWiFi(); 
-            }
-            if (!mqtt.IsConnected()) { 
-                mqtt.Connect(); 
-            }
+            wifi.CheckConnection(); 
+            mqtt.CheckConnection(); 
 
-            PublishedMeasurements measurements = sensorManager.PublishMeasurements(&mqtt);
-             
-            displayOnTerminal(
-                measurements.distance,
-                measurements.temperature,
-                measurements.humidity
-            );
+            sensorManager.PublishAndUpdateSensorMeasurements(&mqtt, &wioDisplay);
+
         } else {
             wioDisplay.DisplayPause();
         }
@@ -117,7 +97,6 @@ void loop()
 void displayOnTerminal(long distance, long temperature, long humidity) 
 {
     ledBar.UpdateDisplay(distance);
-    DateTime now = realTimeClock.GetNow();
     tft.fillScreen(TFT_GREEN);
     tft.setCursor(10, 10);
 
@@ -151,16 +130,5 @@ void displayOnTerminal(long distance, long temperature, long humidity)
       tft.println(" cm");
     }
 
-    tft.print(" Date: ");
-    tft.print(now.year(), DEC);
-    tft.print('/');
-    tft.print(now.month(), DEC);
-    tft.print('/');
-    tft.print(now.day(), DEC);
-    tft.print("   ");
-    tft.print(now.hour(), DEC);
-    tft.print(':');
-    tft.print(now.minute(), DEC);
-    tft.println();
+    wioDisplay.DisplayCurrentTime(realTimeClock.GetNow());
 }
-
