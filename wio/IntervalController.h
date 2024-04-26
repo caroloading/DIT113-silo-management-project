@@ -68,6 +68,19 @@ class PublishInterval : public Interval
 };
 
 
+class NtpUpdateInterval : public Interval
+{
+    public:
+        NtpUpdateInterval(
+            RealTimeClock* realTimeClock
+        );
+        bool IsOverInterval(unsigned long currentMillis) override;
+        void RunIntervalAction() override;
+    private:
+        RealTimeClock* _realTimeClock;
+};
+
+
 class IntervalController
 {
     public:

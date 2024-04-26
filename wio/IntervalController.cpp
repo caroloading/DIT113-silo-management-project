@@ -89,6 +89,25 @@ void PublishInterval::RunIntervalAction()
 }
 
 
+// NTP UPDATE INTERVAL
+
+NtpUpdateInterval::NtpUpdateInterval(RealTimeClock* realTimeClock)
+{
+    UpdateLastRun(0);
+    _realTimeClock = realTimeClock;
+}
+
+bool NtpUpdateInterval::IsOverInterval(unsigned long currentMillis)
+{
+    return (currentMillis - GetLastRun()) >= _realTimeClock->GetNtpUpdateInterval(); 
+}
+
+void NtpUpdateInterval::RunIntervalAction()
+{
+    _realTimeClock->UpdateRtcUsingNtp();
+}
+
+
 // INTERVAL CONTROLLER
 
 IntervalController::IntervalController()

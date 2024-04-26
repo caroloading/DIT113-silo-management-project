@@ -1,6 +1,5 @@
 #include <DateTime.h>
 #include <RTC_SAMD51.h>
-#include <ArduinoJson.h>
 
 #include "secrets.h"
 
@@ -45,7 +44,8 @@ SensorManager sensorManager(
     &ledBar,
     &pauseButton,
     &imperialButton,
-    &thermometerhumidity
+    &thermometerhumidity,
+    &realTimeClock
 );
 
 CheckButtonInterval checkButtonInterval(&imperialButton, &pauseButton, &wioDisplay);
@@ -57,6 +57,7 @@ PublishInterval publishInterval(
     &wioDisplay,
     &realTimeClock
 );
+NtpUpdateInterval ntpUpdateInterval(&realTimeClock);
 IntervalController intervalController;
 
 
@@ -69,11 +70,14 @@ void setup()
     wifi.ConnectToWiFi();
     wioDisplay.DisplayConnectedToWiFi(wifi.GetLocalIpAddress());
 
+    realTimeClock.UpdateRtcUsingNtp();
+
     mqtt.Connect();
     
     // Register intervals that are meant to run during the loop
     intervalController.AddInterval(&checkButtonInterval);
     intervalController.AddInterval(&publishInterval);
+    intervalController.AddInterval(&ntpUpdateInterval);
 }
 
 

@@ -1,5 +1,4 @@
 #include "ThermometerAndHumidity.h"
-#include <cstdio>
 
 
 ThermometerAndHumidity::ThermometerAndHumidity() : _dht(DHT_PIN, DHT_TYPE) { }

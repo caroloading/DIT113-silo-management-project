@@ -1,4 +1,4 @@
-#include "./Ranger.h"
+#include "Ranger.h"
 
 
 Ranger::Ranger(int pin) : _ultrasonic(pin) { }

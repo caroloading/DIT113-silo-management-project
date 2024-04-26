@@ -6,7 +6,8 @@ SensorManager::SensorManager(
     LedBar* ledBar, 
     ModeButton* modeButton, 
     ImperialButton* imperialButton, 
-    ThermometerAndHumidity* temphum
+    ThermometerAndHumidity* temphum,
+    RealTimeClock* realTimeClock
 )
 {
     _ranger = ranger;
@@ -14,6 +15,7 @@ SensorManager::SensorManager(
     _modeButton = modeButton;
     _imperialButton = imperialButton;
     _temphum = temphum;
+    _realTimeClock = realTimeClock;
 }
 
 void SensorManager::PublishAndUpdateSensorMeasurements(
@@ -31,14 +33,19 @@ PublishedMeasurements SensorManager::PublishMeasurements(MqttClient* client)
     long temperature = _temphum->GetTemperature();
     long humidity = _temphum->GetHumidity();
 
+    // ISO_LOCAL_DATE_TIME
+    std::string now = std::string(
+        _realTimeClock->GetNow().timestamp(DateTime::TIMESTAMP_FULL).c_str()
+    ); 
+
     client->Publish(
-        Topic::DISTANCE, _ranger->ToJson(distance).c_str()
+        Topic::DISTANCE, _ranger->ToJson(distance, now).c_str()
     );
     client->Publish(
-        Topic::TEMPERATURE, _temphum->ToJson(temperature).c_str()
+        Topic::TEMPERATURE, _temphum->ToJson(temperature, now).c_str()
     );
     client->Publish(
-        Topic::HUMIDITY, _temphum->ToJson(humidity).c_str()
+        Topic::HUMIDITY, _temphum->ToJson(humidity, now).c_str()
     );
 
     return PublishedMeasurements{
