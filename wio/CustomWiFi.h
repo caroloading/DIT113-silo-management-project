@@ -7,15 +7,15 @@
 
 class CustomWiFi 
 {
-  public:
-      CustomWiFi(const char* ssid,const char* password);
-      void ConnectToWiFi();
-      bool IsConnected();
-      String GetLocalIpAddress();
-      void CheckConnection();
-  private:
-      const char* _ssid;
-      const char* _password;
+    public:
+        CustomWiFi(const char* ssid,const char* password);
+        void ConnectToWiFi();
+        bool IsConnected();
+        String GetLocalIpAddress();
+        void CheckConnection();
+    private:
+        const char* _ssid;
+        const char* _password;
 };
 
 
