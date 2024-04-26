@@ -1,5 +1,7 @@
 #include "ThermometerAndHumidity.h"
 
+extern RTC_SAMD51 rtc;
+
 ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE){
    long humidity = humidity;
    long temperature = temperature;
@@ -26,9 +28,11 @@ long ThermometerAndHumidity::getHumidity(){
 }
 
 std::string ThermometerAndHumidity::getTempData(){
-    return "{\"value\": " + std::to_string(getTemperature()) + "}";
+  std::string now = std::string(rtc.now().timestamp(DateTime::TIMESTAMP_FULL).c_str());  // ISO_LOCAL_DATE_TIME
+  return "{\"value\": " + std::to_string(getTemperature()) + ", \"dateTime\": \"" + now + "\"}";
 }
 
 std::string ThermometerAndHumidity::getHumidityData(){
-    return "{\"value\": " + std::to_string(getHumidity()) + "}";
+  std::string now = std::string(rtc.now().timestamp(DateTime::TIMESTAMP_FULL).c_str()); // ISO_LOCAL_DATE_TIME
+  return "{\"value\": " + std::to_string(getHumidity()) + ", \"dateTime\": \"" + now + "\"}";
 }

@@ -1,5 +1,6 @@
 #include "./Ranger.h"
 
+extern RTC_SAMD51 rtc;
 
 Ranger::Ranger(int pin) : _ultrasonic(pin)
 {
@@ -12,5 +13,6 @@ long Ranger::measureRange()
 };
 
 std::string Ranger::getRangeData(){
-    return "{\"value\": " + std::to_string(measureRange()) + "}";
+  std::string now = std::string(rtc.now().timestamp(DateTime::TIMESTAMP_FULL).c_str()); // ISO_LOCAL_DATE_TIME
+  return "{\"value\": " + std::to_string(measureRange()) + ", \"dateTime\": \"" + now + "\"}";
 }

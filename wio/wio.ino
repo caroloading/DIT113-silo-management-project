@@ -2,6 +2,8 @@
 #include <ArduinoJson.h>
 #include <ArduinoJson.hpp>
 #include <RTC_SAMD51.h>
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 
 #include "secrets.h"
 
@@ -20,6 +22,10 @@ RTC_SAMD51 rtc;
 #define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 #define CHECK_BUTTONS_INTERVAL 200
 #define PUBLISH_INTERVAL 15000
+#define NTP_UPDATE_INTERVAL 3600000
+#define UTC_OFFSET 7200 //UTC+2 
+#define NTP_SERVER "europe.pool.ntp.org"
+
 
 CustomWiFi wifi(SECRET_SSID, SECRET_PASSWORD);
 MqttClient mqtt;
@@ -29,14 +35,21 @@ Ranger ranger(2);
 ModeButton pauseButton(BUTTON_1);
 ImperialButton imperialButton(BUTTON_2);
 
+DateTime now; // Datetime object
+WiFiUDP ntpUDP; // UDP object 
+NTPClient ntpClient(ntpUDP, NTP_SERVER, UTC_OFFSET, NTP_UPDATE_INTERVAL); // NTP object 
+
 unsigned long lastExecutedCheckButtons = 0;
 unsigned long lastExecutedPublish = 0;
+unsigned long lastReceivedNTPUpdate = 0;
+unsigned long devicetime; // RTC localtime (Epoch)
 
 void setup() {
-  rtc.begin();
-  DateTime now = DateTime(F(__DATE__), F(__TIME__));
-  rtc.adjust(now);
 
+  Serial.begin(115200);
+  rtc.begin();          // intialize RTC 
+  ntpClient.begin();    // initialize NTPClient
+  
   tft.begin();
   tft.setRotation(3);
   tft.setCursor(50,100);
@@ -45,13 +58,14 @@ void setup() {
   tft.fillScreen(TFT_RED);
   tft.println("connecting to wifi..");
 
-  Serial.begin(115200);
   wifi.connectToWiFi();
   if(wifi.isConnected()){
     tft.fillScreen(TFT_GREEN);
     tft.println("connected to wifi");
     tft.println("IP Adress: "+ WiFi.localIP().toString());
   }
+
+  updateRTCUsingNTP();  // update RTC localtime
 
   mqtt.connect(); // Connect the MQTT Server
 }
@@ -68,7 +82,7 @@ unsigned long currMillis = millis();
     imperialButton.ChangeIfPressed();
     Serial.println("--");
   }
-  
+
   if (currMillis - lastExecutedPublish >= PUBLISH_INTERVAL){
     lastExecutedPublish = currMillis;
     
@@ -86,6 +100,12 @@ unsigned long currMillis = millis();
     } else {
       displayPause();
     }
+  }
+
+  if (currMillis - lastReceivedNTPUpdate >= NTP_UPDATE_INTERVAL){
+    lastReceivedNTPUpdate = currMillis;
+      
+    updateRTCUsingNTP(); // update RTC localtime
   }
 }
 
@@ -155,4 +175,24 @@ long readValue(std::string jsonString){
   JsonDocument doc;
   deserializeJson(doc, jsonString);
   return doc["value"];
+}
+
+void updateRTCUsingNTP() {
+  ntpClient.update(); // get update from NTP server 
+
+  // get the Epoch time, i.e., time in seconds since Jan. 1, 1970
+  devicetime = ntpClient.getEpochTime();
+  if (devicetime == 0) {
+    Serial.println("Failed to get time from network time server.");
+  } 
+  else {
+    // adjust RTC localtime
+    Serial.println("Adjust dateTime!");
+    rtc.adjust(DateTime(devicetime));
+
+    // get and log the current RTC dateTime
+    now = rtc.now();
+    Serial.print("RTC time is: ");
+    Serial.println(now.timestamp(DateTime::TIMESTAMP_FULL)); // ISO_LOCAL_DATE_TIME
+  } 
 }
