@@ -6,28 +6,29 @@
 
 #include "ThermometerAndHumidity.h"
 #include "MqttClient.h"
-#include "TFT_eSPI.h"
 #include "CustomWiFi.h"
 #include "Ranger.h"
 #include "LedBar.h"
 #include "ModeButton.h"
 #include "ImperialButton.h"
 #include "SensorManager.h"
-#include "WioDisplay.h"
 #include "RealTimeClock.h"
 #include "IntervalController.h"
+#include "WioDisplay.h"
+#include "TFT_eSPI.h"
 
-
-#define LCD_BACKLIGHT (72Ul) // Control Pin of LCD // NOTE: Is this define necessary?
 
 #define LED_BAR_CLOCK_PIN 1
 #define LED_BAR_DATA_PIN 0
 
-#define RANGER_PIN 2
+#define RANGER_PIN 4
+#define LCD_BACKLIGHT (72Ul) // Control Pin of LCD
 
+
+TFT_eSPI tft;
 
 RealTimeClock realTimeClock;
-
+ 
 CustomWiFi wifi(SECRET_SSID, SECRET_PASSWORD);
 MqttClient mqtt;
 WioDisplay wioDisplay;
@@ -35,10 +36,10 @@ WioDisplay wioDisplay;
 ThermometerAndHumidity thermometerhumidity;
 LedBar ledBar(LED_BAR_CLOCK_PIN, LED_BAR_DATA_PIN, GREEN_FIRST);
 Ranger ranger(RANGER_PIN);
-
+ 
 ModeButton pauseButton(BUTTON_1);
 ImperialButton imperialButton(BUTTON_2);
-
+ 
 SensorManager sensorManager(
     &ranger,
     &ledBar,
@@ -62,6 +63,7 @@ IntervalController intervalController;
 void setup()
 {
     Serial.begin(115200);
+    tft.begin();
 
     wioDisplay.DisplayConnectingToWiFi();
     wifi.ConnectToWiFi();

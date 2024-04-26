@@ -4,6 +4,8 @@
 #include "TFT_eSPI.h"
 #include <DateTime.h>
 
+extern TFT_eSPI tft;
+
 
 class WioDisplay {
     public:
@@ -19,8 +21,6 @@ class WioDisplay {
             long measurement
         );
         void SetDefaultPreset();
-    private:
-        TFT_eSPI _tft;
     };
 
 
