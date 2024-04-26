@@ -26,6 +26,7 @@ Within a particular ecosystem, there may be a common way of installing things, s
 * [Seeed Arduino FS](https://github.com/Seeed-Studio/Seeed_Arduino_FS)
 * [Seeed Arduino mbedtls](https://github.com/Seeed-Studio/Seeed_Arduino_mbedtls)
 * [PubSubClient](https://github.com/knolleary/pubsubclient/tree/master)
+* [NTPClient](https://github.com/arduino-libraries/NTPClient)
 
 ## Usage
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
