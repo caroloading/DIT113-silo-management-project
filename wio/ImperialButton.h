@@ -7,11 +7,9 @@
 class ImperialButton : public ModeButton 
 {
     public:
-      ImperialButton(int pin);
-      long ConvertToFahrenheit(long valueCelsius);
-      long ConvertToInches(long valueCM);
-    private:
-      void _PrintStatus();
+        ImperialButton(int pin);
+        long ConvertToFahrenheit(long valueCelsius);
+        long ConvertToInches(long valueCM);
 };
 
 #endif
