@@ -15,6 +15,7 @@
 class Interval
 {
     public:
+        Interval();
         virtual bool IsOverInterval(unsigned long currentMillis);
         virtual void RunIntervalAction();
         void UpdateLastRun(unsigned long lastRun);

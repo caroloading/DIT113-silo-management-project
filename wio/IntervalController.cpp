@@ -3,6 +3,11 @@
 
 // INTERVAL
 
+Interval::Interval()
+{
+    _lastRun = 0;
+}
+
 void Interval::UpdateLastRun(unsigned long lastRun)
 {
     _lastRun = lastRun;
@@ -23,7 +28,6 @@ CheckButtonInterval::CheckButtonInterval(
     unsigned int intervalMillis
 )
 {
-    UpdateLastRun(0);
     _intervalMillis = intervalMillis;
     _imperialButton = imperialButton;
     _pauseButton = pauseButton;
@@ -60,7 +64,6 @@ PublishInterval::PublishInterval(
     unsigned int intervalMillis
 )
 {
-    UpdateLastRun(0);
     _intervalMillis = intervalMillis;
     _pauseButton = pauseButton;
     _wifi = wifi;
@@ -93,7 +96,6 @@ void PublishInterval::RunIntervalAction()
 
 NtpUpdateInterval::NtpUpdateInterval(RealTimeClock* realTimeClock)
 {
-    UpdateLastRun(0);
     _realTimeClock = realTimeClock;
 }
 
