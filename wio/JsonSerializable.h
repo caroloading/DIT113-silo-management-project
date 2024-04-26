@@ -7,9 +7,9 @@
 class JsonSerializable
 {
     public:
-        virtual std::string ToJson(const char* value)
+        virtual std::string ToJson(long value)
         {
-            return "{\"value\": " + (std::string)value + "}";
+            return "{\"value\": \"" + std::to_string(value) + "\"}";
         }
 };
 

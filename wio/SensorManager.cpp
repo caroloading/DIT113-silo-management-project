@@ -32,13 +32,13 @@ PublishedMeasurements SensorManager::PublishMeasurements(MqttClient* client)
     long humidity = _temphum->GetHumidity();
 
     client->Publish(
-        Topic::DISTANCE, _ranger->ToJson((const char*)distance).c_str()
+        Topic::DISTANCE, _ranger->ToJson(distance).c_str()
     );
     client->Publish(
-        Topic::TEMPERATURE, _temphum->ToJson((const char*)temperature).c_str()
+        Topic::TEMPERATURE, _temphum->ToJson(temperature).c_str()
     );
     client->Publish(
-        Topic::HUMIDITY, _temphum->ToJson((const char*)humidity).c_str()
+        Topic::HUMIDITY, _temphum->ToJson(humidity).c_str()
     );
 
     return PublishedMeasurements{
@@ -82,7 +82,7 @@ void SensorManager::UpdateDisplayWithSensorData(
         "Temperature", temperatureUnit, measurements->temperature
     );
     display->DisplayMeasurement(
-        "Humidity", "", measurements->humidity
+        "Humidity", "%", measurements->humidity
     );
     display->DisplayMeasurement(
         "Distance", distanceUnit, measurements->distance
