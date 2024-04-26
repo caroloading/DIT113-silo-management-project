@@ -30,6 +30,7 @@ class CheckButtonInterval : public Interval
         CheckButtonInterval(
             ImperialButton* imperialButton, 
             ModeButton* pauseButton, 
+            WioDisplay* display,
             unsigned int intervalMillis = 200
         );
         bool IsOverInterval(unsigned long currentMillis) override;
@@ -38,6 +39,7 @@ class CheckButtonInterval : public Interval
         unsigned int    _intervalMillis;
         ImperialButton* _imperialButton;
         ModeButton*     _pauseButton;
+        WioDisplay*     _display;
 };
 
 

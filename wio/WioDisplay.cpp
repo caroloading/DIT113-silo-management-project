@@ -10,6 +10,7 @@ void WioDisplay::DisplayPause(const char* msg)
     tft.println(msg);
 }
 
+
 void WioDisplay::DisplayConnectingToWiFi(const char* msg)
 {
     tft.setRotation(3);

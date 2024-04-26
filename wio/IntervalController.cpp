@@ -19,6 +19,7 @@ unsigned int Interval::GetLastRun()
 CheckButtonInterval::CheckButtonInterval(
     ImperialButton* imperialButton, 
     ModeButton* pauseButton, 
+    WioDisplay* display, 
     unsigned int intervalMillis
 )
 {
@@ -26,6 +27,7 @@ CheckButtonInterval::CheckButtonInterval(
     _intervalMillis = intervalMillis;
     _imperialButton = imperialButton;
     _pauseButton = pauseButton;
+    _display = display;
 }
 
 bool CheckButtonInterval::IsOverInterval(unsigned long currentMillis)
@@ -35,10 +37,16 @@ bool CheckButtonInterval::IsOverInterval(unsigned long currentMillis)
 
 void CheckButtonInterval::RunIntervalAction()
 {
-    _pauseButton->ChangeIfPressed();
+    bool pauseStatusChanged = _pauseButton->ChangeIfPressed();
     _imperialButton->ChangeIfPressed();
+    if (pauseStatusChanged) {
+        if (_pauseButton->IsEnabled()){
+            _display->DisplayPause();
+        } else {
+            _display->DisplayPause("Resuming measures. Please wait.");
+        }
+    }
 }
-
 
 // PUBLISH INTERVAL
 
@@ -70,7 +78,6 @@ bool PublishInterval::IsOverInterval(unsigned long currentMillis)
 void PublishInterval::RunIntervalAction()
 {
     if (_pauseButton->IsEnabled()) {
-        _display->DisplayPause();
         return;
     }
 

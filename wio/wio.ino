@@ -48,7 +48,7 @@ SensorManager sensorManager(
     &thermometerhumidity
 );
 
-CheckButtonInterval checkButtonInterval(&imperialButton, &pauseButton);
+CheckButtonInterval checkButtonInterval(&imperialButton, &pauseButton, &wioDisplay);
 PublishInterval publishInterval(
     &pauseButton,
     &wifi,
