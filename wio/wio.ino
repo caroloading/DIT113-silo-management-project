@@ -17,6 +17,10 @@
 #include "TFT_eSPI.h"
 
 
+#define NTP_UPDATE_INTERVAL 3600000
+#define UTC_OFFSET 7200 // UTC+2
+#define NTP_SERVER "europe.pool.ntp.org"
+
 #define LED_BAR_CLOCK_PIN 1
 #define LED_BAR_DATA_PIN 0
 
@@ -26,7 +30,10 @@
 
 TFT_eSPI tft;
 
-RealTimeClock realTimeClock;
+WiFiUDP ntpUDP; // UDP object 
+NTPClient ntpClient(ntpUDP, NTP_SERVER, UTC_OFFSET, NTP_UPDATE_INTERVAL); // NTP object 
+
+RealTimeClock realTimeClock(NTP_UPDATE_INTERVAL);
  
 CustomWiFi wifi(SECRET_SSID, SECRET_PASSWORD);
 MqttClient mqtt;
@@ -65,6 +72,7 @@ void setup()
 {
     Serial.begin(115200);
     tft.begin();
+    ntpClient.begin();
 
     wioDisplay.DisplayConnectingToWiFi();
     wifi.ConnectToWiFi();

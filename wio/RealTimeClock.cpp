@@ -1,15 +1,9 @@
 #include "RealTimeClock.h"
 
 
-RealTimeClock::RealTimeClock(
-    unsigned long ntpUpdateInterval,
-    long utcOffset,
-    const char* ntpServer
-) : _rtc(), _udp(), _ntp(_udp, ntpServer, utcOffset, ntpUpdateInterval)
+RealTimeClock::RealTimeClock( unsigned long ntpUpdateInterval) : _rtc()
 {
     _rtc.begin();
-    _ntp.begin();
-    
     // Adjust the clock using current time
     _rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     
@@ -24,10 +18,10 @@ DateTime RealTimeClock::GetNow()
 
 void RealTimeClock::UpdateRtcUsingNtp()
 {
-    _ntp.update(); // get update from NTP server 
+    ntpClient.update(); // get update from NTP server 
 
     // get the Epoch time, i.e., time in seconds since Jan. 1, 1970
-    _deviceTime = _ntp.getEpochTime();
+    _deviceTime = ntpClient.getEpochTime();
     if (_deviceTime == 0) {
         Serial.println("Failed to get time from network time server.");
     } else {
