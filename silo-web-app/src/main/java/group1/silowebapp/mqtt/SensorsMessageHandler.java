@@ -3,10 +3,14 @@ package group1.silowebapp.mqtt;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import group1.silowebapp.model.EntityFactory;
+import group1.silowebapp.model.GrainHeight;
+import group1.silowebapp.model.Humidity;
+import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
 import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
+import group1.silowebapp.webSocketComponent.WebSocketSensorUpdateComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
@@ -28,6 +32,9 @@ public class SensorsMessageHandler implements MessageHandler {
     private GrainHeightRepository quantityRepo;
     @Autowired
     private SiloRepository siloRepository;
+
+    @Autowired
+    private WebSocketSensorUpdateComponent webSocketSensorUpdateComponent;
 
     public SensorsMessageHandler(String type) {
         this.type = type;
@@ -54,13 +61,16 @@ public class SensorsMessageHandler implements MessageHandler {
 
         switch (type) {
             case "Humidity":
-                humiRepo.save(EntityFactory.createHumidity(value, dateTime, siloRepository.findById(1L)));
+                Humidity humidity = humiRepo.save(EntityFactory.createHumidity(value, dateTime, siloRepository.findById(1L)));
+                webSocketSensorUpdateComponent.updateHumidity(humidity);
                 break;
             case "Temperature":
-                tempRepo.save(EntityFactory.createTemperature(value, dateTime, siloRepository.findById(1L)));
+                Temperature temperature = tempRepo.save(EntityFactory.createTemperature(value, dateTime, siloRepository.findById(1L)));
+                webSocketSensorUpdateComponent.updateTemperature(temperature);
                 break;
             case "GrainHeight":
-                quantityRepo.save(EntityFactory.createGrainHeight(value, dateTime, siloRepository.findById(1L)));
+                GrainHeight grainHeight = quantityRepo.save(EntityFactory.createGrainHeight(value, dateTime, siloRepository.findById(1L)));
+                webSocketSensorUpdateComponent.updateDistance(grainHeight);
                 break;
         }
     }
