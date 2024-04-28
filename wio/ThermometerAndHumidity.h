@@ -3,31 +3,25 @@
 
 #include <iostream>
 #include "Grove_Temperature_And_Humidity_Sensor.h"
-#include "TFT_eSPI.h"
+#include "JsonSerializable.h"
 
-#include <RTC_SAMD51.h>
+#define DHT_TYPE DHT11
+#define DHT_PIN PIN_WIRE_SCL
 
-//Define sensor version
-#define DHTTYPE DHT11
 
-//Define used pin
-#define DHTPIN PIN_WIRE_SCL
-
-class ThermometerAndHumidity{
-  public:
-    ThermometerAndHumidity();
-    const char* convertReadings();
-    std::string getTempData();
-    std::string getHumidityData();
-    long getTemperature();
-    long getHumidity();
-
-  private:
-    DHT dht;
-    TFT_eSPI tft;
-    //variables
-    long humidity;
-    long temperature;
+class ThermometerAndHumidity : public JsonSerializable
+{
+    public:
+        ThermometerAndHumidity();
+        const char* ConvertReadings();
+        long        GetTemperature();
+        long        GetHumidity();
+    private:
+        DHT  _dht;
+        long _humidity;
+        long _temperature;
 };
 
+
 #endif
+

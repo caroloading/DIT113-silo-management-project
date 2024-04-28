@@ -1,38 +1,33 @@
 #include "ThermometerAndHumidity.h"
 
-extern RTC_SAMD51 rtc;
 
-ThermometerAndHumidity::ThermometerAndHumidity() : dht(DHTPIN, DHTTYPE){
-   long humidity = humidity;
-   long temperature = temperature;
-   DHT dht = dht;
-   TFT_eSPI tft = tft;
+ThermometerAndHumidity::ThermometerAndHumidity() : _dht(DHT_PIN, DHT_TYPE) { }
+
+const char* ThermometerAndHumidity::ConvertReadings()
+{
+    // NOTE: allocate memory on the heap instead of the stack to avoid potential
+    // problems of loosing the data once the 'readingsBuffer' goes out of scope.
+    char* readingsBuffer = new char[50];
+
+    long temperatures = GetTemperature();
+    long humidity = GetHumidity();
+
+    std::sprintf(readingsBuffer, "%ldC %ld%%", temperatures, humidity);
+    
+    return readingsBuffer;
 }
 
-const char* ThermometerAndHumidity::convertReadings(){
-  String convertedTemperature = String(getTemperature());
-  String convertedHumidity = String(getHumidity());
+long ThermometerAndHumidity::GetTemperature()
+{
+    long temperature = _dht.readTemperature();
 
-  String environmentReadings = ""+convertedTemperature +"C "+ convertedHumidity+"% ";
-  return environmentReadings.c_str();
+    return temperature;
 }
 
-long ThermometerAndHumidity::getTemperature(){
-  long temperature = dht.readTemperature();
-  return temperature;
+long ThermometerAndHumidity::GetHumidity()
+{
+    long humidity = _dht.readHumidity();
+
+    return humidity;
 }
 
-long ThermometerAndHumidity::getHumidity(){
-  long humidity = dht.readHumidity();
-  return humidity;
-}
-
-std::string ThermometerAndHumidity::getTempData(){
-  std::string now = std::string(rtc.now().timestamp(DateTime::TIMESTAMP_FULL).c_str());  // ISO_LOCAL_DATE_TIME
-  return "{\"value\": " + std::to_string(getTemperature()) + ", \"dateTime\": \"" + now + "\"}";
-}
-
-std::string ThermometerAndHumidity::getHumidityData(){
-  std::string now = std::string(rtc.now().timestamp(DateTime::TIMESTAMP_FULL).c_str()); // ISO_LOCAL_DATE_TIME
-  return "{\"value\": " + std::to_string(getHumidity()) + ", \"dateTime\": \"" + now + "\"}";
-}

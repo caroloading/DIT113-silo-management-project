@@ -3,13 +3,13 @@
 
 #include "ModeButton.h"
 
-class ImperialButton : public ModeButton {
+
+class ImperialButton : public ModeButton 
+{
     public:
-      ImperialButton(int pin);
-      long convertToFahrenheit(long valueCelsius);
-      long convertToInches(long valueCM);
-    private:
-      void printStatus();
+        ImperialButton(int pin);
+        long ConvertToFahrenheit(long valueCelsius);
+        long ConvertToInches(long valueCM);
 };
 
 #endif
