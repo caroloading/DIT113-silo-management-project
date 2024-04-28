@@ -15,7 +15,7 @@ public class HumidityController {
 
     @GetMapping("/humidities")
     public String getAllHumidities(Model humidities) {
-        humidities.addAttribute("humidities", humidityRepository.findAll());
+        humidities.addAttribute("humidities", humidityRepository.findAllByOrderByDateTimeDesc());
         humidities.addAttribute("thisYear", Year.now());
 
         return "humidities";

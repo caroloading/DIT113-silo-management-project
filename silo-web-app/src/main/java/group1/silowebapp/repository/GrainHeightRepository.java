@@ -14,6 +14,8 @@ public interface GrainHeightRepository extends CrudRepository<GrainHeight, Long>
      */
     GrainHeight findById(long id);
 
+    List<GrainHeight> findAllByOrderByDateTimeDesc();
+
     GrainHeight findTopByOrderByDateTimeDesc();
     /* By default, @Query accepts JPQL queries (used below).
      * It also allows for running native queries by setting the nativeQuery flag
@@ -21,4 +23,6 @@ public interface GrainHeightRepository extends CrudRepository<GrainHeight, Long>
      */
     @Query("SELECT g FROM GrainHeight g WHERE g.dateTime LIKE ?1%")
     List<GrainHeight> findByDate(String dateTime);
+
+    
 }

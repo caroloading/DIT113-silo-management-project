@@ -13,6 +13,8 @@ public interface TemperatureRepository extends CrudRepository<Temperature, Long>
      */
     Temperature findById(long id);
 
+    List<Temperature> findAllByOrderByDateTimeDesc();
+
     Temperature findTopByOrderByDateTimeDesc();
 
     /* By default, @Query accepts JPQL queries (used below).

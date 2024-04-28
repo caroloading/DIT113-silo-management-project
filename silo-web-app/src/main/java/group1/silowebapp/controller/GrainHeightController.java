@@ -15,7 +15,7 @@ public class GrainHeightController {
 
     @GetMapping("/grainheights")
     public String getAllGrainHeights(Model grainHeight) {
-        grainHeight.addAttribute("grainHeights", grainHeightRepository.findAll());
+        grainHeight.addAttribute("grainHeights", grainHeightRepository.findAllByOrderByDateTimeDesc());
         grainHeight.addAttribute("thisYear", Year.now());
 
         return "grainheights";
