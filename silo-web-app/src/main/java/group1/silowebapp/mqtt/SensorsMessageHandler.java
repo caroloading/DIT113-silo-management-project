@@ -11,6 +11,8 @@ import group1.silowebapp.repository.HumidityRepository;
 import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
 import group1.silowebapp.webSocketComponent.WebSocketSensorUpdateComponent;
+import reactor.core.publisher.Mono;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
@@ -56,8 +58,7 @@ public class SensorsMessageHandler implements MessageHandler {
         }
 
         Double value = node.get("value").asDouble();
-        //String dateTime = node.get("dateTime").asText();
-        String dateTime = LocalTime.now().toString();
+        String dateTime = node.get("dateTime").asText();
 
         switch (type) {
             case "Humidity":

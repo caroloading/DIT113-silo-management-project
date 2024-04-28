@@ -1,6 +1,7 @@
 package group1.silowebapp.repository;
 
 import group1.silowebapp.model.GrainHeight;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,7 +15,6 @@ public interface GrainHeightRepository extends CrudRepository<GrainHeight, Long>
     GrainHeight findById(long id);
 
     GrainHeight findTopByOrderByDateTimeDesc();
-
     /* By default, @Query accepts JPQL queries (used below).
      * It also allows for running native queries by setting the nativeQuery flag
      * to true (however, database platform independence is then lost)

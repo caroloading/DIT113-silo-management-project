@@ -21,4 +21,3 @@ bool ModeButton::IsEnabled()
 {
     return _isEnabled;
 }
-
