@@ -21,6 +21,11 @@ Within a particular ecosystem, there may be a common way of installing things, s
 * [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger/archive/master.zip)
 * [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
 * [Seeed Arduino RTC](https://github.com/Seeed-Studio/Seeed_Arduino_RTC/tree/master)
+* [Seeed Arduino rpcWiFi](https://github.com/Seeed-Studio/Seeed_Arduino_rpcWiFi)
+* [Seeed Arduino rpcUnified](https://github.com/Seeed-Studio/Seeed_Arduino_rpcUnified)
+* [Seeed Arduino FS](https://github.com/Seeed-Studio/Seeed_Arduino_FS)
+* [Seeed Arduino mbedtls](https://github.com/Seeed-Studio/Seeed_Arduino_mbedtls)
+* [PubSubClient](https://github.com/knolleary/pubsubclient/tree/master)
 
 ## Usage
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
