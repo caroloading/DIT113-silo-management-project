@@ -1,18 +1,20 @@
 #ifndef wioRanger
 #define wioRanger
 
-#include <iostream>
-#include "Ultrasonic.h"  // External lib
+#include "Ultrasonic.h"
 #include "LedBar.h"
+#include "JsonSerializable.h"
 
-class Ranger 
+
+class Ranger : public JsonSerializable
 {
     public:
       Ranger(int pin);
-      std::string getRangeData();
-    private:    
-      long measureRange();
+      long MeasureRange();
+    private:
       Ultrasonic _ultrasonic;
 };
 
+
 #endif // wioRanger
+
