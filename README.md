@@ -18,7 +18,7 @@ Within a particular ecosystem, there may be a common way of installing things, s
 ## Libraries
 * [Grove Temperature and Humidity Sensor](https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor)
 * [Grove LED Bar](https://github.com/Seeed-Studio/Grove_LED_Bar/tree/master)
-* [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger/archive/master.zip)
+* [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger)
 * [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
 * [Seeed Arduino RTC](https://github.com/Seeed-Studio/Seeed_Arduino_RTC/tree/master)
 * [Seeed Arduino rpcWiFi](https://github.com/Seeed-Studio/Seeed_Arduino_rpcWiFi)

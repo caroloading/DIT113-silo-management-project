@@ -1,4 +1,4 @@
-//Creating STOMP client for communication through websocket
+//Creating and connecting STOMP client for communication through websocket
 const socket = new SockJS("/silo-websocket")
 const stompClient = Stomp.over(socket);
 
