@@ -15,7 +15,7 @@ public class TemperatureController {
 
     @GetMapping("/temperatures")
     public String getAllTemperatures(Model temperatures) {
-        temperatures.addAttribute("temperatures", temperatureRepository.findAll());
+        temperatures.addAttribute("temperatures", temperatureRepository.findAllByOrderByDateTimeDesc());
         temperatures.addAttribute("thisYear", Year.now());
         return "temperatures";
     }
