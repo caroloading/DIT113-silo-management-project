@@ -8,9 +8,6 @@ export NOCOLOR='\033[0m'
 # Update the package index files on the system
 apt-get update
 
-# Change to current user's home directory 
-cd ~
-
 # Install JDK 21
 apt-get install openjdk-21-jdk -y 
 printf "${GREEN}Java Version:${NOCOLOR} \n"
