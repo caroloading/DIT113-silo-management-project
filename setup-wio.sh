@@ -24,7 +24,7 @@ cd ~
 
 # Install 'third-party' packages / libraries: find proper location and 'git clone'
 apt-get install git -y
-cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
+cd `arduino-cli config dump | grep data`
 git clone https://github.com/Seeed-Studio/Grove_LED_Bar.git
 git clone https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor.git
 git clone https://github.com/Seeed-Studio/Seeed_Arduino_RTC.git
