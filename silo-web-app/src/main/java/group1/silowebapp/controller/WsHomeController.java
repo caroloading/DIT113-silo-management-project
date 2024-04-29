@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalTime;
 
+
+/*
+ * Controller class for page used for testing purposes
+ * Will be removed before deployment.
+ */
 @Controller
 public class WsHomeController {
 

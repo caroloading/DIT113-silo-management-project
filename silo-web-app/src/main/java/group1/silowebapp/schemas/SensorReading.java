@@ -1,5 +1,9 @@
 package group1.silowebapp.schemas;
 
+/*
+ * Class used for testing purposes
+ * Will be removed before deployment.
+ */
 public class SensorReading {
     private double temperature;
     private double humidity;

@@ -1,9 +1,11 @@
 const socket = new SockJS("/silo-websocket")
 const stompClient = Stomp.over(socket);
 
+//Finding page url
 const url = window.location.href.split("/");
 const urlPath = url[url.length - 1]
 
+//Subscribing to correct topic according to the page
 const onConnect = () => {
     switch (urlPath) {
         case "humidities":
@@ -24,6 +26,7 @@ const onError = () => {
 
 stompClient.connect({}, onConnect, onError);
 
+//Adding new row with new received data
 const insertIntoTable = (tableId, data) => {
     const table = document.getElementById(tableId);
 
