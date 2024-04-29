@@ -1,11 +1,17 @@
 /* package group1.silowebapp.config;
 
 
+import group1.silowebapp.model.GrainHeight;
+import group1.silowebapp.model.Humidity;
 import group1.silowebapp.model.Silo;
+import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
 import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
+
+import java.time.LocalTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -55,57 +61,11 @@ public class InitDb {
             // save a few Grain heights
             //grainHeightRepository.save(new GrainHeight(30.19, LocalTime.now().toString(), firstSilo));
             //grainHeightRepository.save(new GrainHeight(33.20, LocalTime.now().toString(), firstSilo));
-//
-            //// fetch all heights
-            //log.info("GrainHeights found with findAll():");
-            //log.info("-------------------------------");
-            //grainHeightRepository.findAll().forEach(grainHeight -> {
-            //	log.info(grainHeight.toString());
-            //});
-            //log.info("");
-//
-            //// fetch an individual GrainHeight by ID
-            //GrainHeight grainHeight  = grainHeightRepository.findById(1L);
-            //log.info("GrainHeight found with findById(1L):");
-            //log.info("--------------------------------");
-            //log.info(grainHeight.toString());
-            //log.info("");
-//
-            //// fetch heights by a given date
-            ////log.info("GrainHeights found with findByDate('2024-04-10'):");
-            ////log.info("-------------------------------");
-            ////grainHeightRepository.findByDate("2024-04-10").forEach(height -> {
-            ////	log.info(height.toString());
-            ////});
-            ////log.info("");
-//
-            //// Humidity
-            //// save a few Humidities
+
+            // Humidity
+            // save a few Humidities
             //humidityRepository.save(new Humidity(33.32, LocalTime.now().toString(), firstSilo));
             //humidityRepository.save(new Humidity(43.20, LocalTime.now().toString(), firstSilo));
-//
-            //// fetch all Humidities
-            //log.info("Humidities found with findAll():");
-            //log.info("-------------------------------");
-            //humidityRepository.findAll().forEach(humidity -> {
-            //    log.info(humidity.toString());
-            //});
-            //log.info("");
-//
-            //// fetch an individual Humidity by ID
-            //Humidity humidity  = humidityRepository.findById(1L);
-            //log.info("Humidity found with findById(1L):");
-            //log.info("--------------------------------");
-            //log.info(humidity.toString());
-            //log.info("");
-
-            // fetch humidities by a given date
-            //log.info("Humidity found with findByDate('2024-04-11'):");
-            //log.info("-------------------------------");
-            //humidityRepository.findByDate("2024-04-11").forEach(humid -> {
-            //    log.info(humid.toString());
-            //});
-            //log.info("");
 
             // Temperature
             // save a few Temperatures

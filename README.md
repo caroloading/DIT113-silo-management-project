@@ -18,9 +18,15 @@ Within a particular ecosystem, there may be a common way of installing things, s
 ## Libraries
 * [Grove Temperature and Humidity Sensor](https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor)
 * [Grove LED Bar](https://github.com/Seeed-Studio/Grove_LED_Bar/tree/master)
-* [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger/archive/master.zip)
+* [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger)
 * [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
 * [Seeed Arduino RTC](https://github.com/Seeed-Studio/Seeed_Arduino_RTC/tree/master)
+* [Seeed Arduino rpcWiFi](https://github.com/Seeed-Studio/Seeed_Arduino_rpcWiFi)
+* [Seeed Arduino rpcUnified](https://github.com/Seeed-Studio/Seeed_Arduino_rpcUnified)
+* [Seeed Arduino FS](https://github.com/Seeed-Studio/Seeed_Arduino_FS)
+* [Seeed Arduino mbedtls](https://github.com/Seeed-Studio/Seeed_Arduino_mbedtls)
+* [PubSubClient](https://github.com/knolleary/pubsubclient/tree/master)
+* [NTPClient](https://github.com/arduino-libraries/NTPClient)
 
 ## Usage
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.

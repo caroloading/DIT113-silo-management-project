@@ -11,7 +11,7 @@
     <div class="row pgcontent">
         <div class="col">
             <h3>Humidity Readings</h3>
-            <table class="table table-striped table-sm caption-top w-auto">
+            <table id="humidity-table" class="table table-striped table-sm caption-top w-auto">
                 <caption>Humidity Readings</caption>
                 <thead>
                 <tr>
@@ -32,5 +32,8 @@
     </div>
 </section>
 
+<section layout:fragment="custom-scripts">
+    <script src="/scripts/wsSensor.js"></script>
+</section>
 </body>
 </html>

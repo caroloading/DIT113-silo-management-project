@@ -13,6 +13,8 @@ public interface HumidityRepository extends CrudRepository<Humidity, Long> {
      */
     Humidity findById(long id);
 
+    List<Humidity> findAllByOrderByDateTimeDesc();
+
     Humidity findTopByOrderByDateTimeDesc();
 
     /* By default, @Query accepts JPQL queries (used below).
