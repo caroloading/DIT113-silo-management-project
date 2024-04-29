@@ -16,7 +16,6 @@ compile:
     - pwd                                     # print the current working directory
     - cd wio                          				# change the directory to arduino folder
     - echo "$SECRETS" > secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
-    - cat secrets.h
     - arduino-cli lib list                    # check that libraries are installed
     
     # Compile
