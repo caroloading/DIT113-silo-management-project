@@ -13,10 +13,10 @@ cd ~
 
 # Install JDK 21
 apt-get install openjdk-21-jdk -y 
-echo -e "{GREEN}Java Version: "
+printf "${GREEN}Java Version: \n"
 java --version 
 
 # Install Maven 
 apt-get install maven -y
-echo -e "{GREEN}Maven Version: "
+printf "${GREEN}Maven Version: \n"
 mvn --version 
