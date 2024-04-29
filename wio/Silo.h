@@ -2,6 +2,8 @@
 #define wioSilo
 
 
+// Test comment
+// This is a Silo representation
 class Silo
 {
     public:
