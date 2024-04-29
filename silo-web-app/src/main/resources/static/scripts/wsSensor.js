@@ -50,7 +50,7 @@ const onReceivedMessage = (payload, type) => {
     switch (type) {
         case "temperature":
             insertIntoTable("temperature-table", {id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime})
-            break;
+            handleJson(value, dateTime);
         case "distance":
             insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime})
             break;
