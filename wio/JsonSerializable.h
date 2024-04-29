@@ -7,7 +7,7 @@
 class JsonSerializable
 {
     public:
-        virtual std::string ToJson(long value, std::string measurementTime) {
+        virtual std::string ToJson(float value, std::string measurementTime) {
             return "{\"value\": " 
                 + std::to_string(value) 
                 + ", \"dateTime\": \"" 

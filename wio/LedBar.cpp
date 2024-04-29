@@ -28,7 +28,7 @@ void LedBar::_SetLevel(int level)
     _ledBar.setLevel(level);
 }
 
-void LedBar::UpdateDisplay(long value)
+void LedBar::UpdateDisplay(float value)
 {
     _SetLevel(LedBar::MAX_LEVEL - (int)((value * LedBar::MAX_LEVEL) /_maxDisplayRange));
 }

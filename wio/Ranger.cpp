@@ -3,8 +3,8 @@
 
 Ranger::Ranger(int pin) : _ultrasonic(pin) { }
 
-long Ranger::MeasureRange()
+float Ranger::MeasureRange()
 {
-  return _ultrasonic.MeasureInCentimeters();
+  return (float)_ultrasonic.MeasureInCentimeters();
 }
 

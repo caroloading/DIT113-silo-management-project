@@ -10,7 +10,7 @@ class Ranger : public JsonSerializable
 {
     public:
       Ranger(int pin);
-      long MeasureRange();
+      float MeasureRange();
     private:
       Ultrasonic _ultrasonic;
 };

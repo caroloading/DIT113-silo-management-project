@@ -18,7 +18,7 @@ class WioDisplay {
         void DisplayMeasurement(
             const char* preValue, 
             const char* postValue, 
-            long measurement
+            float measurement
         );
         void SetDefaultPreset();
     };

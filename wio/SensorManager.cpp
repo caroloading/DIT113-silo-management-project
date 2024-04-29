@@ -29,9 +29,9 @@ void SensorManager::PublishAndUpdateSensorMeasurements(
 
 PublishedMeasurements SensorManager::PublishMeasurements(MqttClient* client)
 {
-    long distance = _ranger->MeasureRange();
-    long temperature = _temphum->GetTemperature();
-    long humidity = _temphum->GetHumidity();
+    float distance = _ranger->MeasureRange();
+    float temperature = _temphum->GetTemperature();
+    float humidity = _temphum->GetHumidity();
 
     // ISO_LOCAL_DATE_TIME
     std::string now = std::string(
@@ -96,12 +96,12 @@ void SensorManager::UpdateDisplayWithSensorData(
     );
 }
 
-bool SensorManager::_IsTemperatureOutOfBounds(long temperature)
+bool SensorManager::_IsTemperatureOutOfBounds(float temperature)
 {
     return temperature < Silo::LOWER_BOUND_TEMPERATURE || temperature > Silo::UPPER_BOUND_TEMPERATURE;
 }
 
-bool SensorManager::_IsHumidityOutOfBounds(long humidity)
+bool SensorManager::_IsHumidityOutOfBounds(float humidity)
 {
     return humidity < Silo::LOWER_BOUND_HUMIDITY || humidity > Silo::UPPER_BOUND_HUMIDITY;
 }
