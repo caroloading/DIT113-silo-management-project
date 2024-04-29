@@ -3,6 +3,8 @@ image: ubuntu:24.04
 before_script:
   - chmod +x setup-wio.sh
   - ./setup-wio.sh
+  - chmod +x setup-spring.sh
+  - ./setup-spring.sh
 
 stages:
   - build
