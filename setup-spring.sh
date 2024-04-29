@@ -2,17 +2,21 @@
 
 # Set environment variables
 export PATH=$PATH:/root/bin
+export GREEN='\033[0;32m'
+export NOCOLOR='\033[0m'
 
 # Update the package index files on the system
-apt update
+apt-get update
 
 # Change to current user's home directory 
 cd ~
 
 # Install JDK 21
-apt install openjdk-21-jdk -y 
+apt-get install openjdk-21-jdk -y 
+printf "{GREEN}Java Version: \n"
 java --version 
 
 # Install Maven 
-apt install maven -y
+apt-get install maven -y
+printf "{GREEN}Maven Version: \n"
 mvn --version 
