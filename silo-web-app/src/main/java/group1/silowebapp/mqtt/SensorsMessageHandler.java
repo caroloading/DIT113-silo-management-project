@@ -14,7 +14,6 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.MessagingException;
 
 import java.io.IOException;
-import java.time.LocalTime;
 
 public class SensorsMessageHandler implements MessageHandler {
 
@@ -49,8 +48,7 @@ public class SensorsMessageHandler implements MessageHandler {
         }
 
         Double value = node.get("value").asDouble();
-        //String dateTime = node.get("dateTime").asText();
-        String dateTime = LocalTime.now().toString();
+        String dateTime = node.get("dateTime").asText();
 
         switch (type) {
             case "Humidity":
