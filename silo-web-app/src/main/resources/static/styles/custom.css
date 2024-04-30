@@ -1,3 +1,8 @@
+:root {
+    --topbar-height: 60px;
+    --sidenav-width: 250px;
+}
+
 .row.pgcontent, .row.pgmenu {
     margin-bottom: 10px;
 }
@@ -6,4 +11,27 @@
     width: 12rem;
 }
 
+.c-nav-item-active {
+    background-color: #af9146;
+}
 
+.c-topbar {
+    height: var(--topbar-height);
+}
+
+.c-sidenav {
+    width: var(--sidenav-width);
+}
+
+.c-nav-item {
+    border-radius: 5px;
+}
+
+.c-nav-item:hover {
+    background-color: #af9146;
+    transition: background-color 0.1s ease-in;
+}
+
+.c-section {
+    max-height: calc(100% - var(--topbar-height));
+}

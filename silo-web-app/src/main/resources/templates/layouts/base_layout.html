@@ -27,23 +27,16 @@
 
 <body>
 
-<div class="container">
-    <div class="row pgmenu">
-        <div class="col">
-            <nav th:replace="~{fragments/menu::#menu01}"></nav>
-        </div>
-    </div>
+    <main class="d-flex flex-row overflow-y-hidden" style="max-height: 100vh">
+        <aside th:replace="~{fragments/sidenav::#sidenav}"></aside>
 
-    <section layout:fragment="content">
-        <!-- Page content goes here -->
-    </section>
-
-    <div class="row pgfooter">
-        <div class="col">
-            <footer th:replace="~{fragments/footer::#footer01}"></footer>
+        <div class="w-100">
+            <div th:replace="~{fragments/topbar::#topbar}"></div>
+            <section class="p-4 overflow-y-auto c-section" layout:fragment="content">
+                <!-- Page content goes here -->
+            </section>
         </div>
-    </div>
-</div>
+    </main>
 
 <!--
 You can include Popper and Bootstrap JS separately. If you don't plan to use dropdowns,
@@ -57,6 +50,7 @@ popovers, or tooltips, save some kilobytes by not including Popper.
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous">
 </script>
+<script src="/scripts/sidenav.js"></script>
 <section layout:fragment="custom-scripts"></section>
 </body>
 </html>
