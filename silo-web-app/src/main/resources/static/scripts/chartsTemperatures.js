@@ -8,8 +8,9 @@ tbody.querySelectorAll("tr").forEach(function(row){
     var temperatureValue = row.querySelector("td:nth-child(2)").innerText;
     var timeValue = row.querySelector("td:nth-child(3)").innerText;
 
-    temperatureReadings.push(temperatureValue);
-    timeStamps.push(timeValue);
+    //unshift puts the elements in the beginning of the array, thus the newest reading will be at the right-hand part of the chart.
+    temperatureReadings.unshift(temperatureValue);
+    timeStamps.unshift(timeValue);
 });
 
 const temperatureChart = document.getElementById('myChart');
