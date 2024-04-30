@@ -1,8 +1,14 @@
 image: ubuntu:24.04
 
 before_script:
+
+  # Wio build prerequisites 
   - chmod +x setup-wio.sh
   - ./setup-wio.sh
+
+  # Spring Boot build prerequisites 
+  - chmod +x setup-spring.sh
+  - ./setup-spring.sh
 
 stages:
   - build
@@ -12,14 +18,19 @@ compile:
   tags:
     - docker
   script:
+  # Wio build using arduino-cli:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
     - pwd                                     # print the current working directory
     - cd wio                          				# change the directory to arduino folder
-    - echo "$SECRETS" > secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
+    - echo "$SECRETS" > secrets.h             # import secrets from GitLAB CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
-    
     # Compile
     - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+
+  # Spring Boot build using mvn (Maven):
+    - cd ../silo-web-app                      # change into spring boot app directory          
+    - pwd                                     # display the current working directory
+    - mvn clean compile                       # compile  
 
   except:
     - tags
