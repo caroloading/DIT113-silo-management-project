@@ -30,7 +30,6 @@ window.addEventListener("click", (element) => {
         && !hamburgerBtn.contains(element.target)
         && !sidenavMobile.contains(element.target)
     ) {
-        console.log("clickoutside!");
         sidenavMobile.classList.toggle("c-sidenav-mobile-open");
     }
 });
