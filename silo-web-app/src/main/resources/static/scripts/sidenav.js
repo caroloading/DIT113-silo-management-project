@@ -1,5 +1,8 @@
 const sidenavLinks = document.querySelectorAll(".sidenav-links");
+const sidenavMobile = document.querySelector("#sidenav-mobile");
+const hamburgerBtn = document.querySelector("#topbar .c-hamburger-btn");
 const activeNavItemClassName = "c-nav-item-active";
+const mediumSizeDeviceScreenWidth = 786;
 
 const setActiveNavItem = () => {
     let url = window.location.href;
@@ -15,5 +18,21 @@ const setActiveNavItem = () => {
         })
     })
 }
+
+window.addEventListener("click", (element) => {
+    if (window.innerWidth > mediumSizeDeviceScreenWidth) {
+        return;
+    }
+
+    if (
+        sidenavMobile !== null
+        && sidenavMobile.classList.contains("c-sidenav-mobile-open")
+        && !hamburgerBtn.contains(element.target)
+        && !sidenavMobile.contains(element.target)
+    ) {
+        console.log("clickoutside!");
+        sidenavMobile.classList.toggle("c-sidenav-mobile-open");
+    }
+});
 
 setActiveNavItem();
