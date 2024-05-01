@@ -35,4 +35,8 @@ window.addEventListener("click", (element) => {
     }
 });
 
+hamburgerBtn.addEventListener("click", () => {
+    sidenavMobile.classList.toggle("c-sidenav-mobile-open");
+});
+
 setActiveNavItem();
