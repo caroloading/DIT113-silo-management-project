@@ -35,3 +35,10 @@
 .c-section {
     max-height: calc(100% - var(--topbar-height));
 }
+
+.c-sidenav-icon {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
