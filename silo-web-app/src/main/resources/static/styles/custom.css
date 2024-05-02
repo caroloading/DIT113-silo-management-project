@@ -1,9 +1,25 @@
 .row.pgcontent, .row.pgmenu {
     margin-bottom: 10px;
+
 }
 
 .hp-card {
     width: 12rem;
 }
 
+tbody{
+    display: block;
+    height: 400px;
+    width: 150%;
+    overflow-y: auto;
+    overflow-x: clip;
+    justify-content: space-between;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 150%;
+    table-layout: auto;
+
+}
 
