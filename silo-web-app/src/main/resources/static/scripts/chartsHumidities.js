@@ -1,32 +1,32 @@
 var tbody = document.querySelector("tbody");
 
 const timeStamps = [];
-const temperatureReadings = [];
+const humidityReadings = [];
 
 //retrieve all values from the existing table
 tbody.querySelectorAll("tr").forEach(function(row){
-    var temperatureValue = row.querySelector("td:nth-child(2)").innerText;
+    var humidityValue = row.querySelector("td:nth-child(2)").innerText;
     var timeValue = row.querySelector("td:nth-child(3)").innerText;
 
     //unshift puts the elements in the beginning of the array, thus the newest reading will be at the right-hand part of the chart.
-    temperatureReadings.unshift(temperatureValue);
+    humidityReadings.unshift(humidityValue);
     timeStamps.unshift(timeValue);
 });
 
-const temperatureChart = document.getElementById('tempLineChart');
+const humidityChart = document.getElementById('humLineChart');
 
 //Insert readings in chart when measured
-const handleTempJson = (Value, timeStamp) => {
-    temperatureReadings.unshift(Value);
+const handleHumJson = (Value, timeStamp) => {
+    humidityReadings.unshift(Value);
     timeStamps.unshift(timeStamp);
 }
-  new Chart(temperatureChart, {
+  new Chart(humidityChart, {
     type: 'line',
     data: {
       labels: timeStamps,
       datasets: [{
-        label: 'Temperatures over time',
-        data: temperatureReadings,
+        label: 'Humidities over time',
+        data: humidityReadings,
         borderWidth: 1
       }]
     },
@@ -38,5 +38,3 @@ const handleTempJson = (Value, timeStamp) => {
       }
     }
 });
-
-
