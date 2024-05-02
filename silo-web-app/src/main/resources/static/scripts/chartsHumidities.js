@@ -1,5 +1,8 @@
 var tbody = document.querySelector("tbody");
 
+const gradient = window['chartjs-plugin-gradient'];
+Chart.register(gradient);
+
 const timeStamps = [];
 const humidityReadings = [];
 
@@ -13,7 +16,7 @@ tbody.querySelectorAll("tr").forEach(function(row){
     timeStamps.unshift(timeValue);
 });
 
-const humidityChart = document.getElementById('humLineChart');
+const humidityChart = document.getElementById('humBarChart');
 
 //Insert readings in chart when measured
 const handleHumJson = (Value, timeStamp) => {
@@ -21,19 +24,36 @@ const handleHumJson = (Value, timeStamp) => {
     timeStamps.unshift(timeStamp);
 }
   new Chart(humidityChart, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: timeStamps,
       datasets: [{
-        label: 'Humidities over time',
+        label: 'Humiditiy Level',
         data: humidityReadings,
-        borderWidth: 1
+        borderWidth: 1,
+        gradient: {
+          backgroundColor: {
+              axis: 'y',
+              colors: {
+                  0: '#DAF7A6',
+                  20: '#FEE08C',
+                  30: '#F8AD48'
+              }
+          },
+          borderColor: {
+              axis: 'x',
+              colors: {
+
+              }
+          }
+      }
       }]
     },
     options: {
       scales: {
         y: {
-          beginAtZero: false
+          max: 100,
+          min: 0
         }
       }
     }
