@@ -48,7 +48,7 @@ const handleTempJson = (Value, timeStamp) => {
                 scaleID: 'y',
                 value: 20,
                 borderColor: 'rgb(0,0,255)',
-                borderWidth: 4,
+                borderWidth: 2,
                 label: {
                   display: (ctx) => ctx.hovered,
                   content: (ctx) => 'min safe temperature',
@@ -71,7 +71,7 @@ const handleTempJson = (Value, timeStamp) => {
                 scaleID: 'y',
                 value: 35,
                 borderColor: 'rgb(255,0,0)',
-                borderWidth: 4,
+                borderWidth: 2,
                 label: {
                   display: (ctx) => ctx.hovered,
                   content: 'max safe temperature',
