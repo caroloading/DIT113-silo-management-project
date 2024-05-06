@@ -9,18 +9,40 @@
 
 <!-- Replaces the content section of the base layout -->
 <section layout:fragment="content">
-  <h3 th:text="@{Silo {id}(id=${silo.id})}"></h3>
+  <h3 th:text="@{Detailed Page for Silo {id}(id=${silo.id})}"></h3>
   <div class="row pgcontent">
-    <div class="col">
-      col left
+    <div class="col c-box">
+      <div class="w-100 h-100 d-flex flex-row align-items-center justify-content-around">
+         <div class="d-flex flex-column gap-1 c-info-col-display">
+           <label class="text-xs bold">ID</label>
+           <p th:text="${silo.id}"></p>
+         </div>
+        <div class="d-flex flex-column gap-1 c-info-col-display">
+          <label>Name</label>
+          <p>Big Ben</p>
+        </div>
+        <div class="d-flex flex-column gap-1 c-info-col-display">
+          <label>Height</label>
+          <p th:text="${silo.height}"></p>
+        </div>
+        <div class="d-flex flex-column gap-1 c-info-col-display">
+          <label>Radius</label>
+          <p th:text="${silo.radius}"></p>
+        </div>
+      </div>
     </div>
     <div class="col">
-      col right
+      <div id="map" class="c-map"></div>
     </div>
   </div>
 </section>
 
 <section layout:fragment="custom-scripts">
+  <script>
+    const geoLong = 11.937415;
+    const geoLat = 57.706470;
+  </script>
+  <script src="/scripts/siloMap.js"></script>
 </section>
 </body>
 </html>
