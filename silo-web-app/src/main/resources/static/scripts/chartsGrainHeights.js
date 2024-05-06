@@ -26,20 +26,25 @@ const insertIntoTable = (data) => {
   let newRow = tableBody.insertRow(0);
 
   let idCell = newRow.insertCell();
+  idCell.classList.add("tableColumn1");
   idCell.appendChild(document.createTextNode(data.id))
 
   let temperatureCell = newRow.insertCell();
+  temperatureCell.classList.add("tableColumn1");
   temperatureCell.appendChild(document.createTextNode(data.value));
 
   let datetimeCell = newRow.insertCell();
   datetimeCell.appendChild(document.createTextNode(data.dateTime));
 }
+function toPercentage(heightValue){
+   return  (heightValue/15)*(-100)+100;
 
+}
 const onReceivedMessage = (payload) => {
   const payloadBody = JSON.parse(payload.body);
   insertIntoTable({id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime});
 
-  var heightValue = payloadBody.height;
+  var heightValue = toPercentage(payloadBody.height);
   var timeValue = payloadBody.dateTime;
 
   heightReadings.push(heightValue);
@@ -52,7 +57,7 @@ const heightReadings = [];
 
 function handleGrainJson() {
     tbody.querySelectorAll("tr").forEach(function(row){
-    var heightValue = (row.querySelector("td:nth-child(2)").innerText/15)*(-100)+100;//turn grain height into to a percentage (15 is the max in this scale meaning silo is empty/0%)
+    var heightValue = toPercentage(row.querySelector("td:nth-child(2)").innerText);//turn grain height into to a percentage (15 is the max in this scale meaning silo is empty/0%)
     var timeValue = row.querySelector("td:nth-child(3)").innerText;
 
     //unshift puts the elements in the beginning of the array, thus the newest reading will be at the right-hand part of the chart.

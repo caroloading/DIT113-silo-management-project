@@ -23,9 +23,11 @@ const insertIntoTable = (data) => {
   let newRow = tableBody.insertRow(0);
 
   let idCell = newRow.insertCell();
+  idCell.classList.add("tableColumn1");
   idCell.appendChild(document.createTextNode(data.id))
 
   let temperatureCell = newRow.insertCell();
+  temperatureCell.classList.add("tableColumn1");
   temperatureCell.appendChild(document.createTextNode(data.value));
 
   let datetimeCell = newRow.insertCell();

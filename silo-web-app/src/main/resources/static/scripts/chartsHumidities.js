@@ -26,9 +26,11 @@ const insertIntoTable = (data) => {
   let newRow = tableBody.insertRow(0);
 
   let idCell = newRow.insertCell();
+  idCell.classList.add("tableColumn1");
   idCell.appendChild(document.createTextNode(data.id))
 
   let temperatureCell = newRow.insertCell();
+  temperatureCell.classList.add("tableColumn1");
   temperatureCell.appendChild(document.createTextNode(data.value));
 
   let datetimeCell = newRow.insertCell();
@@ -75,7 +77,7 @@ const humidityChart = document.getElementById('humBarChart');
       datasets: [{
         label: 'Humiditiy Level',
         data: humidityReadings,
-        borderWidth: 1,
+        borderWidth: 0,
         gradient: {
           backgroundColor: {
               axis: 'y',
