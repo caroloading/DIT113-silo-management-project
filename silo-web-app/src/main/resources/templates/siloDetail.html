@@ -19,7 +19,7 @@
          </div>
         <div class="d-flex flex-column gap-1 c-info-col-display">
           <label>Name</label>
-          <p>Big Ben</p>
+          <p th:text="${silo.name}"></p>
         </div>
         <div class="d-flex flex-column gap-1 c-info-col-display">
           <label>Height</label>
@@ -38,9 +38,9 @@
 </section>
 
 <section layout:fragment="custom-scripts">
-  <script>
-    const geoLong = 11.937415;
-    const geoLat = 57.706470;
+  <script th:inline="javascript">
+    const geoLong = [[${silo.longitude}]];
+    const geoLat = [[${silo.latitude}]];
   </script>
   <script src="/scripts/siloMap.js"></script>
 </section>
