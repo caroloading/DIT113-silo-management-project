@@ -20,6 +20,8 @@
                         <th>Name</th>
                         <th class="text-center">Height</th>
                         <th class="text-center">Radius</th>
+                        <th class="text-center">Longitude</th>
+                        <th class="text-center">Latitude</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -27,9 +29,11 @@
                     <tr th:each="silo : ${silos}">
                         <td class="text-center"><input type="checkbox" name="silo"></td>
                         <td th:text="${silo.id}"></td>
-                        <td>Big BOB</td>
+                        <td th:text="${silo.name}"></td>
                         <td class="text-center" th:text="${silo.height}"></td>
                         <td class="text-center" th:text="${silo.radius}"></td>
+                        <td class="text-center" th:text="${silo.longitude}"></td>
+                        <td class="text-center" th:text="${silo.latitude}"></td>
                         <td class="text-center">
                             <a th:href="@{/silos/{id}(id=${silo.id})}">
                                 View
