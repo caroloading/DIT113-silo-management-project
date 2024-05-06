@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base_layout}">
+<head>
+  <title th:text="@{Silo {id}(id=${silo.id})}"></title>
+</head>
+<body>
+
+<!-- Replaces the content section of the base layout -->
+<section layout:fragment="content">
+  <h3 th:text="@{Silo {id}(id=${silo.id})}"></h3>
+  <div class="row pgcontent">
+    <div class="col">
+      col left
+    </div>
+    <div class="col">
+      col right
+    </div>
+  </div>
+</section>
+
+<section layout:fragment="custom-scripts">
+</section>
+</body>
+</html>

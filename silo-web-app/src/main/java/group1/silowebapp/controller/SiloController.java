@@ -22,7 +22,10 @@ public class SiloController {
     }
 
     @GetMapping("/silos/{id}")
-    public String getSilo(@PathVariable("id") String siloId) {
-        return "";
+    public String getSilo(@PathVariable("id") String siloId, Model silo) {
+        silo.addAttribute("silo", siloRepository.findById(Long.parseLong(siloId)));
+        silo.addAttribute("thisYear", Year.now());
+
+        return "siloDetail";
     }
 }
