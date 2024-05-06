@@ -1,4 +1,4 @@
-const socket = new SockJS("/silo-websocket")
+/*const socket = new SockJS("/silo-websocket")
 const stompClient = Stomp.over(socket);
 
 //Finding page url
@@ -50,7 +50,6 @@ const onReceivedMessage = (payload, type) => {
     switch (type) {
         case "temperature":
             insertIntoTable("temperature-table", {id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime})
-            handleTempJson(value, dateTime);
         case "distance":
             insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime})
             break;
@@ -60,3 +59,5 @@ const onReceivedMessage = (payload, type) => {
             break;
     }
 }
+*/
+

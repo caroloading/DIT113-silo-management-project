@@ -1,4 +1,48 @@
 var tbody = document.querySelector("tbody");
+const socket = new SockJS("/silo-websocket")
+const stompClient = Stomp.over(socket);
+
+const url = window.location.href.split("/");
+const urlPath = url[url.length - 1]
+
+const onConnect = () => {
+    stompClient.subscribe("/topic/temperatures/update", (payload) => onReceivedMessage(payload, "temperature"))
+};
+
+const onError = () => {
+  console.log("Could not establish WebSocket connection");
+}
+
+stompClient.connect({}, onConnect, onError);
+
+const insertIntoTable = (data) => {
+  const table = document.getElementById('temperature-table');
+
+  const tableBody = table.getElementsByTagName("tbody")[0];
+
+  let newRow = tableBody.insertRow(0);
+
+  let idCell = newRow.insertCell();
+  idCell.appendChild(document.createTextNode(data.id))
+
+  let temperatureCell = newRow.insertCell();
+  temperatureCell.appendChild(document.createTextNode(data.value));
+
+  let datetimeCell = newRow.insertCell();
+  datetimeCell.appendChild(document.createTextNode(data.dateTime));
+}
+
+const onReceivedMessage = (payload) => {
+  const payloadBody = JSON.parse(payload.body);
+  insertIntoTable({id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime});
+
+  var temperatureValue = payloadBody.tvalue;
+  var timeValue = payloadBody.dateTime;
+
+  temperatureReadings.push(temperatureValue);
+  timeStamps.push(timeValue);
+  update();
+}
 
 const annotation = window['chartjs-plugin-annotation'];
 Chart.register(annotation);
@@ -7,23 +51,24 @@ const timeStamps = [];
 const temperatureReadings = [];
 
 //retrieve all values from the existing table
-tbody.querySelectorAll("tr").forEach(function(row){
+function handleTempJson() {
+  tbody.querySelectorAll("tr").forEach(function(row){
     var temperatureValue = row.querySelector("td:nth-child(2)").innerText;
     var timeValue = row.querySelector("td:nth-child(3)").innerText;
 
     //unshift puts the elements in the beginning of the array, thus the newest reading will be at the right-hand part of the chart.
     temperatureReadings.unshift(temperatureValue);
     timeStamps.unshift(timeValue);
-});
+  });
+}
+
+if(timeStamps.length == 0){
+  handleTempJson();
+}
 
 const temperatureChart = document.getElementById('tempLineChart');
 
-//Insert readings in chart when measured
-const handleTempJson = (Value, timeStamp) => {
-    temperatureReadings.unshift(Value);
-    timeStamps.unshift(timeStamp);
-}
-  new Chart(temperatureChart, {
+  var tempChart = new Chart(temperatureChart, {
     type: 'line',
     data: {
       labels: timeStamps,
@@ -36,7 +81,8 @@ const handleTempJson = (Value, timeStamp) => {
     options: {
       tooltips: {
         intersect: false,
-        mode: 'index'
+        mode: 'index',
+        responsive: true
       },
         plugins: {
           autocolors: false,
@@ -51,7 +97,7 @@ const handleTempJson = (Value, timeStamp) => {
                 borderWidth: 4,
                 label: {
                   display: (ctx) => ctx.hovered,
-                  content: (ctx) => 'min safe temperature',
+                  content: 'min safe temperature',
                   position: (ctx) => ctx.hoverPosition,
                   backgroundColor: 'rgba(0,0,255,1)'
                 },
@@ -60,7 +106,7 @@ const handleTempJson = (Value, timeStamp) => {
                   ctx.hoverPosition = (event.x / ctx.chart.chartArea.width * 82) + '%';
                   ctx.chart.update();
                 },
-                leave(ctx, event) {
+                leave(ctx) {
                   ctx.hovered = false;
                   ctx.chart.update();
                 }  
@@ -83,7 +129,7 @@ const handleTempJson = (Value, timeStamp) => {
                   ctx.hoverPosition = (event.x / ctx.chart.chartArea.width * 82) + '%';
                   ctx.chart.update();
                 },
-                leave(ctx, event) {
+                leave(ctx) {
                   ctx.hovered = false;
                   ctx.chart.update();
                 }  
@@ -100,3 +146,6 @@ const handleTempJson = (Value, timeStamp) => {
     }
 });
 
+function update(){
+  tempChart.update();
+}
