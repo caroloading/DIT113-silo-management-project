@@ -35,10 +35,14 @@ const insertIntoTable = (tableId, data) => {
     let newRow = tableBody.insertRow(0);
 
     let idCell = newRow.insertCell();
-    idCell.appendChild(document.createTextNode(data.id))
+    idCell.className="tableColum1";
+    idCell.appendChild(document.createTextNode(data.id));
+
 
     let temperatureCell = newRow.insertCell();
+    temperatureCell.className="tableColum1";
     temperatureCell.appendChild(document.createTextNode(data.value));
+
 
     let datetimeCell = newRow.insertCell();
     datetimeCell.appendChild(document.createTextNode(data.dateTime));
@@ -51,6 +55,7 @@ const onReceivedMessage = (payload, type) => {
         case "temperature":
             insertIntoTable("temperature-table", {id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime})
             handleTempJson(value, dateTime);
+            break;
         case "distance":
             insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime})
             break;
