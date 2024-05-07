@@ -1,6 +1,5 @@
 .row.pgcontent, .row.pgmenu {
     margin-bottom: 10px;
-
 }
 
 .hp-card {
@@ -12,8 +11,6 @@ tbody{
     height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
-
-
 }
 
 .thead, tr  {

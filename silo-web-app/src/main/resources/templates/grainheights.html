@@ -24,9 +24,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="grainHeight : ${grainHeights}">
-                    <td class="tableColum1" th:text="${grainHeight.id}"></td>
-                    <td class="tableColum1"  th:text="${grainHeight.height}"></td>
-                    <td th:text="${grainHeight.dateTime}"></td>
+                    <td th:text="${grainHeight.id}"></td>
+                    <td class="chartData" th:text="${grainHeight.height}"></td>
+                    <td class="chartLabel" th:text="${grainHeight.dateTime}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -42,9 +42,10 @@
 
 
 <section layout:fragment="custom-scripts">
-    <script src="/scripts/wsSensor.js"></script>
+    <script type="module" src="/scripts/wsSensor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gradient"></script>
-    <script src="/scripts/chartsGrainHeights.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js" integrity="sha512-Hn1w6YiiFw6p6S2lXv6yKeqTk0PLVzeCwWY9n32beuPjQ5HLcvz5l2QsP+KilEr1ws37rCTw3bZpvfvVIeTh0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script src="/scripts/allCharts.js"></script>
 </section>
 </body>
 </html>

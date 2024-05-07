@@ -1,9 +1,11 @@
-/*const socket = new SockJS("/silo-websocket")
+const socket = new SockJS("/silo-websocket")
 const stompClient = Stomp.over(socket);
 
 //Finding page url
 const url = window.location.href.split("/");
 const urlPath = url[url.length - 1]
+
+//export default currentTable;
 
 //Subscribing to correct topic according to the page
 const onConnect = () => {
@@ -35,16 +37,17 @@ const insertIntoTable = (tableId, data) => {
     let newRow = tableBody.insertRow(0);
 
     let idCell = newRow.insertCell();
-    idCell.className="tableColum1";
+    idCell.className="column1";
     idCell.appendChild(document.createTextNode(data.id));
 
 
     let temperatureCell = newRow.insertCell();
-    temperatureCell.className="tableColum1";
+    temperatureCell.className="chartData";
     temperatureCell.appendChild(document.createTextNode(data.value));
 
 
     let datetimeCell = newRow.insertCell();
+    datetimeCell.className="chartLabel";
     datetimeCell.appendChild(document.createTextNode(data.dateTime));
 }
 
@@ -54,14 +57,18 @@ const onReceivedMessage = (payload, type) => {
     switch (type) {
         case "temperature":
             insertIntoTable("temperature-table", {id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime})
+            updateChart(payloadBody.tvalue, payloadBody.dateTime);
+            break;
         case "distance":
             insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime})
+            updateChart(payloadBody.height, payloadBody.dateTime);
             break;
         case "humidity":
             insertIntoTable("humidity-table", {id: payloadBody.id, value: payloadBody.hvalue, dateTime: payloadBody.dateTime})
-            handleHumJson(value, dateTime);
+            updateChart(payloadBody.hvalue, payloadBody.dateTime);
             break;
     }
 }
-*/
+
+
 
