@@ -24,7 +24,6 @@ public class InitDb {
             List<Silo> silos = (List<Silo>) siloRepository.findAll();
             if (silos.isEmpty()) {
                 siloRepository.save(new Silo("Sadgrak Bloodfoot", 8.0, 4.0, "Wio terminal 01", "Seed Studio", "SAMD51", 11.936941, 57.706584));
-                siloRepository.save(new Silo("Skornug Blazingbender", 7.0, 3.0, "Wio terminal 02", "Seed Studio", "SAMD51", 11.938611, 57.706275));
             }
         };
     }
