@@ -150,3 +150,39 @@ For medium size device screens and smaller
     background-color: var(--highlight-color);
     transition: background-color 0.1s ease-in;
 }
+
+.c-card {
+    height: 380px;
+    width: 290px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+.c-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+}
+
+.c-card-icon {
+    text-align: center;
+    font-size: 4rem;
+}
+
+.c-card-subtitle {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 1.3rem;
+}
+
+.c-temperature-card-icon {
+    color: #ff7400;
+}
+
+.c-humidity-card-icon {
+    color: #1aa7ec;
+}
+
+.c-distance-card-icon {
+    color: #008080;
+}
