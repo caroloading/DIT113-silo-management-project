@@ -18,6 +18,7 @@ public interface HumidityRepository extends CrudRepository<Humidity, Long> {
     Humidity findTopByOrderByDateTimeDesc();
 
     /* By default, @Query accepts JPQL queries (used below).
+     *
      * It also allows for running native queries by setting the nativeQuery flag
      * to true (however, database platform independence is then lost)
      */

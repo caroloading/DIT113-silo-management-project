@@ -1,6 +1,5 @@
 /* package group1.silowebapp.config;
 
-
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
 import group1.silowebapp.model.Silo;
@@ -12,8 +11,6 @@ import group1.silowebapp.repository.TemperatureRepository;
 
 import java.time.LocalTime;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +22,6 @@ import org.springframework.context.annotation.Configuration;
 /*
 @Configuration
 public class InitDb {
-
-    private static final Logger log = LoggerFactory.getLogger(InitDb.class);
-
 
     @Bean("initializeDb")
     public CommandLineRunner initDbWithData(
