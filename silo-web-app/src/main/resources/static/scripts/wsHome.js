@@ -45,11 +45,23 @@ const onReceivedDistMessage = (payload) => {
 
 const onReceivedNotifMessage = (payload) => {
     const popup = document.getElementById("siloFullPopup");
-    popup.classList.add("show");
+    const warningBlock = document.getElementById("fullWarning");
+    if (payload.body == "true"){
+        popup.classList.add("show");
 
-    const popupMessage = document.getElementById("popupMessage");
-    
-    popupMessage.textContent = "Warning! Silo is " + payload.body + "% full. Please organize pickup.";
+        const popupMessage = document.getElementById("popupMessage");
+        
+        popupMessage.textContent = "Warning! Silo is soon full. Please organize pickup.";
+
+        const warningBlock = document.getElementById("fullWarning");
+        warningBlock.classList.add("show");
+
+        const card = document.getElementById("grain-elem");
+        
+    } else {
+        popup.classList.remove("show");
+        warningBlock.classList.remove("show");
+    }
 }
 
 const configureClosePopup = () => {

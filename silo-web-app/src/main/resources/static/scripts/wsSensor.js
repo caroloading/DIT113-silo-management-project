@@ -5,6 +5,8 @@ const stompClient = Stomp.over(socket);
 const url = window.location.href.split("/");
 const urlPath = url[url.length - 1]
 
+//export default currentTable;
+
 //Subscribing to correct topic according to the page
 const onConnect = () => {
     switch (urlPath) {
@@ -18,6 +20,7 @@ const onConnect = () => {
             stompClient.subscribe("/topic/distances/update",  (payload) => onReceivedMessage(payload, "distance"));
             break;
     }
+    stompClient.subscribe("/topic/notification", onReceivedNotifMessage);
 }
 
 const onError = () => {
@@ -35,12 +38,17 @@ const insertIntoTable = (tableId, data) => {
     let newRow = tableBody.insertRow(0);
 
     let idCell = newRow.insertCell();
-    idCell.appendChild(document.createTextNode(data.id))
+    idCell.className="column1";
+    idCell.appendChild(document.createTextNode(data.id));
+
 
     let temperatureCell = newRow.insertCell();
+    temperatureCell.className="chartData";
     temperatureCell.appendChild(document.createTextNode(data.value));
 
+
     let datetimeCell = newRow.insertCell();
+    datetimeCell.className="chartLabel";
     datetimeCell.appendChild(document.createTextNode(data.dateTime));
 }
 
@@ -50,12 +58,53 @@ const onReceivedMessage = (payload, type) => {
     switch (type) {
         case "temperature":
             insertIntoTable("temperature-table", {id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime})
+            updateChart(payloadBody.tvalue, payloadBody.dateTime);
             break;
         case "distance":
             insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.percentage, dateTime: payloadBody.dateTime})
+            updateChart(payloadBody.height, payloadBody.dateTime);
             break;
         case "humidity":
             insertIntoTable("humidity-table", {id: payloadBody.id, value: payloadBody.hvalue, dateTime: payloadBody.dateTime})
+            updateChart(payloadBody.hvalue, payloadBody.dateTime);
             break;
     }
 }
+
+const onReceivedNotifMessage = (payload) => {
+    const popup = document.getElementById("siloFullPopup");
+    const warningBlock = document.getElementById("fullWarning");
+    if (payload.body == "true"){
+        popup.classList.add("show");
+
+        const popupMessage = document.getElementById("popupMessage");
+        
+        popupMessage.textContent = "Warning! Silo is soon full. Please organize pickup.";
+
+        const warningBlock = document.getElementById("fullWarning");
+        warningBlock.classList.add("show");
+
+        const card = document.getElementById("grain-elem");
+        
+    } else {
+        popup.classList.remove("show");
+        warningBlock.classList.remove("show");
+    }
+}
+
+const configureClosePopup = () => {
+    const closePopupButton = document.getElementById("closePopup");
+    const popup = document.getElementById("siloFullPopup");
+
+    closePopupButton.addEventListener(
+        "click",
+        function () {
+            popup.classList.remove("show");
+        }
+    );
+}
+
+document.addEventListener("DOMContentLoaded", function() { 
+    configureClosePopup();
+});
+

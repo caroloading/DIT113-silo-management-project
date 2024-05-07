@@ -1,5 +1,8 @@
 package group1.silowebapp.webSocketComponent;
 
+//Class not linked to database
+//for sending grain quantity data
+//with percentages
 public class GrainPercentage {
     private Long id;
     private String percentage;

@@ -26,16 +26,20 @@ public class WebSocketSensorUpdateComponent {
 
         double percentage = grainHeight.getPercentage();
         String percentageString = String.format("%.2f", percentage);
+
+        //creating object not linked to database, with percentage distance
         GrainPercentage grainPercentage = 
             new GrainPercentage(grainHeight.getId(), percentageString, grainHeight.getDateTime());
         messagingTemplate.convertAndSend("/topic/distances/update", grainPercentage);
 
         if (percentage >= 95.0){
-            fullNotification(percentageString);
-        }       
+            fullNotification(true);
+        } else {
+            fullNotification(false);
+        }
     }
 
-    private void fullNotification(String percentage){
-        messagingTemplate.convertAndSend("/topic/notification", percentage);
+    private void fullNotification(boolean full){
+        messagingTemplate.convertAndSend("/topic/notification", full);
     }
 }

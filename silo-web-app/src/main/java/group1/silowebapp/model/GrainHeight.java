@@ -39,8 +39,14 @@ public class GrainHeight {
         return height;
     }
 
+    //getting the percentage
+    //as a derived attribute
     public Double getPercentage(){
-        return height/silo.getHeight()*(-100)+100;
+        if (silo!= null){
+            return height/silo.getHeight()*(-100)+100;
+        } else {
+            return -1.0;
+        }
     }
 
     public String getDateTime() {
