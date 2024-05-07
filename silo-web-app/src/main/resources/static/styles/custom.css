@@ -10,7 +10,27 @@
     height: 500px;
 }
 
-.c-info-col-display label{
+.dataTable {
+    display: block;
+    height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.tableHeading {
+    display: table;
+    width: 300px;
+}
+
+.dataID, .chartData {
+    width: 75px;
+}
+
+.chartLabel {
+    width: 180px;
+}
+
+.c-info-col-display label {
     font-weight: bold;
     font-size: 12px;
 }
