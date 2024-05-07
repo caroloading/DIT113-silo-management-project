@@ -24,7 +24,7 @@
                 <tbody>
                 <tr th:each="grainHeight : ${grainHeights}">
                     <td th:text="${grainHeight.id}"></td>
-                    <td th:text="${grainHeight.height}"></td>
+                    <td th:text="${grainHeight.getPercentage()}"></td>
                     <td th:text="${grainHeight.dateTime}"></td>
                 </tr>
                 </tbody>
