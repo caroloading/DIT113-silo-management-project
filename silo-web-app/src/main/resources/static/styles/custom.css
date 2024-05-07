@@ -10,16 +10,16 @@
 tbody{
     display: block;
     height: 400px;
-    width: 150%;
     overflow-y: auto;
-    overflow-x: clip;
-    justify-content: space-between;
+    scrollbar-width: thin;
+
+
 }
 
-thead, tbody tr {
+.thead, tr  {
     display: table;
-    width: 150%;
-    table-layout: auto;
-
 }
 
+.tableColumn1{
+    width: 75px;
+}

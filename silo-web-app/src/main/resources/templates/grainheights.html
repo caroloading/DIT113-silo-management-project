@@ -7,13 +7,13 @@
     <title>Grain Heights</title>
 </head>
 
-<body>
+<body >
 <section layout:fragment="content">
-    <div class="flex-parent-element">
     <div class="row pgcontent">
         <div class="col">
             <h3>Grain Heights Readings</h3>
-            <table id="distance-table" class="table table-hover table-striped table-responsive caption-top w-auto">
+            <div class ="flex-container">
+            <table id="distance-table" class="table table-hover table-striped table-responsive caption-top w-auto ">
                 <caption>Grain Heights Readings</caption>
                 <thead>
                 <tr>
@@ -24,8 +24,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="grainHeight : ${grainHeights}">
-                    <td th:text="${grainHeight.id}"></td>
-                    <td th:text="${grainHeight.height}"></td>
+                    <td class="tableColumn1" th:text="${grainHeight.id}"></td>
+                    <td class="tableColumn1"  th:text="${grainHeight.height}"></td>
                     <td th:text="${grainHeight.dateTime}"></td>
                 </tr>
                 </tbody>
@@ -36,6 +36,7 @@
         <canvas id="heightChart"></canvas>
     </div>
     </div>
+
 </section>
 
 

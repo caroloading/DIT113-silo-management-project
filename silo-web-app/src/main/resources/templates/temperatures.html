@@ -11,7 +11,7 @@
     <div class="row pgcontent">
         <div class="col">
             <h3>Temperature Readings</h3>
-            <table id="temperature-table" class="table table-striped table-sm caption-top w-auto">
+            <table id="temperature-table" class="table table-striped table-responsive caption-top w-auto">
                 <caption>Temperature Readings</caption>
                 <thead>
                 <tr>
@@ -22,8 +22,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="temperature : ${temperatures}">
-                    <td th:text="${temperature.id}"></td>
-                    <td th:text="${temperature.tValue}"></td>
+                    <td class="tableColumn1" th:text="${temperature.id}"></td>
+                    <td class="tableColumn1" th:text="${temperature.tValue}"></td>
                     <td th:text="${temperature.dateTime}"></td>
                 </tr>
                 </tbody>
