@@ -2,6 +2,8 @@
     --topbar-height: 60px;
     --sidenav-width: 250px;
     --sidenav-mobile-open-height: 200px;
+    --dark-color: #212529eb;
+    --highlight-color: #af9146;
 }
 
 /*
@@ -56,7 +58,7 @@ For medium size device screens and smaller
 }
 
 .c-nav-item-active {
-    background-color: #af9146;
+    background-color: var(--highlight-color);
 }
 
 .c-topbar {
@@ -68,7 +70,7 @@ For medium size device screens and smaller
 }
 
 .c-nav-item:hover {
-    background-color: #af9146;
+    background-color: var(--highlight-color);
     transition: background-color 0.1s ease-in;
 }
 
@@ -130,4 +132,21 @@ For medium size device screens and smaller
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
     padding: 0.8rem;
+}
+
+.c-back-button {
+    outline: none;
+    border: none;
+    color: whitesmoke;
+    background-color: var(--dark-color);
+    position: absolute;
+    bottom: 20px;
+    padding: 0.4rem 0.8rem;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.c-back-button:hover {
+    background-color: var(--highlight-color);
+    transition: background-color 0.1s ease-in;
 }
