@@ -24,9 +24,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="icon" href="/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="icon" href="/images/favicons/favicon.ico">
+    <link rel="icon" href="/images/favicons/faviconG-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/images/favicons/faviconG-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/images/favicons/faviconG.ico">
 </head>
 
 <body>
@@ -37,7 +37,9 @@
 
         <div class="w-100">
             <div th:replace="~{fragments/topbar::#topbar}"></div>
-            <section class="p-4 overflow-y-auto c-section" layout:fragment="content"></section>
+            <div class="p-2 h-100">
+                <section class="h-100 p-4 overflow-y-auto c-section" layout:fragment="content"></section>
+            </div>
         </div>
     </main>
 
