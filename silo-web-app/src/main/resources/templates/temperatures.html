@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="temperature : ${temperatures}">
-                    <td class="column1" th:text="${temperature.id}"></td>
+                    <td th:text="${temperature.id}"></td>
                     <td class="chartData" th:text="${temperature.tValue}"></td>
                     <td class="chartLabel" th:text="${temperature.dateTime}"></td>
                 </tr>
