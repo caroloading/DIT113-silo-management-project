@@ -6,23 +6,38 @@
     width: 12rem;
 }
 
-.dataTable{
+.c-map {
+    height: 500px;
+}
+
+.dataTable {
     display: block;
     height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
 }
 
-.tableHeading{
+.tableHeading {
     display: table;
     width: 300px;
 }
 
-.dataID, .chartData{
+.dataID, .chartData {
     width: 75px;
 }
 
-.chartLabel{
+.chartLabel {
     width: 180px;
 }
 
+.c-info-col-display label {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.c-box {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+    padding: 0.8rem;
+}

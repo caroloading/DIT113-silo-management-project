@@ -12,6 +12,9 @@ public class Silo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column()
+    private String name;
+
     @Column(nullable = false)
     private Double radius;
 
@@ -27,15 +30,24 @@ public class Silo {
     @Column(nullable = false)
     private String mcuModel;
 
+    @Column()
+    private Double longitude;
+
+    @Column()
+    private Double latitude;
+
     protected Silo() {
     }
 
-    public Silo(Double height, Double radius, String mcuName, String mcuVendor, String mcuModel) {
+    public Silo(String name, Double height, Double radius, String mcuName, String mcuVendor, String mcuModel, Double longitude, Double latitude) {
+        this.name = name;
         this.height = height;
         this.radius = radius;
         this.mcuName = mcuName;
         this.mcuVendor = mcuVendor;
         this.mcuModel = mcuModel;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public Long getId() {
@@ -80,6 +92,18 @@ public class Silo {
 
     public void settMcuModel(String mcuModel) {
         this.mcuModel = mcuModel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
     }
 
     @Override
