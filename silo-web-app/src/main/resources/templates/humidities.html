@@ -8,24 +8,24 @@
 <body>
 
 <section layout:fragment="content">
-    <div class="row pgcontent">
+    <div class="row_pgcontent">
         <div class="col">
             <h3>Humidity Readings</h3>
             <table id="humidity-table" class="table table-striped caption-top w-auto">
                 <caption>Humidity Readings</caption>
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Humidity</th>
-                    <th>Datetime</th>
-                </tr>
+                    <tr class="tableHeading">
+                        <th>ID</th>
+                        <th>Humidity</th>
+                        <th>Datetime</th>
+                    </tr>
                 </thead>
-                <tbody>
-                <tr th:each="humidity : ${humidities}">
-                    <td  th:text="${humidity.id}"></td>
-                    <td class="chartData" th:text="${humidity.hValue}"></td>
-                    <td class="chartLabel" th:text="${humidity.dateTime}"></td>
-                </tr>
+                <tbody class="dataTable">
+                    <tr th:each="humidity : ${humidities}">
+                        <td class="dataID" th:text="${humidity.id}"></td>
+                        <td class="chartData" th:text="${humidity.hValue}"></td>
+                        <td class="chartLabel" th:text="${humidity.dateTime}"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -6,17 +6,23 @@
     width: 12rem;
 }
 
-tbody{
+.dataTable{
     display: block;
     height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
 }
 
-.thead, tr  {
+.tableHeading{
     display: table;
+    width: 300px;
 }
 
-.tableColumn1{
+.dataID, .chartData{
     width: 75px;
 }
+
+.chartLabel{
+    width: 180px;
+}
+

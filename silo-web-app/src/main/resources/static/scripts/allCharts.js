@@ -3,10 +3,10 @@ const annotation = window['chartjs-plugin-annotation']
 Chart.register(annotation);
 Chart.register(gradient);
 
-var currentChart;
+let currentChart;
 
-var dataReadings = [];
-var timeStamps = [];
+let dataReadings = [];
+let timeStamps = [];
 
 getTableData();
 
@@ -161,11 +161,11 @@ else if (window.location.href.includes('grainheights')){
 
 function getTableData() {
     document.querySelectorAll(".chartLabel").forEach((e) => {
-      var timeValue = e.innerHTML;
+      let timeValue = e.innerHTML;
       timeStamps.unshift(timeValue); //unshift puts the elements in the beginning of the array, thus the newest reading will be at the right-hand part of the chart.
-    }),
+    })
     document.querySelectorAll(".chartData").forEach((e) => {
-      var Value = e.innerHTML;
+      let Value = e.innerHTML;
       dataReadings.unshift(Value); //unshift puts the elements in the beginning of the array, thus the newest reading will be at the right-hand part of the chart.
     })
 }

@@ -16,15 +16,15 @@
             <table id="distance-table" class="table table-hover table-striped table-responsive caption-top w-auto ">
                 <caption>Grain Heights Readings</caption>
                 <thead>
-                <tr>
+                <tr class="tableHeading">
                     <th>ID</th>
                     <th>Grain Height</th>
                     <th>Datetime</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="dataTable">
                 <tr th:each="grainHeight : ${grainHeights}">
-                    <td th:text="${grainHeight.id}"></td>
+                    <td class="dataID" th:text="${grainHeight.id}"></td>
                     <td class="chartData" th:text="${grainHeight.height}"></td>
                     <td class="chartLabel" th:text="${grainHeight.dateTime}"></td>
                 </tr>
