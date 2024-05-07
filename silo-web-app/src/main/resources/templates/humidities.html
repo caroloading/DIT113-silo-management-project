@@ -23,18 +23,18 @@
                 <div class="tab-pane fade show active" id="humidities-table" role="tabpanel" aria-labelledby="humidity-table-tab">
                     <table id="humidity-table" class="table table-striped caption-top">
                         <thead>
-                        <tr class="tableHeading">
-                            <th>ID</th>
-                            <th>Humidity</th>
-                            <th>Datetime</th>
-                        </tr>
+                            <tr class="tableHeading">
+                                <th>ID</th>
+                                <th>Humidity</th>
+                                <th>Datetime</th>
+                            </tr>
                         </thead>
                         <tbody class="dataTable">
-                        <tr th:each="humidity : ${humidities}">
-                            <td class="dataID" th:text="${humidity.id}"></td>
-                            <td class="chartData" th:text="${humidity.hValue}"></td>
-                            <td class="chartLabel" th:text="${humidity.dateTime}"></td>
-                        </tr>
+                            <tr th:each="humidity : ${humidities}">
+                                <td class="dataID" th:text="${humidity.id}"></td>
+                                <td class="chartData" th:text="${humidity.hValue}"></td>
+                                <td class="chartLabel" th:text="${humidity.dateTime}"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

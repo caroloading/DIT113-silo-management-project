@@ -23,18 +23,18 @@
                 <div class="tab-pane fade show active" id="temperatures-table" role="tabpanel" aria-labelledby="temperature-table-tab">
                     <table id="temperature-table" class="table table-striped table-responsive caption-top">
                         <thead>
-                        <tr class="tableHeading">
-                            <th>ID</th>
-                            <th>Temperature</th>
-                            <th>Datetime</th>
-                        </tr>
+                            <tr class="tableHeading">
+                                <th>ID</th>
+                                <th>Temperature</th>
+                                <th>Datetime</th>
+                            </tr>
                         </thead>
                         <tbody class="dataTable">
-                        <tr th:each="temperature : ${temperatures}">
-                            <td class="dataID" th:text="${temperature.id}"></td>
-                            <td class="chartData" th:text="${temperature.tValue}"></td>
-                            <td class="chartLabel" th:text="${temperature.dateTime}"></td>
-                        </tr>
+                            <tr th:each="temperature : ${temperatures}">
+                                <td class="dataID" th:text="${temperature.id}"></td>
+                                <td class="chartData" th:text="${temperature.tValue}"></td>
+                                <td class="chartLabel" th:text="${temperature.dateTime}"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
