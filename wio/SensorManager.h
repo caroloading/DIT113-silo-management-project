@@ -18,9 +18,9 @@ extern RTC_SAMD51 rtc;
 
 struct PublishedMeasurements
 {
-    long distance;
-    long temperature;
-    long humidity;
+    double distance;
+    double temperature;
+    double humidity;
 };
 
 class SensorManager
@@ -51,8 +51,8 @@ class SensorManager
         ThermometerAndHumidity* _temphum;
         RealTimeClock*          _realTimeClock;
 
-        bool _IsTemperatureOutOfBounds(long temperature);
-        bool _IsHumidityOutOfBounds(long humidity);
+        bool _IsTemperatureOutOfBounds(double temperature);
+        bool _IsHumidityOutOfBounds(double humidity);
 };
 
 

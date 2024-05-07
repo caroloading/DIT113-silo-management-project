@@ -14,12 +14,12 @@ class ThermometerAndHumidity : public JsonSerializable
     public:
         ThermometerAndHumidity();
         const char* ConvertReadings();
-        long        GetTemperature();
-        long        GetHumidity();
+        double        GetTemperature();
+        double        GetHumidity();
     private:
         DHT  _dht;
-        long _humidity;
-        long _temperature;
+        double _humidity;
+        double _temperature;
 };
 
 
