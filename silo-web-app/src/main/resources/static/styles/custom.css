@@ -74,6 +74,8 @@ For medium size device screens and smaller
 
 .c-section {
     max-height: calc(100% - var(--topbar-height));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 }
 
 .c-sidenav-icon {
@@ -114,23 +116,8 @@ For medium size device screens and smaller
 }
 
 .dataTable {
-    display: block;
-    height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
-}
-
-.tableHeading {
-    display: table;
-    width: 300px;
-}
-
-.dataID, .chartData {
-    width: 75px;
-}
-
-.chartLabel {
-    width: 180px;
 }
 
 .c-info-col-display label {
