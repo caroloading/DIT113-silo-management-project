@@ -2,6 +2,7 @@ package group1.silowebapp.webSocketComponent;
 
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
+import group1.silowebapp.model.Silo;
 import group1.silowebapp.model.Temperature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -22,6 +23,19 @@ public class WebSocketSensorUpdateComponent {
     }
 
     public void updateDistance(GrainHeight grainHeight) {
-        messagingTemplate.convertAndSend("/topic/distances/update", grainHeight);
+
+        double percentage = grainHeight.getPercentage();
+        String percentageString = String.format("%.2f", percentage);
+        GrainPercentage grainPercentage = 
+            new GrainPercentage(grainHeight.getId(), percentageString, grainHeight.getDateTime());
+        messagingTemplate.convertAndSend("/topic/distances/update", grainPercentage);
+
+        if (percentage >= 95.0){
+            fullNotification(percentageString);
+        }       
+    }
+
+    private void fullNotification(String percentage){
+        messagingTemplate.convertAndSend("/topic/notification", percentage);
     }
 }

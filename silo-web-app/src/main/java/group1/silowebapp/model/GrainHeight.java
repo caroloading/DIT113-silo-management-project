@@ -39,6 +39,10 @@ public class GrainHeight {
         return height;
     }
 
+    public Double getPercentage(){
+        return height/silo.getHeight()*(-100)+100;
+    }
+
     public String getDateTime() {
         // Todo: format dateTime
         return dateTime;

@@ -30,7 +30,7 @@ public class InitDb {
 
             // SILO
             // save a few Silos
-            siloRepository.save(new Silo(8.0, 4.0, "Wio terminal 01", "Seed Studio", "SAMD51"));
+            siloRepository.save(new Silo(16.0, 4.0, "Wio terminal 01", "Seed Studio", "SAMD51"));
             siloRepository.save(new Silo(7.0, 3.0, "Wio terminal 02", "Seed Studio", "SAMD51"));
 
             final Silo firstSilo = siloRepository.findById(1L);

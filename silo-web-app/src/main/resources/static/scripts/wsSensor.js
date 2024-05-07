@@ -52,7 +52,7 @@ const onReceivedMessage = (payload, type) => {
             insertIntoTable("temperature-table", {id: payloadBody.id, value: payloadBody.tvalue, dateTime: payloadBody.dateTime})
             break;
         case "distance":
-            insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime})
+            insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.percentage, dateTime: payloadBody.dateTime})
             break;
         case "humidity":
             insertIntoTable("humidity-table", {id: payloadBody.id, value: payloadBody.hvalue, dateTime: payloadBody.dateTime})

@@ -9,6 +9,7 @@ const onConnect = () => {
     stompClient.subscribe("/topic/temperatures/update", onReceivedTempMessage);
     stompClient.subscribe("/topic/humidity/update", onReceivedHumMessage);
     stompClient.subscribe("/topic/distances/update", onReceivedDistMessage);
+    stompClient.subscribe("/topic/notification", onReceivedNotifMessage);
 }
 
 const onError = () => {
@@ -39,5 +40,30 @@ const onReceivedDistMessage = (payload) => {
 
     //Updating card
     const card = document.getElementById("grain-elem");
-    card.textContent = payloadBody.height;
+    card.textContent = payloadBody.percentage;
 }
+
+const onReceivedNotifMessage = (payload) => {
+    const popup = document.getElementById("siloFullPopup");
+    popup.classList.add("show");
+
+    const popupMessage = document.getElementById("popupMessage");
+    
+    popupMessage.textContent = "Warning! Silo is " + payload.body + "% full. Please organize pickup.";
+}
+
+const configureClosePopup = () => {
+    const closePopupButton = document.getElementById("closePopup");
+    const popup = document.getElementById("siloFullPopup");
+
+    closePopupButton.addEventListener(
+        "click",
+        function () {
+            popup.classList.remove("show");
+        }
+    );
+}
+
+document.addEventListener("DOMContentLoaded", function() { 
+    configureClosePopup();
+});
