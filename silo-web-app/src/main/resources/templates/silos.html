@@ -15,7 +15,6 @@
             <table id="silos-table" class="table table-striped table-lg caption-top">
                 <thead>
                     <tr>
-                        <th width="55px"></th>
                         <th>ID</th>
                         <th>Name</th>
                         <th class="text-center">Height</th>
@@ -27,7 +26,6 @@
                 </thead>
                 <tbody>
                     <tr th:each="silo : ${silos}">
-                        <td class="text-center"><input type="checkbox" name="silo"></td>
                         <td th:text="${silo.id}"></td>
                         <td th:text="${silo.name}"></td>
                         <td class="text-center" th:text="${silo.height}"></td>
