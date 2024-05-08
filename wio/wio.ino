@@ -55,7 +55,7 @@ SensorManager sensorManager(
     &realTimeClock
 );
 
-CheckButtonInterval checkButtonInterval(&imperialButton, &pauseButton, &wioDisplay);
+CheckButtonInterval checkButtonInterval(&imperialButton, &pauseButton, &wioDisplay, &sensorManager);
 PublishInterval publishInterval(
     &pauseButton,
     &wifi,
@@ -65,6 +65,12 @@ PublishInterval publishInterval(
     &realTimeClock
 );
 NtpUpdateInterval ntpUpdateInterval(&realTimeClock);
+DisplayInterval displayInterval(
+    &wifi,
+    &mqtt,
+    &wioDisplay,
+    &realTimeClock
+);
 IntervalController intervalController;
 
 
@@ -86,6 +92,20 @@ void setup()
     intervalController.AddInterval(&checkButtonInterval);
     intervalController.AddInterval(&publishInterval);
     intervalController.AddInterval(&ntpUpdateInterval);
+    intervalController.AddInterval(&displayInterval);
+
+    delay(1000); // pause 
+
+    // display simple dashboard 
+    wioDisplay.DisplayBackground();
+    wioDisplay.DisplayLines();
+    wioDisplay.DisplayLabels();
+    wioDisplay.DisplayWifiStatus(wifi.IsConnected());
+    wioDisplay.DisplayCurrentTime(realTimeClock.GetNow());
+    wioDisplay.DisplayMqttStatus(mqtt.IsConnected()); 
+
+    // initial publish 
+    sensorManager.PublishAndUpdateSensorMeasurements(&mqtt, &wioDisplay);
 }
 
 

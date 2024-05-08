@@ -32,6 +32,7 @@ class CheckButtonInterval : public Interval
             ImperialButton* imperialButton, 
             ModeButton* pauseButton, 
             WioDisplay* display,
+            SensorManager* sensorManager, 
             unsigned int intervalMillis = 200
         );
         bool IsOverInterval(unsigned long currentMillis) override;
@@ -41,6 +42,7 @@ class CheckButtonInterval : public Interval
         ImperialButton* _imperialButton;
         ModeButton*     _pauseButton;
         WioDisplay*     _display;
+        SensorManager* _sensorManager;
 };
 
 
@@ -81,6 +83,25 @@ class NtpUpdateInterval : public Interval
         RealTimeClock* _realTimeClock;
 };
 
+class DisplayInterval : public Interval
+{
+    public:
+        DisplayInterval(
+            CustomWiFi* wifi, 
+            MqttClient* client, 
+            WioDisplay* display, 
+            RealTimeClock* realTimeClock, 
+            unsigned int intervalMillis = 100
+        );
+        bool IsOverInterval(unsigned long currentMillis) override;
+        void RunIntervalAction() override;
+    private:
+        unsigned int   _intervalMillis;
+        CustomWiFi*    _wifi;
+        MqttClient*    _client;
+        WioDisplay*    _display;
+        RealTimeClock* _realTimeClock;
+};
 
 class IntervalController
 {

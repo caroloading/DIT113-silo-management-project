@@ -62,17 +62,25 @@ void SensorManager::UpdateDisplayWithSensorData(
 {
     _ledBar->UpdateDisplay(measurements->distance);
 
-    display->SetDefaultPreset();
-
-    if (_IsTemperatureOutOfBounds(measurements->temperature)) {
+    bool isTempOutOfBounds = _IsTemperatureOutOfBounds(measurements->temperature);
+    if (isTempOutOfBounds) {
         display->DisplayWarning("Temperature out of bounds");
     }
-    if (_IsHumidityOutOfBounds(measurements->humidity)) {
+
+    delay(1000); // pause necessary to allow user to see warning
+
+    bool isHumOutOfBounds = _IsHumidityOutOfBounds(measurements->humidity);
+    if (isHumOutOfBounds) {
         display->DisplayWarning("Humidity out of bounds");
     }
+
+    if (!isTempOutOfBounds && !isHumOutOfBounds) {
+        display->HideWarning(); 
+    }
     
-    const char* temperatureUnit = "C";
-    const char* distanceUnit = " cm";
+    const char *temperatureUnit = "C", *temperatureLabel = "Temp";
+    const char *humidityUnit = "%", *humidityLabel = "R.H.";
+    const char *distanceUnit = "cm", *distanceLabel = "G. Lvl";
 
     if (_imperialButton->IsEnabled()) {
         measurements->temperature = _imperialButton->ConvertToFahrenheit(
@@ -82,17 +90,17 @@ void SensorManager::UpdateDisplayWithSensorData(
             measurements->distance
         );
         temperatureUnit = "F";
-        distanceUnit = " inches";
+        distanceUnit = "in";
     }
 
     display->DisplayMeasurement(
-        "Temperature", temperatureUnit, measurements->temperature
+        temperatureLabel, temperatureUnit, measurements->temperature
     );
     display->DisplayMeasurement(
-        "Humidity", "%", measurements->humidity
+        humidityLabel, humidityUnit, measurements->humidity
     );
     display->DisplayMeasurement(
-        "Distance", distanceUnit, measurements->distance
+        distanceLabel, distanceUnit, measurements->distance
     );
 }
 
