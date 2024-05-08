@@ -1,7 +1,7 @@
 :root {
     --topbar-height: 60px;
     --sidenav-width: 250px;
-    --sidenav-mobile-open-height: 200px;
+    --sidenav-mobile-open-height: 250px;
     --dark-color: #212529eb;
     --highlight-color: #af9146;
 }
