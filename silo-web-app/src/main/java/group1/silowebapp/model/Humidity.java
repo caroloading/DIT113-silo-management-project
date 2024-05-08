@@ -48,6 +48,10 @@ public class Humidity {
         return silo;
     }
 
+    public boolean getOutOfBounds(){
+        return hValue < silo.getMinHumidity() || hValue > silo.getMaxHumidity();
+    }
+
     @Override
     public String toString() {
         return String.format("Humidity[id=%d, value='%.2f', dateTime='%s']", id, hValue, dateTime);

@@ -48,6 +48,10 @@ public class Temperature {
         return silo;
     }
 
+    public boolean getOutOfBounds(){
+        return tValue < silo.getMinTemperature() || tValue > silo.getMaxTemperature();
+    }
+
     @Override
     public String toString() {
         return String.format("Temperature[id=%d, value='%.2f', dateTime='%s']", id, tValue, dateTime);

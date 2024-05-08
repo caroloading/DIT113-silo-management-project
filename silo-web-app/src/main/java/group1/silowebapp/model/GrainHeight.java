@@ -58,6 +58,10 @@ public class GrainHeight {
         return silo;
     }
 
+    public boolean getOutOfBounds(){
+        return getPercentage() > 90.0;
+    }
+
     @Override
     public String toString() {
         return String.format("GrainHeight[id=%d, value='%.2f', dateTime='%s']", id, height, dateTime);

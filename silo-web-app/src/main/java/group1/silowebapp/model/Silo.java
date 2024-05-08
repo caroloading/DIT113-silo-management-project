@@ -36,10 +36,26 @@ public class Silo {
     @Column()
     private Double latitude;
 
+    @Column()
+    private Double minTemperature;
+
+    @Column()
+    private Double maxTemperature;
+
+    @Column()
+    private Double minHumidity;
+
+    @Column()
+    private Double maxHumidity;
+
     protected Silo() {
     }
 
-    public Silo(String name, Double height, Double radius, String mcuName, String mcuVendor, String mcuModel, Double longitude, Double latitude) {
+    public Silo(String name, Double height, Double radius, 
+                String mcuName, String mcuVendor, String mcuModel, 
+                Double longitude, Double latitude,
+                Double minTemp, Double maxTemp,
+                Double minHum, Double maxHum) {
         this.name = name;
         this.height = height;
         this.radius = radius;
@@ -48,6 +64,10 @@ public class Silo {
         this.mcuModel = mcuModel;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.minTemperature = minTemp;
+        this.maxTemperature = maxTemp;
+        this.minHumidity = minHum;
+        this.maxHumidity = maxHum;
     }
 
     public Long getId() {
@@ -104,6 +124,22 @@ public class Silo {
 
     public Double getLatitude() {
         return latitude;
+    }
+
+    public Double getMinTemperature(){
+        return minTemperature;
+    }
+
+    public Double getMaxTemperature(){
+        return maxTemperature;
+    }
+
+    public Double getMinHumidity(){
+        return minHumidity;
+    }
+
+    public Double getMaxHumidity(){
+        return maxHumidity;
     }
 
     @Override
