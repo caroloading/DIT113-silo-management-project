@@ -44,7 +44,6 @@ const onReceivedDistMessage = (payload) => {
 }
 
 const onReceivedNotifMessage = (payload) => {
-    
     const payloadBody = JSON.parse(payload.body);
     switch (payloadBody.warningType){
         case "temperature":     
