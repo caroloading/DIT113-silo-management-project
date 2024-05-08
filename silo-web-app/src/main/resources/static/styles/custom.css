@@ -192,3 +192,7 @@ For medium size device screens and smaller
     background-color: var(--home-highlight);
     transition: background-color 0.15s ease-in;
 }
+
+.card.hp-card.c-card {
+    cursor: pointer;
+}
