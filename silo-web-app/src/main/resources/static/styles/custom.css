@@ -4,6 +4,7 @@
     --sidenav-mobile-open-height: 250px;
     --dark-color: #212529eb;
     --highlight-color: #af9146;
+    --home-highlight: #e9e9e9
 }
 
 /*
@@ -185,4 +186,9 @@ For medium size device screens and smaller
 
 .c-distance-card-icon {
     color: #008080;
+}
+
+.card.hp-card.c-card:hover {
+    background-color: var(--home-highlight);
+    transition: background-color 0.15s ease-in;
 }
