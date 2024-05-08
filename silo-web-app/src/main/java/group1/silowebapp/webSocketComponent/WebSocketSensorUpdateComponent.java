@@ -4,6 +4,8 @@ import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
 import group1.silowebapp.model.Temperature;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
@@ -25,8 +27,7 @@ public class WebSocketSensorUpdateComponent {
         distanceNotification = new Notification("distance", false);
     }
 
-    public void updateTemperature(Temperature temperature) {      
-        System.out.println("sending message");  
+    public void updateTemperature(Temperature temperature) {  
         messagingTemplate.convertAndSend("/topic/temperatures/update", temperature);
 
         tempNotification.setWarningOn(temperature.getOutOfBounds());
@@ -41,9 +42,9 @@ public class WebSocketSensorUpdateComponent {
     }
 
     public void updateDistance(GrainHeight grainHeight) {
-
+        
         Double percentage = grainHeight.getPercentage();
-        String percentageString = String.format("%.2f", percentage);
+        String percentageString = String.format(Locale.ENGLISH, "%.2f", percentage);
         percentage = Double.parseDouble(percentageString);
 
         //creating object not linked to database, with percentage distance
@@ -56,7 +57,6 @@ public class WebSocketSensorUpdateComponent {
     }
 
     private void sendNotification(Notification notification){
-        System.out.println("sent notification");
         messagingTemplate.convertAndSend("/topic/notification", notification);
     }
 }

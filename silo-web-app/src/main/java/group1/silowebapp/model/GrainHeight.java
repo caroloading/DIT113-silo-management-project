@@ -43,7 +43,8 @@ public class GrainHeight {
     //as a derived attribute
     public Double getPercentage(){
         if (silo!= null){
-            return height/silo.getHeight()*(-100)+100;
+            Double percentage = height/silo.getHeight()*(-100)+100;
+            return percentage >= 0.0? percentage : 0.0;
         } else {
             return -1.0;
         }
@@ -59,7 +60,7 @@ public class GrainHeight {
     }
 
     public boolean getOutOfBounds(){
-        return getPercentage() > 90.0;
+        return getPercentage() > 85.0;
     }
 
     @Override

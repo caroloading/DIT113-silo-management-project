@@ -65,7 +65,7 @@ const onReceivedNotifMessage = (payload) => {
         case "distance":
             const fullWarningBlock = document.getElementById("fullWarning");
             const popup = document.getElementById("siloFullPopup");
-            if (payloadBody.warningOn.equals("true")){
+            if (payloadBody.warningOn){
                 popup.classList.add("show");
                 fullWarningBlock.classList.add("show");
             } else {
