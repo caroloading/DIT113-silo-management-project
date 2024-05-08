@@ -3,12 +3,12 @@
 
 ImperialButton::ImperialButton(int pin) : ModeButton(pin) { };
 
-long ImperialButton::ConvertToFahrenheit(long valueCelsius)
+double ImperialButton::ConvertToFahrenheit(double valueCelsius)
 {
     return (valueCelsius * 1.8) + 32;
 }
 
-long ImperialButton::ConvertToInches(long valueCM)
+double ImperialButton::ConvertToInches(double valueCM)
 {
     return valueCM / 2.54;
 }
