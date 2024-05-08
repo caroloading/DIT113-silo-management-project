@@ -5,10 +5,10 @@ package group1.silowebapp.webSocketComponent;
 //with percentages
 public class GrainPercentage {
     private Long id;
-    private String percentage;
+    private Double percentage;
     private String dateTime;
 
-    public GrainPercentage(Long id, String percentage, String dateTime){
+    public GrainPercentage(Long id, Double percentage, String dateTime){
         this.id = id;
         this.percentage = percentage;
         this.dateTime = dateTime;
@@ -18,7 +18,7 @@ public class GrainPercentage {
         return id;
     }
 
-    public String getPercentage(){
+    public Double getPercentage(){
         return percentage;
     }
 

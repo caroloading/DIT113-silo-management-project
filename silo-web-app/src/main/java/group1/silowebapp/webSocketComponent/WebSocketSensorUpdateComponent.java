@@ -24,12 +24,13 @@ public class WebSocketSensorUpdateComponent {
 
     public void updateDistance(GrainHeight grainHeight) {
 
-        double percentage = grainHeight.getPercentage();
+        Double percentage = grainHeight.getPercentage();
         String percentageString = String.format("%.2f", percentage);
+        percentage = Double.parseDouble(percentageString);
 
         //creating object not linked to database, with percentage distance
         GrainPercentage grainPercentage = 
-            new GrainPercentage(grainHeight.getId(), percentageString, grainHeight.getDateTime());
+            new GrainPercentage(grainHeight.getId(), percentage, grainHeight.getDateTime());
         messagingTemplate.convertAndSend("/topic/distances/update", grainPercentage);
 
         if (percentage >= 95.0){

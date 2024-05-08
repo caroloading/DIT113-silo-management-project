@@ -1,3 +1,54 @@
+:root {
+    --topbar-height: 60px;
+    --sidenav-width: 250px;
+    --sidenav-mobile-open-height: 250px;
+    --dark-color: #212529eb;
+    --highlight-color: #af9146;
+}
+
+/*
+For all devices with width bigger than 769px
+*/
+@media screen and (min-width: 769px) {
+    .c-sidenav {
+        width: var(--sidenav-width);
+    }
+
+    .c-sidenav-mobile {
+        display: none;
+    }
+
+    .c-topbar-mobile {
+        display: none;
+    }
+}
+
+/*
+For medium size device screens and smaller
+*/
+@media screen and (max-width: 768px) {
+    .c-sidenav {
+        visibility: hidden;
+        width: 0;
+    }
+
+    .c-sidenav-mobile {
+        display: block;
+    }
+
+    .c-topbar {
+        justify-content: space-between;
+    }
+
+    .c-topbar-mobile {
+        padding: 1rem;
+    }
+
+    .c-hamburger-btn {
+        display: inline-block !important;
+    }
+}
+
 .row.pgcontent, .row.pgmenu {
     margin-bottom: 10px;
 }
@@ -6,28 +57,69 @@
     width: 12rem;
 }
 
+.c-nav-item-active {
+    background-color: var(--highlight-color);
+}
+
+.c-topbar {
+    height: var(--topbar-height);
+}
+
+.c-nav-item {
+    border-radius: 5px;
+}
+
+.c-nav-item:hover {
+    background-color: var(--highlight-color);
+    transition: background-color 0.1s ease-in;
+}
+
+.c-section {
+    max-height: calc(100% - var(--topbar-height));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.c-sidenav-icon {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-sidenav-mobile {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    top: var(--topbar-height);
+    overflow: hidden;
+}
+
+.c-sidenav-mobile-open {
+    z-index: 10;
+    height: var(--sidenav-mobile-open-height);
+}
+
+.c-hamburger-btn {
+    outline: none;
+    border: none;
+    background: none;
+    color: whitesmoke;
+    display: none;
+}
+
+.c-hamburger-btn:hover {
+    transform: scale(1.4);
+    transition: transform 0.1s linear;
+}
+
 .c-map {
     height: 500px;
 }
 
 .dataTable {
-    display: block;
-    height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
-}
-
-.tableHeading {
-    display: table;
-    width: 300px;
-}
-
-.dataID, .chartData {
-    width: 75px;
-}
-
-.chartLabel {
-    width: 180px;
 }
 
 .c-info-col-display label {
@@ -42,6 +134,58 @@
     padding: 0.8rem;
 }
 
+.c-back-button {
+    outline: none;
+    border: none;
+    color: whitesmoke;
+    background-color: var(--dark-color);
+    position: absolute;
+    bottom: 20px;
+    padding: 0.4rem 0.8rem;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.c-back-button:hover {
+    background-color: var(--highlight-color);
+    transition: background-color 0.1s ease-in;
+}
+
+.c-card {
+    height: 380px;
+    width: 290px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+.c-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+}
+
+.c-card-icon {
+    text-align: center;
+    font-size: 4rem;
+}
+
+.c-card-subtitle {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 1.3rem;
+}
+
+.c-temperature-card-icon {
+    color: #ff7400;
+}
+
+.c-humidity-card-icon {
+    color: #1aa7ec;
+}
+
+.c-distance-card-icon {
+    color: #008080;
+}
 .popup{
     position: fixed;
     z-index: 1;
@@ -60,7 +204,7 @@
 }
 
 .popup-content{
-    background-color: #af9146;
+    background-color: #fbf1d7;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888888;

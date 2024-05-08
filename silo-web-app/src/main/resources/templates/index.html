@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/base_layout}">
-<head>
-    <title>Home</title>
-</head>
-<body>
-    
-<!-- Replaces the content section of the base layout -->     
-<section layout:fragment="content">
-    <div class="row pgcontent justify-content-center">
-        <div class="col-auto d-flex justify-content-center">
-            <div class="card hp-card">
-                <div class="card-body">
-                    <h5 class="card-title">Temperature</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Current temperature:</h6>
-                    <p class="card-text fs-2 fw-bold text-center">
-                        <span id="temp-elem" th:text="${temperature.tValue}"></span> &deg;C
-                    </p>
+      layout:decorate="~{layouts/base_layout}"
+>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="h-100 row justify-content-center align-items-center">
+                <div class="col-auto d-flex justify-content-center">
+                    <div class="card hp-card c-card">
+                        <div class="card-body c-card-body">
+                            <div class="c-card-icon c-temperature-card-icon">
+                                <i class="fa-solid fa-temperature-quarter fa-lg"></i>
+                            </div>
+                            <p class="card-text fs-2 text-center">
+                                <span id="temp-elem" th:text="${temperature.tValue}"></span> &deg;C
+                            </p>
+                            <h6 class="card-subtitle c-card-subtitle">Latest Temperature</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto d-flex justify-content-center">
+                    <div class="card hp-card c-card">
+                        <div class="card-body c-card-body">
+                            <div class="c-card-icon c-humidity-card-icon">
+                                <i class="fa-solid fa-droplet fa-lg"></i>
+                            </div>
+                            <p class="card-text fs-2 text-center">
+                                <span id="humid-elem" th:text="${humidity.hValue}"></span>&percnt;
+                            </p>
+                            <h6 class="card-subtitle c-card-subtitle">Latest Humidity</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto d-flex justify-content-center">
+                    <div class="card hp-card c-card">
+                        <div class="card-body c-card-body">
+                            <div class="c-card-icon c-distance-card-icon">
+                                <i class="fa-solid fa-ruler-vertical fa-lg"></i>
+                            </div>
+                            <p class="card-text fs-2 text-center">
+                                <span id="grain-elem" th:text="${grainHeight.getPercentage()}"></span>
+                            </p>
+                            <h6 class="card-subtitle c-card-subtitle">Latest Grain Level</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-auto d-flex justify-content-center">
-            <div class="card hp-card">
-                <div class="card-body">
-                    <h5 class="card-title">Humidity</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Current Humidity:</h6>
-                    <p class="card-text fs-2 fw-bold text-center">
-                        <span id="humid-elem" th:text="${humidity.hValue}"></span>&percnt;
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-auto d-flex justify-content-center">
-            <div class="card hp-card">
-                <div class="card-body">
-                    <h5 class="card-title">Grain Level</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Current Level:</h6>
-                    <p class="card-text fs-2 fw-bold text-center">
-                        <span id="grain-elem" th:text="${grainHeight.getPercentage()}"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<section layout:fragment="custom-scripts">
-    <script src="/scripts/wsHome.js"></script>
-</section>
-</body>
+        <section layout:fragment="custom-scripts">
+            <script src="/scripts/wsHome.js"></script>
+        </section>
+    </body>
 </html>
