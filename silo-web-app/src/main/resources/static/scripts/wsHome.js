@@ -44,24 +44,37 @@ const onReceivedDistMessage = (payload) => {
 }
 
 const onReceivedNotifMessage = (payload) => {
-    const popup = document.getElementById("siloFullPopup");
-    const warningBlock = document.getElementById("fullWarning");
-    if (payload.body == "true"){
-        popup.classList.add("show");
-
-        const popupMessage = document.getElementById("popupMessage");
-        
-        popupMessage.textContent = "Warning! Silo is soon full. Please organize pickup.";
-
-        const warningBlock = document.getElementById("fullWarning");
-        warningBlock.classList.add("show");
-
-        const card = document.getElementById("grain-elem");
-        
-    } else {
-        popup.classList.remove("show");
-        warningBlock.classList.remove("show");
-    }
+    
+    const payloadBody = JSON.parse(payload.body);
+    switch (payloadBody.warningType){
+        case "temperature":     
+            const tempWarningBlock = document.getElementById("tempWarning"); 
+            if (payloadBody.warningOn){                  
+                tempWarningBlock.classList.add("show");//
+            } else {
+                tempWarningBlock.classList.remove("show");
+            }          
+            break;
+        case "humidity": 
+            const humWarningBlock = document.getElementById("humWarning");
+            if (payloadBody.warningOn){                  
+                humWarningBlock.classList.add("show");
+            } else {
+                humWarningBlock.classList.remove("show");
+            }     
+            break;
+        case "distance":
+            const fullWarningBlock = document.getElementById("fullWarning");
+            const popup = document.getElementById("siloFullPopup");
+            if (payloadBody.warningOn.equals("true")){
+                popup.classList.add("show");
+                fullWarningBlock.classList.add("show");
+            } else {
+                popup.classList.remove("show");
+                fullWarningBlock.classList.remove("show");
+            }
+            break;
+    }  
 }
 
 const configureClosePopup = () => {

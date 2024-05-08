@@ -58,7 +58,7 @@ public class SensorsMessageHandler implements MessageHandler {
 
         Double value = node.get("value").asDouble();
         String dateTime = node.get("dateTime").asText();
-        Silo silo = siloRepository.findByHeight(16.0);
+        Silo silo = siloRepository.findByName("Sadgra Bloodfoot");
         //Adding received values to database 
         //and send through websocket to update the webpage
         switch (type) {

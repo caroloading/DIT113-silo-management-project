@@ -218,7 +218,10 @@ For medium size device screens and smaller
 }
 
 .warning {
-    background-color: rgb(223, 5, 5);
+    background-color: rgb(192, 14, 14);
+    text-align: center;
+    margin-left: 1% auto;
+    border-bottom: 1px solid dark;
     display: none;
 }
 

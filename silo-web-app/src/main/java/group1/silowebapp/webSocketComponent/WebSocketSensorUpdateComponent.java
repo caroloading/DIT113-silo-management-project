@@ -2,11 +2,12 @@ package group1.silowebapp.webSocketComponent;
 
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
-import group1.silowebapp.model.Silo;
 import group1.silowebapp.model.Temperature;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
+
 
 
 @Component
@@ -14,12 +15,29 @@ public class WebSocketSensorUpdateComponent {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    public void updateTemperature(Temperature temperature) {
+    private final Notification tempNotification;
+    private final Notification humNotification;
+    private final Notification distanceNotification;
+
+    public WebSocketSensorUpdateComponent(){
+        tempNotification = new Notification("temperature", false);
+        humNotification = new Notification("humidity", false);
+        distanceNotification = new Notification("distance", false);
+    }
+
+    public void updateTemperature(Temperature temperature) {      
+        System.out.println("sending message");  
         messagingTemplate.convertAndSend("/topic/temperatures/update", temperature);
+
+        tempNotification.setWarningOn(temperature.getOutOfBounds());
+        sendNotification(tempNotification);
     }
 
     public void updateHumidity(Humidity humidity) {
         messagingTemplate.convertAndSend("/topic/humidity/update", humidity);
+
+        humNotification.setWarningOn(humidity.getOutOfBounds());
+        sendNotification(humNotification);
     }
 
     public void updateDistance(GrainHeight grainHeight) {
@@ -33,14 +51,12 @@ public class WebSocketSensorUpdateComponent {
             new GrainPercentage(grainHeight.getId(), percentage, grainHeight.getDateTime());
         messagingTemplate.convertAndSend("/topic/distances/update", grainPercentage);
 
-        if (percentage >= 95.0){
-            fullNotification(true);
-        } else {
-            fullNotification(false);
-        }
+        distanceNotification.setWarningOn(grainHeight.getOutOfBounds());
+        sendNotification(distanceNotification);
     }
 
-    private void fullNotification(boolean full){
-        messagingTemplate.convertAndSend("/topic/notification", full);
+    private void sendNotification(Notification notification){
+        System.out.println("sent notification");
+        messagingTemplate.convertAndSend("/topic/notification", notification);
     }
 }
