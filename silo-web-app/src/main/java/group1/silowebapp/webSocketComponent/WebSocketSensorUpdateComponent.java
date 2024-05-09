@@ -30,15 +30,25 @@ public class WebSocketSensorUpdateComponent {
     public void updateTemperature(Temperature temperature) {  
         messagingTemplate.convertAndSend("/topic/temperatures/update", temperature);
 
-        tempNotification.setWarningOn(temperature.getOutOfBounds());
-        sendNotification(tempNotification);
+        if (temperature.getOutOfBounds() && !tempNotification.getWarningOn()){
+            tempNotification.setWarningOn(true);
+            sendNotification(tempNotification);
+        } else if (!temperature.getOutOfBounds() && tempNotification.getWarningOn()){
+            tempNotification.setWarningOn(false);
+            sendNotification(tempNotification);
+        }
     }
 
     public void updateHumidity(Humidity humidity) {
         messagingTemplate.convertAndSend("/topic/humidity/update", humidity);
 
-        humNotification.setWarningOn(humidity.getOutOfBounds());
-        sendNotification(humNotification);
+        if (humidity.getOutOfBounds() && !humNotification.getWarningOn()){
+            humNotification.setWarningOn(true);
+            sendNotification(humNotification);
+        } else if (!humidity.getOutOfBounds() && humNotification.getWarningOn()){
+            humNotification.setWarningOn(false);
+            sendNotification(humNotification);
+        }
     }
 
     public void updateDistance(GrainHeight grainHeight) {
@@ -52,11 +62,27 @@ public class WebSocketSensorUpdateComponent {
             new GrainPercentage(grainHeight.getId(), percentage, grainHeight.getDateTime());
         messagingTemplate.convertAndSend("/topic/distances/update", grainPercentage);
 
-        distanceNotification.setWarningOn(grainHeight.getOutOfBounds());
-        sendNotification(distanceNotification);
+        if (grainHeight.getOutOfBounds() && !distanceNotification.getWarningOn()){
+            distanceNotification.setWarningOn(true);
+            sendNotification(distanceNotification);
+        } else if (!grainHeight.getOutOfBounds() && distanceNotification.getWarningOn()){
+            distanceNotification.setWarningOn(false);
+            sendNotification(distanceNotification);
+        }
     }
 
     private void sendNotification(Notification notification){
+        System.out.println("notif sent" + notification.getWarningType() + notification.getWarningOn());
         messagingTemplate.convertAndSend("/topic/notification", notification);
     }
+
+    public void setUpWarningStatus(boolean temp, boolean hum, boolean distance){
+        tempNotification.setWarningOn(temp);
+        humNotification.setWarningOn(hum);
+        distanceNotification.setWarningOn(distance);
+        sendNotification(tempNotification);
+        sendNotification(humNotification);
+        sendNotification(distanceNotification);
+    }
+
 }

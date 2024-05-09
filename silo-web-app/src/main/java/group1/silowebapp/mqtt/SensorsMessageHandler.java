@@ -71,7 +71,6 @@ public class SensorsMessageHandler implements MessageHandler {
                 webSocketSensorUpdateComponent.updateTemperature(temperature);
                 break;
             case "GrainHeight":
-                System.out.println("got message");
                 GrainHeight grainHeight = quantityRepo.save(EntityFactory.createGrainHeight(value, dateTime, silo));
                 webSocketSensorUpdateComponent.updateDistance(grainHeight);
                 break;

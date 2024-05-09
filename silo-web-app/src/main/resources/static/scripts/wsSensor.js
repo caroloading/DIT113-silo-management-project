@@ -21,6 +21,8 @@ const onConnect = () => {
             break;
     }
     stompClient.subscribe("/topic/notification", onReceivedNotifMessage);
+    
+    stompClient.send("/app/send/warningSetUp"); //prompting server to send warning notifications
 }
 
 const onError = () => {
@@ -77,7 +79,7 @@ const onReceivedNotifMessage = (payload) => {
         case "temperature":     
             const tempWarningBlock = document.getElementById("tempWarning"); 
             if (payloadBody.warningOn){                  
-                tempWarningBlock.classList.add("show");//
+                tempWarningBlock.classList.add("show");
             } else {
                 tempWarningBlock.classList.remove("show");
             }          
@@ -119,4 +121,3 @@ const configureClosePopup = () => {
 document.addEventListener("DOMContentLoaded", function() { 
     configureClosePopup();
 });
-

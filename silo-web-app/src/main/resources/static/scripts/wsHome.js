@@ -10,12 +10,13 @@ const onConnect = () => {
     stompClient.subscribe("/topic/humidity/update", onReceivedHumMessage);
     stompClient.subscribe("/topic/distances/update", onReceivedDistMessage);
     stompClient.subscribe("/topic/notification", onReceivedNotifMessage);
+
+    stompClient.send("/app/send/warningSetUp");
 }
 
 const onError = () => {
     console.log("Could not establish WebSocket connection");
 }
-
 
 stompClient.connect({}, onConnect, onError);
 
@@ -49,7 +50,7 @@ const onReceivedNotifMessage = (payload) => {
         case "temperature":     
             const tempWarningBlock = document.getElementById("tempWarning"); 
             if (payloadBody.warningOn){                  
-                tempWarningBlock.classList.add("show");//
+                tempWarningBlock.classList.add("show");
             } else {
                 tempWarningBlock.classList.remove("show");
             }          
