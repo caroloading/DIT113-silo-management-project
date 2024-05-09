@@ -25,6 +25,7 @@ CheckButtonInterval::CheckButtonInterval(
     ImperialButton* imperialButton, 
     ModeButton* pauseButton, 
     WioDisplay* display, 
+    SensorManager* sensorManager, 
     unsigned int intervalMillis
 )
 {
@@ -32,6 +33,7 @@ CheckButtonInterval::CheckButtonInterval(
     _imperialButton = imperialButton;
     _pauseButton = pauseButton;
     _display = display;
+    _sensorManager = sensorManager;
 }
 
 bool CheckButtonInterval::IsOverInterval(unsigned long currentMillis)
@@ -42,13 +44,23 @@ bool CheckButtonInterval::IsOverInterval(unsigned long currentMillis)
 void CheckButtonInterval::RunIntervalAction()
 {
     bool pauseStatusChanged = _pauseButton->ChangeIfPressed();
-    _imperialButton->ChangeIfPressed();
+    bool unitStatusChanged = _imperialButton->ChangeIfPressed();
+
     if (pauseStatusChanged) {
         if (_pauseButton->IsEnabled()){
             _display->DisplayPause();
         } else {
-            _display->DisplayPause("Resuming measures. Please wait.");
+            _display->DisplayPause("Resuming measures...");
         }
+    }
+
+    if (unitStatusChanged) {
+        PublishedMeasurements measurements = PublishedMeasurements {
+            WioDisplay::savedDistance,
+            WioDisplay::savedTemperature,
+            WioDisplay::savedHumidity
+        }; 
+        _sensorManager->UpdateDisplayWithSensorData(_display, &measurements);
     }
 }
 
@@ -108,6 +120,37 @@ void NtpUpdateInterval::RunIntervalAction()
 {
     _realTimeClock->UpdateRtcUsingNtp();
 }
+
+
+// DISPLAY INTERVAL
+
+DisplayInterval::DisplayInterval(
+    CustomWiFi* wifi, 
+    MqttClient* client, 
+    WioDisplay* display, 
+    RealTimeClock* realTimeClock,
+    unsigned int intervalMillis
+)
+{
+    _intervalMillis = intervalMillis;
+    _wifi = wifi;
+    _client = client;
+    _display = display;
+    _realTimeClock = realTimeClock;
+}
+
+bool DisplayInterval::IsOverInterval(unsigned long currentMillis)
+{
+    return (currentMillis - GetLastRun()) >= _intervalMillis;
+}
+
+void DisplayInterval::RunIntervalAction()
+{
+    _display->DisplayWifiStatus(_wifi->IsConnected());
+    _display->DisplayCurrentTime(_realTimeClock->GetNow());
+    _wifi->IsConnected() ? _display->DisplayMqttStatus(_client->IsConnected()) : _display->DisplayMqttStatus(false);   
+}
+
 
 
 // INTERVAL CONTROLLER

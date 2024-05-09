@@ -8,8 +8,8 @@ class ImperialButton : public ModeButton
 {
     public:
         ImperialButton(int pin);
-        long ConvertToFahrenheit(long valueCelsius);
-        long ConvertToInches(long valueCM);
+        double ConvertToFahrenheit(double valueCelsius);
+        double ConvertToInches(double valueCM);
 };
 
 #endif
