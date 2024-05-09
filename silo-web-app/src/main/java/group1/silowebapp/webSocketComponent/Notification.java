@@ -17,7 +17,7 @@ public class Notification {
         this.warningOn = outOfBounds;
     }
     
-    public boolean getWarningOn(){
+    public boolean isWarningOn(){
         return warningOn;
     }
 }

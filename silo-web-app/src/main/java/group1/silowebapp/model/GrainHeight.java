@@ -59,7 +59,7 @@ public class GrainHeight {
         return silo;
     }
 
-    public boolean getOutOfBounds(){
+    public boolean isOutOfBounds(){
         return getPercentage() > 85.0;
     }
 

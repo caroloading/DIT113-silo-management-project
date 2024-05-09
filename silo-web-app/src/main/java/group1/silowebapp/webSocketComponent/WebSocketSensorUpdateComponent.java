@@ -30,10 +30,10 @@ public class WebSocketSensorUpdateComponent {
     public void updateTemperature(Temperature temperature) {  
         messagingTemplate.convertAndSend("/topic/temperatures/update", temperature);
 
-        if (temperature.getOutOfBounds() && !tempNotification.getWarningOn()){
+        if (temperature.isOutOfBounds() && !tempNotification.isWarningOn()){
             tempNotification.setWarningOn(true);
             sendNotification(tempNotification);
-        } else if (!temperature.getOutOfBounds() && tempNotification.getWarningOn()){
+        } else if (!temperature.isOutOfBounds() && tempNotification.isWarningOn()){
             tempNotification.setWarningOn(false);
             sendNotification(tempNotification);
         }
@@ -42,10 +42,10 @@ public class WebSocketSensorUpdateComponent {
     public void updateHumidity(Humidity humidity) {
         messagingTemplate.convertAndSend("/topic/humidity/update", humidity);
 
-        if (humidity.getOutOfBounds() && !humNotification.getWarningOn()){
+        if (humidity.isOutOfBounds() && !humNotification.isWarningOn()){
             humNotification.setWarningOn(true);
             sendNotification(humNotification);
-        } else if (!humidity.getOutOfBounds() && humNotification.getWarningOn()){
+        } else if (!humidity.isOutOfBounds() && humNotification.isWarningOn()){
             humNotification.setWarningOn(false);
             sendNotification(humNotification);
         }
@@ -62,20 +62,21 @@ public class WebSocketSensorUpdateComponent {
             new GrainPercentage(grainHeight.getId(), percentage, grainHeight.getDateTime());
         messagingTemplate.convertAndSend("/topic/distances/update", grainPercentage);
 
-        if (grainHeight.getOutOfBounds() && !distanceNotification.getWarningOn()){
+        if (grainHeight.isOutOfBounds() && !distanceNotification.isWarningOn()){
             distanceNotification.setWarningOn(true);
             sendNotification(distanceNotification);
-        } else if (!grainHeight.getOutOfBounds() && distanceNotification.getWarningOn()){
+        } else if (!grainHeight.isOutOfBounds() && distanceNotification.isWarningOn()){
             distanceNotification.setWarningOn(false);
             sendNotification(distanceNotification);
         }
     }
 
     private void sendNotification(Notification notification){
-        System.out.println("notif sent" + notification.getWarningType() + notification.getWarningOn());
         messagingTemplate.convertAndSend("/topic/notification", notification);
     }
 
+    //Setting up the starting warning boolean of all notifications
+    //on page load, then sending the notifications.
     public void setUpWarningStatus(boolean temp, boolean hum, boolean distance){
         tempNotification.setWarningOn(temp);
         humNotification.setWarningOn(hum);

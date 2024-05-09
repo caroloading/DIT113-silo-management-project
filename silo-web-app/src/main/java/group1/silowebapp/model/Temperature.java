@@ -48,7 +48,7 @@ public class Temperature {
         return silo;
     }
 
-    public boolean getOutOfBounds(){
+    public boolean isOutOfBounds(){
         if (silo != null){
             return tValue < silo.getMinTemperature() || tValue > silo.getMaxTemperature();
         } else {

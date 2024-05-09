@@ -11,7 +11,7 @@ const onConnect = () => {
     stompClient.subscribe("/topic/distances/update", onReceivedDistMessage);
     stompClient.subscribe("/topic/notification", onReceivedNotifMessage);
 
-    stompClient.send("/app/send/warningSetUp");
+    stompClient.send("/app/send/warningSetUp"); //prompting server to send warning notifications
 }
 
 const onError = () => {

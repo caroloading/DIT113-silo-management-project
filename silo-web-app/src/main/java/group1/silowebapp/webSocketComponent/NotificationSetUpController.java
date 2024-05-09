@@ -20,11 +20,15 @@ public class NotificationSetUpController {
     @Autowired 
     private TemperatureRepository temperatureRepository;
 
+    //receiving message on page load,
+    //getting the last sensors data
+    //and calling the SetUpWarningStatus method 
+    //to inform webpage of warning statuses.
     @MessageMapping("/send/warningSetUp")
     public void triggerNotifications(){
-        boolean lastTempOutOfBounds = temperatureRepository.findTopByOrderByDateTimeDesc().getOutOfBounds();
-        boolean lastHumOutOfBounds = humidityRepository.findTopByOrderByDateTimeDesc().getOutOfBounds();
-        boolean lastDistanceOutOfBounds = grainHeightRepository.findTopByOrderByDateTimeDesc().getOutOfBounds();
+        boolean lastTempOutOfBounds = temperatureRepository.findTopByOrderByDateTimeDesc().isOutOfBounds();
+        boolean lastHumOutOfBounds = humidityRepository.findTopByOrderByDateTimeDesc().isOutOfBounds();
+        boolean lastDistanceOutOfBounds = grainHeightRepository.findTopByOrderByDateTimeDesc().isOutOfBounds();
         
         webSocketSensorUpdateComponent.setUpWarningStatus(lastTempOutOfBounds, lastHumOutOfBounds, lastDistanceOutOfBounds);
     }
