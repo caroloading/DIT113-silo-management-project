@@ -34,9 +34,24 @@
     <main class="d-flex flex-row overflow-y-hidden" style="max-height: 100vh">
         <aside th:replace="~{fragments/sidenav::#sidenav}"></aside>
         <nav th:replace="~{fragments/sidenav::#sidenav-mobile}"></nav>
-
+        <div id="siloFullPopup" class="popup">
+            <div class="popup-content">
+                <p id="popupMessage">Warning! Silo is full. Please organize pickup.</p>
+                <button id="closePopup">OK</button>
+            </div>
+        </div>
+        
         <div class="w-100">
             <div th:replace="~{fragments/topbar::#topbar}"></div>
+            <div id="fullWarning" class="warning">
+                <p class="warning-message">Silo almost full. Plan a pickup.</p>
+            </div>
+            <div id="tempWarning" class="warning">
+                <p class="warning-message">Temperature out of bounds. Please check on the silo.</p>
+            </div>
+            <div id="humWarning" class="warning">
+                <p class="warning-message">Humidity out of bounds. Please check on the silo.</p>
+            </div>
             <div class="p-2 h-100">
                 <section class="h-100 p-4 overflow-y-auto c-section" layout:fragment="content"></section>
             </div>

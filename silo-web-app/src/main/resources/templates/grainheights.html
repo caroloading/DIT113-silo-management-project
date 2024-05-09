@@ -25,14 +25,14 @@
                         <thead>
                             <tr class="tableHeading">
                                 <th>ID</th>
-                                <th>Grain Height</th>
+                                <th>Grain Height (%)</th>
                                 <th>Datetime</th>
                             </tr>
                         </thead>
                         <tbody class="dataTable">
                             <tr th:each="grainHeight : ${grainHeights}">
                                 <td class="dataID" th:text="${grainHeight.id}"></td>
-                                <td class="chartData" th:text="${grainHeight.height}"></td>
+                                <td class="chartData" th:text="${grainHeight.getPercentage()}"></td>
                                 <td class="chartLabel" th:text="${grainHeight.dateTime}"></td>
                             </tr>
                         </tbody>

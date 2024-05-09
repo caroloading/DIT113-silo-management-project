@@ -20,6 +20,9 @@ const onConnect = () => {
             stompClient.subscribe("/topic/distances/update",  (payload) => onReceivedMessage(payload, "distance"));
             break;
     }
+    stompClient.subscribe("/topic/notification", onReceivedNotifMessage);
+    
+    stompClient.send("/app/send/warningSetUp"); //prompting server to send warning notifications
 }
 
 const onError = () => {
@@ -60,8 +63,8 @@ const onReceivedMessage = (payload, type) => {
             updateChart(payloadBody.tvalue, payloadBody.dateTime);
             break;
         case "distance":
-            insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.height, dateTime: payloadBody.dateTime})
-            updateChart(payloadBody.height, payloadBody.dateTime);
+            insertIntoTable("distance-table", {id: payloadBody.id, value: payloadBody.percentage, dateTime: payloadBody.dateTime})
+            updateChart(payloadBody.percentage, payloadBody.dateTime);
             break;
         case "humidity":
             insertIntoTable("humidity-table", {id: payloadBody.id, value: payloadBody.hvalue, dateTime: payloadBody.dateTime})
@@ -70,5 +73,51 @@ const onReceivedMessage = (payload, type) => {
     }
 }
 
+const onReceivedNotifMessage = (payload) => {
+    const payloadBody = JSON.parse(payload.body);
+    switch (payloadBody.warningType){
+        case "temperature":     
+            const tempWarningBlock = document.getElementById("tempWarning"); 
+            if (payloadBody.warningOn){                  
+                tempWarningBlock.classList.add("show");
+            } else {
+                tempWarningBlock.classList.remove("show");
+            }          
+            break;
+        case "humidity": 
+            const humWarningBlock = document.getElementById("humWarning");
+            if (payloadBody.warningOn){                  
+                humWarningBlock.classList.add("show");
+            } else {
+                humWarningBlock.classList.remove("show");
+            }     
+            break;
+        case "distance":
+            const fullWarningBlock = document.getElementById("fullWarning");
+            const popup = document.getElementById("siloFullPopup");
+            if (payloadBody.warningOn){
+                popup.classList.add("show");
+                fullWarningBlock.classList.add("show");
+            } else {
+                popup.classList.remove("show");
+                fullWarningBlock.classList.remove("show");
+            }
+            break;
+    }  
+}
 
+const configureClosePopup = () => {
+    const closePopupButton = document.getElementById("closePopup");
+    const popup = document.getElementById("siloFullPopup");
 
+    closePopupButton.addEventListener(
+        "click",
+        function () {
+            popup.classList.remove("show");
+        }
+    );
+}
+
+document.addEventListener("DOMContentLoaded", function() { 
+    configureClosePopup();
+});
