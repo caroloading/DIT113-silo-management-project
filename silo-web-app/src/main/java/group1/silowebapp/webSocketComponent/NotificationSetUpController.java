@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
+import group1.silowebapp.model.Humidity;
+import group1.silowebapp.model.GrainHeight;
+import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
 import group1.silowebapp.repository.TemperatureRepository;
@@ -20,16 +23,17 @@ public class NotificationSetUpController {
     @Autowired 
     private TemperatureRepository temperatureRepository;
 
-    //receiving message on page load,
+    //Receiving message on page load,
     //getting the last sensors data
     //and calling the SetUpWarningStatus method 
     //to inform webpage of warning statuses.
     @MessageMapping("/send/warningSetUp")
     public void triggerNotifications(){
-        boolean lastTempOutOfBounds = temperatureRepository.findTopByOrderByDateTimeDesc().isOutOfBounds();
-        boolean lastHumOutOfBounds = humidityRepository.findTopByOrderByDateTimeDesc().isOutOfBounds();
-        boolean lastDistanceOutOfBounds = grainHeightRepository.findTopByOrderByDateTimeDesc().isOutOfBounds();
+        Temperature lastTemp = temperatureRepository.findTopByOrderByDateTimeDesc();
+        Humidity lastHumidity = humidityRepository.findTopByOrderByDateTimeDesc();
+        GrainHeight lastDistance = grainHeightRepository.findTopByOrderByDateTimeDesc();
         
-        webSocketSensorUpdateComponent.setUpWarningStatus(lastTempOutOfBounds, lastHumOutOfBounds, lastDistanceOutOfBounds);
+        webSocketSensorUpdateComponent.setUpWarningStatus(
+            lastTemp.isOutOfBounds(), lastHumidity.isOutOfBounds(), lastDistance.isOutOfBounds());
     }
 }
