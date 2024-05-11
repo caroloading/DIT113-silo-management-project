@@ -9,4 +9,7 @@ public interface SiloRepository extends CrudRepository<Silo, Long> {
      * below will be AUTO IMPLEMENTED by Spring Boot.
      */
     Silo findById(long id);
+
+    //for testing purposes
+    Silo findByName(String name);
 }

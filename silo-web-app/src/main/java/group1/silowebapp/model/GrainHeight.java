@@ -39,6 +39,17 @@ public class GrainHeight {
         return height;
     }
 
+    //getting the percentage
+    //as a derived attribute
+    public Double getPercentage(){
+        if (silo!= null){
+            Double percentage = height/silo.getHeight()*(-100)+100;
+            return percentage >= 0.0? percentage : 0.0;
+        } else {
+            return -1.0;
+        }
+    }
+
     public String getDateTime() {
         // Todo: format dateTime
         return dateTime;
@@ -46,6 +57,10 @@ public class GrainHeight {
 
     public Silo getSilo() {
         return silo;
+    }
+
+    public boolean isOutOfBounds(){
+        return getPercentage() > 85.0;
     }
 
     @Override

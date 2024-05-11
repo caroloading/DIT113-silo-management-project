@@ -11,42 +11,38 @@
 <section layout:fragment="content">
     <h3>Humidity Readings</h3>
 
-    <ul class="pt-4 nav nav-tabs" id="humidityTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="humidity-table-tab" data-bs-toggle="tab"
-                    data-bs-target="#humidities-table" type="button" role="tab" aria-controls="humidity-table-tab"
-                    aria-selected="true">Table
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#humidity-chart"
-                    type="button" role="tab" aria-controls="temperature-chart-tab" aria-selected="false">Chart
-            </button>
-        </li>
-    </ul>
-    <div class="tab-content" id="humidities-tab-content">
-        <div class="tab-pane fade show active" id="humidities-table" role="tabpanel"
-             aria-labelledby="humidity-table-tab">
-            <table id="humidity-table" class="table table-striped caption-top">
-                <thead>
-                <tr class="tableHeading">
-                    <th>ID</th>
-                    <th>Humidity</th>
-                    <th>Datetime</th>
-                </tr>
-                </thead>
-                <tbody class="dataTable">
-                <tr th:each="humidity : ${humidities}">
-                    <td class="dataID" th:text="${humidity.id}"></td>
-                    <td class="chartData" th:text="${humidity.hValue}"></td>
-                    <td class="chartLabel" th:text="${humidity.dateTime}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="tab-pane fade" id="humidity-chart" role="tabpanel" aria-labelledby="humidity-chart-tab">
-            <div>
-                <canvas id="humBarChart"></canvas>
+            <ul class="pt-4 nav nav-tabs" id="humidityTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="humidity-table-tab" data-bs-toggle="tab" data-bs-target="#humidities-table" type="button" role="tab" aria-controls="humidity-table-tab" aria-selected="true">Table</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#humidity-chart" type="button" role="tab" aria-controls="temperature-chart-tab" aria-selected="false">Chart</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="humidities-tab-content">
+                <div class="tab-pane fade show active" id="humidities-table" role="tabpanel" aria-labelledby="humidity-table-tab">
+                    <table id="humidity-table" class="table table-striped caption-top">
+                        <thead>
+                            <tr class="tableHeading">
+                                <th>ID</th>
+                                <th>Humidity (%)</th>
+                                <th>Datetime</th>
+                            </tr>
+                        </thead>
+                        <tbody class="dataTable">
+                            <tr th:each="humidity : ${humidities}">
+                                <td class="dataID" th:text="${humidity.id}"></td>
+                                <td class="chartData" th:text="${humidity.hValue}"></td>
+                                <td class="chartLabel" th:text="${humidity.dateTime}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="humidity-chart" role="tabpanel" aria-labelledby="humidity-chart-tab">
+                    <div>
+                        <canvas id="humBarChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

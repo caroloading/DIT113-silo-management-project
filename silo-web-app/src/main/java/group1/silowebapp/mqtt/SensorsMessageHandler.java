@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import group1.silowebapp.model.EntityFactory;
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
+import group1.silowebapp.model.Silo;
 import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
@@ -56,20 +57,20 @@ public class SensorsMessageHandler implements MessageHandler {
 
         Double value = node.get("value").asDouble();
         String dateTime = node.get("dateTime").asText();
-
+        Silo silo = siloRepository.findByName("Sadgra Bloodfoot");
         //Adding received values to database 
         //and send through websocket to update the webpage
         switch (type) {
             case "Humidity":
-                Humidity humidity = humiRepo.save(EntityFactory.createHumidity(value, dateTime, siloRepository.findById(1L)));
+                Humidity humidity = humiRepo.save(EntityFactory.createHumidity(value, dateTime, silo));
                 webSocketSensorUpdateComponent.updateHumidity(humidity);
                 break;
             case "Temperature":
-                Temperature temperature = tempRepo.save(EntityFactory.createTemperature(value, dateTime, siloRepository.findById(1L)));
+                Temperature temperature = tempRepo.save(EntityFactory.createTemperature(value, dateTime, silo));
                 webSocketSensorUpdateComponent.updateTemperature(temperature);
                 break;
             case "GrainHeight":
-                GrainHeight grainHeight = quantityRepo.save(EntityFactory.createGrainHeight(value, dateTime, siloRepository.findById(1L)));
+                GrainHeight grainHeight = quantityRepo.save(EntityFactory.createGrainHeight(value, dateTime, silo));
                 webSocketSensorUpdateComponent.updateDistance(grainHeight);
                 break;
         }
