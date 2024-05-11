@@ -67,10 +67,10 @@ const onReceivedNotifMessage = (payload) => {
             const fullWarningBlock = document.getElementById("fullWarning");
             const popup = document.getElementById("siloFullPopup");
             if (payloadBody.warningOn) {
-                popup.classList.add("show");
+                popup.classList.add("d-flex");
                 fullWarningBlock.classList.add("show");
             } else {
-                popup.classList.remove("show");
+                popup.classList.remove("d-flex");
                 fullWarningBlock.classList.remove("show");
             }
             break;
@@ -84,7 +84,7 @@ const configureClosePopup = () => {
     closePopupButton.addEventListener(
         "click",
         function () {
-            popup.classList.remove("show");
+            popup.classList.remove("d-flex");
         }
     );
 }
