@@ -23,7 +23,7 @@ const markers = new ol.layer.Vector({
 });
 map.addLayer(markers);
 
-const siloMarker= new ol.Feature(
+const siloMarker = new ol.Feature(
     new ol.geom.Point(ol.proj.fromLonLat([geoLong, geoLat]))
 );
 markers.getSource().addFeature(siloMarker);

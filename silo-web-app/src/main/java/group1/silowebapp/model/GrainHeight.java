@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 public class GrainHeight {
-    
-    /* Define the Object Relational Mapping (ORM). JPA/Hibernate converts 
+
+    /* Define the Object Relational Mapping (ORM). JPA/Hibernate converts
      * the definitions to the appropriate SQL DDL statements
      */
     @Id

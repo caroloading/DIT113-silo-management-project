@@ -16,13 +16,13 @@ import java.time.Year;
 
 /*
  * The @Autowired annotations allows Spring to inject beans into the controller.
- * In this case, the autowired repository references allow us to query the 
+ * In this case, the autowired repository references allow us to query the
  * corresponding models (entities)
- * 
- * The controller adds objects to the Model map. This map object is made available 
+ *
+ * The controller adds objects to the Model map. This map object is made available
  * to the view component.
- * 
- * thisYear attribute is used in the footer section of the HTML page 
+ *
+ * thisYear attribute is used in the footer section of the HTML page
  */
 
 @Controller

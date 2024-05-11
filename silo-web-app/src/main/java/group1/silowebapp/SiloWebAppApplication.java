@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 /*
- * The SecurityAutoConfiguration adds features such as form login that aren't needed 
+ * The SecurityAutoConfiguration adds features such as form login that aren't needed
  * right now. Thus, exclude it.
  */
 

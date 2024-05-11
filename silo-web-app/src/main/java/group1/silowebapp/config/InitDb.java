@@ -2,12 +2,11 @@ package group1.silowebapp.config;
 
 import group1.silowebapp.model.Silo;
 import group1.silowebapp.repository.SiloRepository;
-
-import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /*
  * This class initializes the database with mockup data for testing purpose.
