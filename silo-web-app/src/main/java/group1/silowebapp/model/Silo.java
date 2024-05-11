@@ -51,8 +51,8 @@ public class Silo {
     protected Silo() {
     }
 
-    public Silo(String name, Double height, Double radius, 
-                String mcuName, String mcuVendor, String mcuModel, 
+    public Silo(String name, Double height, Double radius,
+                String mcuName, String mcuVendor, String mcuModel,
                 Double longitude, Double latitude,
                 Double minTemp, Double maxTemp,
                 Double minHum, Double maxHum) {
@@ -126,19 +126,19 @@ public class Silo {
         return latitude;
     }
 
-    public Double getMinTemperature(){
+    public Double getMinTemperature() {
         return minTemperature;
     }
 
-    public Double getMaxTemperature(){
+    public Double getMaxTemperature() {
         return maxTemperature;
     }
 
-    public Double getMinHumidity(){
+    public Double getMinHumidity() {
         return minHumidity;
     }
 
-    public Double getMaxHumidity(){
+    public Double getMaxHumidity() {
         return maxHumidity;
     }
 

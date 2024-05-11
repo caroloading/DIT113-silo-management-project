@@ -48,13 +48,13 @@ public class Humidity {
         return silo;
     }
 
-    public boolean isOutOfBounds(){
-        if (silo != null){
+    public boolean isOutOfBounds() {
+        if (silo != null) {
             return hValue < silo.getMinHumidity() || hValue > silo.getMaxHumidity();
         } else {
             return true;
         }
-        
+
     }
 
     @Override

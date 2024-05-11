@@ -2,11 +2,7 @@ package group1.silowebapp.mqtt;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import group1.silowebapp.model.EntityFactory;
-import group1.silowebapp.model.GrainHeight;
-import group1.silowebapp.model.Humidity;
-import group1.silowebapp.model.Silo;
-import group1.silowebapp.model.Temperature;
+import group1.silowebapp.model.*;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
 import group1.silowebapp.repository.SiloRepository;

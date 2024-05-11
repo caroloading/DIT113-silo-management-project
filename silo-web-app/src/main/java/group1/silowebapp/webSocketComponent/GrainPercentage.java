@@ -8,21 +8,21 @@ public class GrainPercentage {
     private Double percentage;
     private String dateTime;
 
-    public GrainPercentage(Long id, Double percentage, String dateTime){
+    public GrainPercentage(Long id, Double percentage, String dateTime) {
         this.id = id;
         this.percentage = percentage;
         this.dateTime = dateTime;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public Double getPercentage(){
+    public Double getPercentage() {
         return percentage;
     }
 
-    public String getDateTime(){
+    public String getDateTime() {
         return dateTime;
     }
 

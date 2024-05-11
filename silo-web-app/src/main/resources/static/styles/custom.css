@@ -196,7 +196,8 @@ For medium size device screens and smaller
 .card.hp-card.c-card {
     cursor: pointer;
 }
-.popup{
+
+.popup {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -205,15 +206,15 @@ For medium size device screens and smaller
     height: 100%;
     overflow: auto;
     background-color: rgba(
-        0,
-        0,
-        0,
-        0.4
+            0,
+            0,
+            0,
+            0.4
     );
     display: none;
 }
 
-.popup-content{
+.popup-content {
     background-color: #fbf1d7;
     margin: 10% auto;
     padding: 20px;
@@ -234,8 +235,9 @@ For medium size device screens and smaller
     margin-bottom: 2px;
     display: none;
 }
-.warning-message{
-    color:beige;
+
+.warning-message {
+    color: beige;
     margin-bottom: 3px;
 }
 

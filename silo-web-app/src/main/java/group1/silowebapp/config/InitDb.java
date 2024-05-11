@@ -22,10 +22,10 @@ public class InitDb {
             // NOTE: add silos only if there is no silo entries in the database
             List<Silo> silos = (List<Silo>) siloRepository.findAll();
             if (silos.isEmpty()) {
-                siloRepository.save(new Silo("Sadgrak Bloodfoot", 16.0, 7.0, 
-                                    "Wio terminal 01", "Seed Studio", "SAMD51", 
-                                    11.936941, 57.706584,
-                                    20.0, 35.0, 25.0, 40.0));
+                siloRepository.save(new Silo("Sadgrak Bloodfoot", 16.0, 7.0,
+                        "Wio terminal 01", "Seed Studio", "SAMD51",
+                        11.936941, 57.706584,
+                        20.0, 35.0, 25.0, 40.0));
             }
         };
     }
