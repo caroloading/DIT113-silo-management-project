@@ -35,9 +35,12 @@
     <aside th:replace="~{fragments/sidenav::#sidenav}"></aside>
     <nav th:replace="~{fragments/sidenav::#sidenav-mobile}"></nav>
     <div id="siloFullPopup" class="align-items-center justify-content-center popup">
-        <div class="popup-content">
-            <p id="popupMessage">Warning! Silo is full. Please organize pickup.</p>
-            <button id="closePopup">OK</button>
+        <div class="d-flex flex-column align-items-center justify-content-around popup-content">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <hr class="w-100 m-0"/>
+            <h3>Silo is full!</h3>
+            <p>Please organize pickup</p>
+            <button id="closePopup" class="btn btn-warning px-4">OK</button>
         </div>
     </div>
 

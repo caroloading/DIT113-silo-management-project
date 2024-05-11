@@ -26,6 +26,10 @@ For all devices with width bigger than 769px
     .popup {
         padding-left: var(--sidenav-width);
     }
+
+    .popup-content {
+        width: 360px;
+    }
 }
 
 /*
@@ -55,6 +59,10 @@ For medium size device screens and smaller
 
     .popup {
         padding-left: 0;
+    }
+
+    .popup-content {
+        width: 300px;
     }
 }
 
@@ -223,16 +231,16 @@ For medium size device screens and smaller
 }
 
 .popup-content {
+    border-radius: 5px;
     background-color: #fbf1d7;
     padding: 20px;
     border: 1px solid #888888;
-    width: 30%;
     font-weight: bolder;
+    height: 330px;
 }
 
-.popup-content button {
-    display: block;
-    margin: 0 auto;
+.popup-content i {
+    font-size: 4rem;
 }
 
 .warning {
