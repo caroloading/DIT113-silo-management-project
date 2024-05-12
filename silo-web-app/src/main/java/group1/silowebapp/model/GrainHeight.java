@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 public class GrainHeight {
-    
-    /* Define the Object Relational Mapping (ORM). JPA/Hibernate converts 
+
+    /* Define the Object Relational Mapping (ORM). JPA/Hibernate converts
      * the definitions to the appropriate SQL DDL statements
      */
     @Id
@@ -41,10 +41,10 @@ public class GrainHeight {
 
     //getting the percentage
     //as a derived attribute
-    public Double getPercentage(){
-        if (silo!= null){
-            Double percentage = height/silo.getHeight()*(-100)+100;
-            return percentage >= 0.0? percentage : 0.0;
+    public Double getPercentage() {
+        if (silo != null) {
+            Double percentage = height / silo.getHeight() * (-100) + 100;
+            return percentage >= 0.0 ? percentage : 0.0;
         } else {
             return -1.0;
         }
@@ -59,7 +59,7 @@ public class GrainHeight {
         return silo;
     }
 
-    public boolean isOutOfBounds(){
+    public boolean isOutOfBounds() {
         return getPercentage() > 85.0;
     }
 

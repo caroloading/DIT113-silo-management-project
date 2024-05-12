@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 public class Humidity {
-    
-    /* Define the Object Relational Mapping (ORM). JPA/Hibernate converts 
+
+    /* Define the Object Relational Mapping (ORM). JPA/Hibernate converts
      * the definitions to the appropriate SQL DDL statements
      */
     @Id
@@ -48,13 +48,13 @@ public class Humidity {
         return silo;
     }
 
-    public boolean isOutOfBounds(){
-        if (silo != null){
+    public boolean isOutOfBounds() {
+        if (silo != null) {
             return hValue < silo.getMinHumidity() || hValue > silo.getMaxHumidity();
         } else {
             return true;
         }
-        
+
     }
 
     @Override

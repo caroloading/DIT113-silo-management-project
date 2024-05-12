@@ -6,10 +6,10 @@ import group1.silowebapp.model.Humidity;
 import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
+import group1.silowebapp.repository.SiloRepository;
 import group1.silowebapp.repository.TemperatureRepository;
 import group1.silowebapp.schemas.SensorReading;
 import group1.silowebapp.webSocketComponent.WebSocketSensorUpdateComponent;
-import group1.silowebapp.repository.SiloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,25 +52,25 @@ public class WsHomeController {
         String now = LocalTime.now().toString();
 
         Temperature temp = tempRepo.save(
-            EntityFactory.createTemperature(
-                reading.getTemperature(),
-                now,
-                siloRepository.findById(1L)
-            )
+                EntityFactory.createTemperature(
+                        reading.getTemperature(),
+                        now,
+                        siloRepository.findById(1L)
+                )
         );
         Humidity humidity = humiRepo.save(
-            EntityFactory.createHumidity(
-                reading.getHumidity(),
-                now,
-                siloRepository.findById(1L)
-            )
+                EntityFactory.createHumidity(
+                        reading.getHumidity(),
+                        now,
+                        siloRepository.findById(1L)
+                )
         );
         GrainHeight distance = distanceRepo.save(
-            EntityFactory.createGrainHeight(
-                reading.getDistance(),
-                now,
-                siloRepository.findById(1L)
-            )
+                EntityFactory.createGrainHeight(
+                        reading.getDistance(),
+                        now,
+                        siloRepository.findById(1L)
+                )
         );
 
         webSocketSensorUpdateComponent.updateTemperature(temp);

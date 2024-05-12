@@ -3,55 +3,64 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/base_layout}"
 >
-    <head>
-        <title>Grain Heights</title>
-    </head>
-    <body>
+<head>
+    <title>Grain Heights</title>
+</head>
+<body>
 
-        <section layout:fragment="content">
-            <h3>Grain Height Readings</h3>
-
-            <ul class="pt-4 nav nav-tabs" id="distancesTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="distance-table-tab" data-bs-toggle="tab" data-bs-target="#distances-table" type="button" role="tab" aria-controls="distance-table-tab" aria-selected="true">Table</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#distance-chart" type="button" role="tab" aria-controls="temperature-chart-tab" aria-selected="false">Chart</button>
-                </li>
-            </ul>
-            <div class="tab-content" id="distances-tab-content">
-                <div class="tab-pane fade show active" id="distances-table" role="tabpanel" aria-labelledby="distance-table-tab">
-                    <table id="distance-table" class="table table-striped caption-top">
-                        <thead>
-                            <tr class="tableHeading">
-                                <th>ID</th>
-                                <th>Grain Height (%)</th>
-                                <th>Datetime</th>
-                            </tr>
-                        </thead>
-                        <tbody class="dataTable">
-                            <tr th:each="grainHeight : ${grainHeights}">
-                                <td class="dataID" th:text="${grainHeight.id}"></td>
-                                <td class="chartData" th:text="${grainHeight.getPercentage()}"></td>
-                                <td class="chartLabel" th:text="${grainHeight.dateTime}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="distance-chart" role="tabpanel" aria-labelledby="distance-chart-tab">
-                    <div>
-                        <canvas id="heightChart"></canvas>
-                    </div>
-                </div>
+<section layout:fragment="content">
+    <h3>Grain Height Readings</h3>
+    <ul class="pt-4 nav nav-tabs" id="distancesTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="distance-table-tab" data-bs-toggle="tab"
+                    data-bs-target="#distances-table" type="button" role="tab" aria-controls="distance-table-tab"
+                    aria-selected="true">Table
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#distance-chart"
+                    type="button" role="tab" aria-controls="temperature-chart-tab" aria-selected="false">Chart
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="distances-tab-content">
+        <div class="tab-pane fade show active" id="distances-table" role="tabpanel"
+             aria-labelledby="distance-table-tab">
+            <table id="distance-table" class="table table-striped caption-top">
+                <thead>
+                <tr class="tableHeading">
+                    <th>ID</th>
+                    <th>Grain Height (%)</th>
+                    <th>Datetime</th>
+                </tr>
+                </thead>
+                <tbody class="dataTable">
+                <tr th:each="grainHeight : ${grainHeights}">
+                    <td class="dataID" th:text="${grainHeight.id}"></td>
+                    <td class="chartData" th:text="${grainHeight.getPercentage()}"></td>
+                    <td class="chartLabel" th:text="${grainHeight.dateTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="distance-chart" role="tabpanel" aria-labelledby="distance-chart-tab">
+            <div>
+                <canvas id="heightChart"></canvas>
             </div>
+        </div>
+    </div>
+    </div>
+    </div>
 
-        </section>
+</section>
 
-        <section layout:fragment="custom-scripts">
-            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gradient"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js" integrity="sha512-Hn1w6YiiFw6p6S2lXv6yKeqTk0PLVzeCwWY9n32beuPjQ5HLcvz5l2QsP+KilEr1ws37rCTw3bZpvfvVIeTh0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script type="text/javascript" src="/scripts/allCharts.js"></script>
-            <script src="/scripts/wsSensor.js"></script>
-        </section>
-    </body>
+<section layout:fragment="custom-scripts">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gradient"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"
+            integrity="sha512-Hn1w6YiiFw6p6S2lXv6yKeqTk0PLVzeCwWY9n32beuPjQ5HLcvz5l2QsP+KilEr1ws37rCTw3bZpvfvVIeTh0Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/scripts/allCharts.js"></script>
+    <script src="/scripts/wsSensor.js"></script>
+</section>
+</body>
 </html>

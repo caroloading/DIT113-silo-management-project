@@ -46,35 +46,35 @@ const onReceivedDistMessage = (payload) => {
 
 const onReceivedNotifMessage = (payload) => {
     const payloadBody = JSON.parse(payload.body);
-    switch (payloadBody.warningType){
-        case "temperature":     
-            const tempWarningBlock = document.getElementById("tempWarning"); 
-            if (payloadBody.warningOn){                  
+    switch (payloadBody.warningType) {
+        case "temperature":
+            const tempWarningBlock = document.getElementById("tempWarning");
+            if (payloadBody.warningOn) {
                 tempWarningBlock.classList.add("show");
             } else {
                 tempWarningBlock.classList.remove("show");
-            }          
+            }
             break;
-        case "humidity": 
+        case "humidity":
             const humWarningBlock = document.getElementById("humWarning");
-            if (payloadBody.warningOn){                  
+            if (payloadBody.warningOn) {
                 humWarningBlock.classList.add("show");
             } else {
                 humWarningBlock.classList.remove("show");
-            }     
+            }
             break;
         case "distance":
             const fullWarningBlock = document.getElementById("fullWarning");
             const popup = document.getElementById("siloFullPopup");
-            if (payloadBody.warningOn){
-                popup.classList.add("show");
+            if (payloadBody.warningOn) {
+                popup.classList.add("d-flex");
                 fullWarningBlock.classList.add("show");
             } else {
-                popup.classList.remove("show");
+                popup.classList.remove("d-flex");
                 fullWarningBlock.classList.remove("show");
             }
             break;
-    }  
+    }
 }
 
 const configureClosePopup = () => {
@@ -84,11 +84,11 @@ const configureClosePopup = () => {
     closePopupButton.addEventListener(
         "click",
         function () {
-            popup.classList.remove("show");
+            popup.classList.remove("d-flex");
         }
     );
 }
 
-document.addEventListener("DOMContentLoaded", function() { 
+document.addEventListener("DOMContentLoaded", function () {
     configureClosePopup();
 });

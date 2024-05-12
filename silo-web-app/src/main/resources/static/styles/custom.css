@@ -22,6 +22,14 @@ For all devices with width bigger than 769px
     .c-topbar-mobile {
         display: none;
     }
+
+    .popup {
+        padding-left: var(--sidenav-width);
+    }
+
+    .popup-content {
+        width: 360px;
+    }
 }
 
 /*
@@ -47,6 +55,14 @@ For medium size device screens and smaller
 
     .c-hamburger-btn {
         display: inline-block !important;
+    }
+
+    .popup {
+        padding-left: 0;
+    }
+
+    .popup-content {
+        width: 300px;
     }
 }
 
@@ -196,7 +212,8 @@ For medium size device screens and smaller
 .card.hp-card.c-card {
     cursor: pointer;
 }
-.popup{
+
+.popup {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -205,37 +222,37 @@ For medium size device screens and smaller
     height: 100%;
     overflow: auto;
     background-color: rgba(
-        0,
-        0,
-        0,
-        0.4
+            0,
+            0,
+            0,
+            0.4
     );
     display: none;
 }
 
-.popup-content{
+.popup-content {
+    border-radius: 5px;
     background-color: #fbf1d7;
-    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888888;
-    width: 30%;
     font-weight: bolder;
+    height: 330px;
 }
 
-.popup-content button {
-    display: block;
-    margin: 0 auto;
+.popup-content i {
+    font-size: 4rem;
 }
 
 .warning {
     background-color: rgb(192, 14, 14);
     text-align: center;
-    border-bottom: 1px solid dark;
+    border-bottom: 1px solid black;
     margin-bottom: 2px;
     display: none;
 }
-.warning-message{
-    color:beige;
+
+.warning-message {
+    color: beige;
     margin-bottom: 3px;
 }
 
