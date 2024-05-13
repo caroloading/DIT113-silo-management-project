@@ -33,18 +33,19 @@ The developed system is meant to help monitor and manage the conditions and leve
 * [PubSubClient](https://github.com/knolleary/pubsubclient/tree/master)
 * [NTPClient](https://github.com/arduino-libraries/NTPClient)
 
-To avoid having potential problems with library dependencies. It is advised to install all libraries directly from the GitHub links provided above.
+To avoid having potential problems with library dependencies, it is advised to install all libraries directly from the GitHub links provided above.
 
 ## Usage
 * Before downloading the git repository, ensure that all required software and libraries are installed.
 * Connect the Battery Chassis with the Wio Terminal by inserting all pins on the battery into the back of the terminal.
+* make sure that the battery is charged by trying to turn the terminal on without connecting it with a wire. <br/>
+If it is not plug the battery into a computer using the central USB-C port on the battery.
 * Connect each sensor to a cable and insert them in the following sockets: 
 <div>
     <img style="margin-left: 50px" src="docs/images/WioConnections.png" width="400px" height="auto"/>
     <img style="margin-left: 50px" src="docs/images/BatteryConnections.png" width="400px" height="auto"/>
 </div>
 
-* note that if you have not yet charged the battery, plug it into a computer using the central USB-C port.
 * Download the GrainGuard repository from GitLab.
 * Extract the .zip file to your choice of directory.
 * Create a secrets.h file in the /wio folder, according secrets.example.h file, replacing the example text with the correct SSID and password for your wifi network.
@@ -55,8 +56,8 @@ To avoid having potential problems with library dependencies. It is advised to i
 </div>
 
 * When you have successfully opened the wio.ino file, ensure that your terminal is connected via the USB-C port to the computer you have arduino IDE open on.
-* Note that the following step will not work if it is connected to the battery or not at all.
-* Now, with the terminal ON, upload the code to your terminal through the Arduino IDE.
+* Now, with the terminal ON, upload the code to your terminal through the Arduino IDE by pressing the arrow button as highlighted below. <br/>
+(Note that the following step will not work if the computer is connected to the battery or not at all.)
 <div>
     <img style="margin-left: 50px" src="docs/images/UploadWio.png" width=500px height=200px/>
 </div>
