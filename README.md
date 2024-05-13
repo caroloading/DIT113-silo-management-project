@@ -4,18 +4,19 @@
 Grain Guard.
 
 ## Description
-The developed system is meant to help monitor and manage the conditions and levels of grain inside a silo. Relevant information such as humidity, temperature and grain level will be measured and sent back to the application, where data will be processed, stored and later displayed on the website for easy access. The main goal of the system will be to monitor if the environment inside a silo is suitable for grain and check if the grain level is not above the collection threshold. If any of the conditions are not met, the correct person/people is notified.
+The developed system is meant to help monitor and manage the conditions and levels of grain inside a silo. Relevant information such as humidity, temperature and grain level will be measured and sent back to the application, where data will be processed, stored and later displayed on the website for easy access. The main goal of the system will be to monitor if the environment inside a silo is suitable for grain and check if the grain level is not above the collection threshold. If any of the conditions are not met, the correct person/people are notified.
 
 ## Visuals
 
 ## Installation
 
 ### Required software
-* [Arduino](https://www.arduino.cc/en/software)
+* [Arduino IDE](https://www.arduino.cc/en/software)
 
 ### Required hardware and sensors
 * Microcontroller: [Wio Seeed Terminal](https://wiki.seeedstudio.com/Wio_Terminal_Intro/)
 * Battery Chassis: [Wio Terminal Battery Chassis](https://wiki.seeedstudio.com/Wio-Terminal-Battery-Chassis/)
+* 3x Cables : [Grove - Cable](https://www.seeedstudio.com/Grove-Universal-4-Pin-20cm-Unbuckled-Cable-5-PCs-Pack-p-749.html)
 * [Grove - Ultrasonic Ranger](https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)
 * [Grove - LED Bar](https://wiki.seeedstudio.com/Grove-LED_Bar/) 
 * [Grove - Temperature&Humidity Sensor (DHT11)](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
@@ -24,7 +25,7 @@ The developed system is meant to help monitor and manage the conditions and leve
 * [Grove Temperature and Humidity Sensor](https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor)
 * [Grove LED Bar](https://github.com/Seeed-Studio/Grove_LED_Bar/tree/master)
 * [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger)
-* [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+* [ArduinoJson](https://github.com/bblanchttps://www.seeedstudio.com/Grove-Universal-4-Pin-20cm-Unbuckled-Cable-5-PCs-Pack-p-749.htmlhon/ArduinoJson)
 * [Seeed Arduino RTC](https://github.com/Seeed-Studio/Seeed_Arduino_RTC/tree/master)
 * [Seeed Arduino rpcWiFi](https://github.com/Seeed-Studio/Seeed_Arduino_rpcWiFi)
 * [Seeed Arduino rpcUnified](https://github.com/Seeed-Studio/Seeed_Arduino_rpcUnified)
@@ -41,6 +42,9 @@ To avoid having potential problems with library dependencies. It is advised to i
 * Upload the Arduino sketch to your Wio Terminal.
 * Run the web application. 
 * Open your web browser to http://localhost:8080/.
+
+* Before downloading the git repository, ensure that all required software and libraries are installed.
+* 
 
 ## Contributors:
 * Charles Jarju - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kick-started the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
