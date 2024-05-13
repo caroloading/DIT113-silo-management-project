@@ -6,11 +6,7 @@ Grain Guard.
 ## Description
 The developed system is meant to help monitor and manage the conditions and levels of grain inside a silo. Relevant information such as humidity, temperature and grain level will be measured and sent back to the application, where data will be processed, stored and later displayed on the website for easy access. The main goal of the system will be to monitor if the environment inside a silo is suitable for grain and check if the grain level is not above the collection threshold. If any of the conditions are not met, the correct person/people is notified.
 
-## Badges
-
-
 ## Visuals
-
 
 ## Installation
 
@@ -38,35 +34,25 @@ The developed system is meant to help monitor and manage the conditions and leve
 
 To avoid having potential problems with library dependencies. It is advised to install all libraries directly from GitHub links provided above.
 
-### Set up
+## Usage
 * Download the repository.
 * Create a secrets.h file in the /wio folder, according secrets.example.h file, replacing with the correct SSID and password for your wifi network.
 * Upload the Arduino sketch to your Wio Terminal.
 * Run the web application. 
 * Open your web browser to http://localhost:8080/.
 
-## Usage
-
-## Support
-
-## Roadmap
-
-## Contributing
-
-## Authors and acknowledgment
-
-### Contributors:
+## Contributors:
 * Charles Jarju
 * Viktor Kolak 
 * Samuel Partain
 * Szymon Witt
 * Caroline Grand-Clement
 
-### Acknowledgements
+## Acknowledgements
 * Thank you to our TAs Teo Portase and Adrian Hassa.
 
 ## License
 The project is licensed under the MIT License. Refer to [license](https://git.chalmers.se/courses/dit113/2024/group-1/silo-management-project/-/blob/main/LICENSE?ref_type=heads) for more information.
 
 ## Project status
-In progress.
+Completed.
