@@ -40,8 +40,8 @@ To avoid having potential problems with library dependencies. It is advised to i
 * Connect the Battery Chassis with the Wio Terminal by inserting all pins on the battery into the back of the terminal.
 * Connect each sensor to a cable and insert them in the following sockets: 
 <div>
-    <img style="margin-left: 50px" src="docs/images/WioConnections.png" width="auto" height="auto"/>
-    <img style="margin-left: 50px" src="docs/images/BatteryConnections.png" width="auto" height="auto"/>
+    <img style="margin-left: 50px" src="docs/images/WioConnections.png" width="400px" height="auto"/>
+    <img style="margin-left: 50px" src="docs/images/BatteryConnections.png" width="400px" height="auto"/>
 </div>
 
 * note that if you have not yet charged the battery, plug it into a computer using the central USB-C port.
