@@ -1,7 +1,4 @@
-# Silo Management Project
-
-## Name
-Grain Guard.
+# <img src="docs/images/faviconG.ico" width="auto" height="auto"/> Grain Guard
 
 ## Description
 The developed system is meant to help monitor and manage the conditions and levels of grain inside a silo. Relevant information such as humidity, temperature and grain level will be measured and sent back to the application, where data will be processed, stored and later displayed on the website for easy access. The main goal of the system will be to monitor if the environment inside a silo is suitable for grain and check if the grain level is not above the collection threshold. If any of the conditions are not met, the correct person/people are notified.
@@ -37,14 +34,34 @@ The developed system is meant to help monitor and manage the conditions and leve
 To avoid having potential problems with library dependencies. It is advised to install all libraries directly from the GitHub links provided above.
 
 ## Usage
-* Download the repository.
-* Create a secrets.h file in the /wio folder, according secrets.example.h file, replacing with the correct SSID and password for your wifi network.
-* Upload the Arduino sketch to your Wio Terminal.
 * Run the web application. 
 * Open your web browser to http://localhost:8080/.
 
 * Before downloading the git repository, ensure that all required software and libraries are installed.
-* 
+* Connect the Battery Chassis with the Wio Terminal by inserting all pins on the battery into the back of the terminal.
+* Connect each sensor to a cable and insert them in the following sockets: 
+<div>
+    <img style="margin-left: 50px" src="docs/images/WioConnections.png" width="auto" height="auto"/>
+    <img style="margin-left: 50px" src="docs/images/BatteryConnections.png" width="auto" height="auto"/>
+</div>
+
+* note that if you have not yet charged the battery, plug it into a computer using the central USB-C port.
+* Download the GrainGuard repository from GitLab.
+* Extract the .zip file to your choice of directory.
+* Create a secrets.h file in the /wio folder, according secrets.example.h file, replacing the example text with the correct SSID and password for your wifi network.
+* Open the Arduino IDE and open the file called wio.ino, the file is located in .../silo-management-project/wio/wio.ino:
+<div>
+    <img style="margin-left: 50px" src="docs/images/OpenFile.png" width="auto" height="auto"/>
+    <img style="margin-left: 50px" src="docs/images/OpenWio.png" width="auto" height="auto"/>
+</div>
+
+* When you have successfully opened the wio.ino file, ensure that your terminal is connected via the USB-C port to the computer you have arduino IDE open on.
+* Note that the following step will not work if it is connected to the battery or not at all.
+* Now, with the terminal ON, upload the code to your terminal through the Arduino IDE.
+<div>
+    <img style="margin-left: 50px" src="docs/images/UploadWio.png" width=500px height=200px/>
+</div>
+
 
 ## Contributors:
 * Charles Jarju - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kick-started the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
