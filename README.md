@@ -9,6 +9,8 @@ The developed system is meant to help monitor and manage the conditions and leve
 
 ### Required software
 * [Arduino IDE](https://www.arduino.cc/en/software)
+* [Java JDK 21](https://www.oracle.com/java/technologies/downloads/#java21)
+* [Maven](https://maven.apache.org/install.html)
 
 ### Required hardware and sensors
 * Microcontroller: [Wio Seeed Terminal](https://wiki.seeedstudio.com/Wio_Terminal_Intro/)
@@ -61,6 +63,12 @@ To avoid having potential problems with library dependencies. It is advised to i
 <div>
     <img style="margin-left: 50px" src="docs/images/UploadWio.png" width=500px height=200px/>
 </div>
+
+* On your computer, open the terminal and change directory so that you end up in .../silo-management-project/silo-webapp/
+* run the command: ```mvn clean install```
+* If the build fails, you may have multiple versions of java installed. Run the line ```java -version``` if the output version is not JDK 21, you may need to look into changing your path [here.](https://www.java.com/en/download/help/path.html)
+* Finally, change directory to .../silo-management-project/silo-webapp/src/main/java/group1/silowebbapp/ and run the line: ```javac silowebappapplication.java```
+
 
 
 ## Contributors:
