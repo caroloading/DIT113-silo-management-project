@@ -15,6 +15,7 @@ The developed system is meant to help monitor and manage the conditions and leve
 
 ### Required hardware and sensors
 * Microcontroller: [Wio Seeed Terminal](https://wiki.seeedstudio.com/Wio_Terminal_Intro/)
+* Battery Chassis: [Wio Terminal Battery Chassis](https://wiki.seeedstudio.com/Wio-Terminal-Battery-Chassis/)
 * [Grove - Ultrasonic Ranger](https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)
 * [Grove - LED Bar](https://wiki.seeedstudio.com/Grove-LED_Bar/) 
 * [Grove - Temperature&Humidity Sensor (DHT11)](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
@@ -32,7 +33,7 @@ The developed system is meant to help monitor and manage the conditions and leve
 * [PubSubClient](https://github.com/knolleary/pubsubclient/tree/master)
 * [NTPClient](https://github.com/arduino-libraries/NTPClient)
 
-To avoid having potential problems with library dependencies. It is advised to install all libraries directly from GitHub links provided above.
+To avoid having potential problems with library dependencies. It is advised to install all libraries directly from the GitHub links provided above.
 
 ## Usage
 * Download the repository.
