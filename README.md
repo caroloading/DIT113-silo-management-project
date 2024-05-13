@@ -1,4 +1,4 @@
-# <img src="docs/images/faviconG.ico" width="auto" height="auto"/> Grain Guard
+# <img src="docs/images/faviconG-32x32.png" width="auto" height="auto"/> Grain Guard
 
 ## Description
 The developed system is meant to help monitor and manage the conditions and levels of grain inside a silo. Relevant information such as humidity, temperature and grain level will be measured and sent back to the application, where data will be processed, stored and later displayed on the website for easy access. The main goal of the system will be to monitor if the environment inside a silo is suitable for grain and check if the grain level is not above the collection threshold. If any of the conditions are not met, the correct person/people are notified.
