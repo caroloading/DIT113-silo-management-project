@@ -36,9 +36,6 @@ The developed system is meant to help monitor and manage the conditions and leve
 To avoid having potential problems with library dependencies. It is advised to install all libraries directly from the GitHub links provided above.
 
 ## Usage
-* Run the web application. 
-* Open your web browser to http://localhost:8080/.
-
 * Before downloading the git repository, ensure that all required software and libraries are installed.
 * Connect the Battery Chassis with the Wio Terminal by inserting all pins on the battery into the back of the terminal.
 * Connect each sensor to a cable and insert them in the following sockets: 
@@ -67,7 +64,8 @@ To avoid having potential problems with library dependencies. It is advised to i
 * On your computer, open the terminal and change directory so that you end up in .../silo-management-project/silo-webapp/
 * run the command: ```mvn clean install```
 * If the build fails, you may have multiple versions of java installed. Run the line ```java -version``` if the output version is not JDK 21, you may need to look into changing your path [here.](https://www.java.com/en/download/help/path.html)
-* Finally, change directory to .../silo-management-project/silo-webapp/src/main/java/group1/silowebbapp/ and run the line: ```javac silowebappapplication.java```
+* Now, change directory to .../silo-management-project/silo-webapp/src/main/java/group1/silowebbapp/ and run the line: ```javac silowebappapplication.java```
+* Lastly, open your webbrowser and enter: http://localhost:8080/
 
 
 
