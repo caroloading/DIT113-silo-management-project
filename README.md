@@ -36,6 +36,8 @@ The developed system is meant to help monitor and manage the conditions and leve
 * [PubSubClient](https://github.com/knolleary/pubsubclient/tree/master)
 * [NTPClient](https://github.com/arduino-libraries/NTPClient)
 
+To avoid having potential problems with library dependencies. It is advised to install all libraries directly from GitHub links provided above.
+
 ### Set up
 * Download the repository.
 * Create a secrets.h file in the /wio folder, according secrets.example.h file, replacing with the correct SSID and password for your wifi network.
