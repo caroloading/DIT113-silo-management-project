@@ -64,10 +64,12 @@ If it is not plug the battery into a computer using the central USB-C port on th
 
 * On your computer, open the terminal and change directory so that you end up in .../silo-management-project/silo-webapp/
 * run the command: ```mvn clean install```
-* If the build fails, you may have multiple versions of java installed. Run the line ```java -version``` if the output version is not JDK 21, you may need to look into changing your path [here.](https://www.java.com/en/download/help/path.html)
-* Now, change directory to .../silo-management-project/silo-webapp/src/main/java/group1/silowebbapp/ and run the line: ```javac silowebappapplication.java```
+* If the build fails, you may have multiple versions of java installed. Run the line ```java -version``` <br/>
+if the output version is not JDK 21, you may need to look into changing your path [here.](https://www.java.com/en/download/help/path.html) Set the path and repeat the step.
+* Now,  run the line: ```mvn compile``` and after, ```mvn exec:java -Dexec.mainClass=group1.silowebapp.SiloWebAppApplication``` 
 * Lastly, open your webbrowser and enter: http://localhost:8080/
 
+* If you wish to stop the program, simply exit your commandprompt.
 
 
 ## Contributors:
