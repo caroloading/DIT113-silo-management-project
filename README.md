@@ -42,11 +42,11 @@ To avoid having potential problems with library dependencies. It is advised to i
 * Open your web browser to http://localhost:8080/.
 
 ## Contributors:
-* Charles Jarju
-* Viktor Kolak 
-* Samuel Partain
-* Szymon Witt
-* Caroline Grand-Clement
+* Charles Jarju - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kick-started the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
+* Viktor Kolak - created a MQTT logic on the Wio terminal level; added Wi-Fi connectivity to the Wio terminal; Set up a third-party database running PostgreSQL engine; worked on the web application charts; positively contributed to the web application styling; created a wonderful logo for the "company"/website
+* Samuel Partain - added business logic for the temperature and humidity sensor; worked on the web application charts; added dynamic updates to the web application charts based on the incoming data 
+* Szymon Witt - made signifficant contributions on the refactor front (both on the sensor level as well as on the web application level); worked on the web application styling; added websockets to the web application
+* Caroline Grand-Clement - worked on the MQTT client on the web application side; added business logic for Wio terminal buttons; worked on the web application websocket connection; added dynamic pop-ups and banners to the web application; was the strongest PM of the group, coordinating responsibilities, keeping project progress information updated, and keeping team meetings on the highest level  
 
 ## Acknowledgements
 * Thank you to our TAs Teo Portase and Adrian Hassa.
