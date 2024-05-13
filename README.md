@@ -64,7 +64,7 @@ The developed system is meant to help monitor and manage the conditions and leve
 * Thank you to our TAs Teo Portase and Adrian Hassa.
 
 ## License
-For open source projects, say how it is licensed.
+The project is licensed under the MIT License. Refer to [license](https://git.chalmers.se/courses/dit113/2024/group-1/silo-management-project/-/blob/main/LICENSE?ref_type=heads) for more information.
 
 ## Project status
 In progress.
