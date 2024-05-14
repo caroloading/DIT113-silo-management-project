@@ -24,7 +24,7 @@ The developed system is meant to help monitor and manage the conditions and leve
 * [Grove Temperature and Humidity Sensor](https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor)
 * [Grove LED Bar](https://github.com/Seeed-Studio/Grove_LED_Bar/tree/master)
 * [Grove Ultrasonic Ranger](https://github.com/Seeed-Studio/Seeed_Arduino_UltrasonicRanger)
-* [ArduinoJson](https://github.com/bblanchttps://www.seeedstudio.com/Grove-Universal-4-Pin-20cm-Unbuckled-Cable-5-PCs-Pack-p-749.htmlhon/ArduinoJson)
+* [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
 * [Seeed Arduino RTC](https://github.com/Seeed-Studio/Seeed_Arduino_RTC/tree/master)
 * [Seeed Arduino rpcWiFi](https://github.com/Seeed-Studio/Seeed_Arduino_rpcWiFi)
 * [Seeed Arduino rpcUnified](https://github.com/Seeed-Studio/Seeed_Arduino_rpcUnified)
@@ -69,7 +69,7 @@ if the output version is not JDK 21, you may need to look into changing your pat
 * Now,  run the line: ```mvn compile``` and after, ```mvn exec:java -Dexec.mainClass=group1.silowebapp.SiloWebAppApplication``` 
 * Lastly, open your webbrowser and enter: http://localhost:8080/
 
-* If you wish to stop the program, simply exit your commandprompt.
+* If you wish to stop the program, simply exit your command prompt.
 
 
 ## Contributors:
