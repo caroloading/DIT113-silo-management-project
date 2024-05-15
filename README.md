@@ -83,6 +83,7 @@ If the output version is not JDK 21, you may need to change your system path. Yo
 
 ## Acknowledgements
 * Thank you to our TAs Teo Portase and Adrian Hassa.
+* Thank you to Font Awesome by Dave Gandy (http://fontawesome.io) for providing great icons
 
 ## License
 The project is licensed under the MIT License. Refer to [license](https://git.chalmers.se/courses/dit113/2024/group-1/silo-management-project/-/blob/main/LICENSE?ref_type=heads) for more information.
