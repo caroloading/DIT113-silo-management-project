@@ -47,30 +47,30 @@ If the battery is not charged, plugged the battery into a computer using the cen
 </div>
 
 * Download the GrainGuard repository from GitLab.
-* Extract the `.zip` file to your choice of directory.
+* Extract the `.zip` file to a directory of choice.
 * Create a `secrets.h` file in the wio directory according to the `secrets.example.h` file, and replace the example text with the correct SSID and password for your Wi-Fi network.
-* In the Arduino IDE, open the file called wio.ino, the file is located in the `silo-management-project/wio/` directory:
+* In the Arduino IDE, open the file called `wio.ino` which is located in the `silo-management-project/wio/` directory:
 
 <div>
     <img style="margin-left: 50px" src="docs/images/OpenFile.png" width="auto" height="auto"/>
     <img style="margin-left: 50px" src="docs/images/OpenWio.png" width="auto" height="auto"/>
 </div>
 
-* After opening the wio.ino file, ensure that your terminal is connected via the USB-C port to the computer you have Arduino IDE opened on.
-* Now, with the terminal ON, upload the code to your terminal through the Arduino IDE by pressing the arrow button as highlighted below. <br/>
+* After opening the `wio.ino` file, ensure that the terminal is connected via the USB-C port to the computer where the Arduino IDE is opened.
+* Now, with the terminal ON, upload the code to the terminal through the Arduino IDE by pressing the arrow button as highlighted below. <br/>
 (Note that the following step will not work if the computer is connected to the battery or not at all.)
 <div>
     <img style="margin-left: 50px" src="docs/images/UploadWio.png" width=500px height=200px/>
 </div>
 
-* On your computer, open the terminal and change the directory so that you end up in `/silo-management-project/silo-webapp/` directory
+* On your computer, open the terminal and navigate to the following directory `/silo-management-project/silo-webapp/`
 * Run the command: ```mvn clean install```
-* If the build fails, it might be the case that you have multiple versions of Java installed. Run the line ```java -version``` <br/>
-if the output version is not JDK 21, you may need to look into changing your path [here.](https://www.java.com/en/download/help/path.html) Set the path and repeat the step.
-* Now,  run the line: ```mvn compile``` and after, ```mvn exec:java -Dexec.mainClass=group1.silowebapp.SiloWebAppApplication``` 
+* If the build fails, it might be the case that you have multiple versions of Java installed. Run the following command in the command prompt to see the currently installed Java version ```java -version``` <br/>
+If the output version is not JDK 21, you may need to change your system path. You can read more about it [here.](https://www.java.com/en/download/help/path.html) Update the path and repeat this step.
+* Now,  run the command: `mvn compile` and after, `mvn exec:java -Dexec.mainClass=group1.silowebapp.SiloWebAppApplication`
 * Lastly, open your web browser and navigate to `http://localhost:8080/`
 
-* If you wish to stop the program, you can either press `CTRL + C` or simply exit the command prompt.
+* If you wish to stop the program, you can either terminate the processes by pressing `CTRL + C` in the terminal or simply closing the command prompt.
 
 
 ## Contributors:
