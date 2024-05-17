@@ -5,6 +5,10 @@ The developed system is meant to help monitor and manage the conditions and leve
 
 ## Visuals
 
+The following video demonstrates the functionalities and use case of GrainGuard:
+
+[GrainGuard - Demo Video](https://youtu.be/ZmxmOqA06aw)
+
 ## Installation
 
 ### Required software
@@ -72,18 +76,26 @@ If the output version is not JDK 21, you may need to change your system path. Yo
 
 * If you wish to stop the program, you can either terminate the processes by pressing `CTRL + C` in the terminal or simply closing the command prompt.
 
+## System Architecture
+
+Our system architecture is illustrated in the diagram below. Light yellow eements represent hardware components, while light blue elements represent software components.
+
+<div>
+    <img style="margin-left: 50px" src="docs/images/systemArchitecture.png" width=auto height=auto/>
+</div>
+
 
 ## Contributors:
-* Charles Jarju - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kicked off the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
-* Viktor Kolak - created MQTT logic on the Wio terminal level; added Wi-Fi connectivity to the Wio terminal; Set up a third-party database running PostgreSQL engine; worked on the web application charts; positively contributed to the web application styling; created a wonderful logo for the "company"/website
-* Samuel Partain - added business logic for the temperature and humidity sensor; worked on the web application charts; added dynamic updates to the web application charts based on the incoming data 
-* Szymon Witt - made significant contributions to the refactor front (both on the sensor level and on the web application level); worked on the web application styling; added web sockets to the web application; created a silo details page with an integrated map view
-* Caroline Grand-Clement - worked on the MQTT client on the web application side; added business logic for Wio terminal buttons; worked on the web application web socket connection; added dynamic pop-ups and banners to the web application; was the strongest PM of the group, coordinating responsibilities, keeping project progress information updated, and keeping team meetings on the highest level
+* Charles Jarju (@jarju) - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kicked off the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
+* Viktor Kolak (@kolak) - created MQTT logic on the Wio terminal level; added Wi-Fi connectivity to the Wio terminal; Set up a third-party database running PostgreSQL engine; worked on the web application charts; positively contributed to the web application styling; created a wonderful logo for the "company"/website
+* Samuel Partain (@partains) - added business logic for the temperature and humidity sensor; worked on the web application charts; added dynamic updates to the web application charts based on the incoming data 
+* Szymon Witt (@szymonw) - made significant contributions to the refactor front (both on the sensor level and on the web application level); worked on the web application styling; added web sockets to the web application; created a silo details page with an integrated map view
+* Caroline Grand-Clement (@jeannec) - worked on the MQTT client on the web application side; added business logic for Wio terminal buttons; worked on the web application web socket connection; added dynamic pop-ups and banners to the web application; was the strongest PM of the group, coordinating responsibilities, keeping project progress information updated, and keeping team meetings on the highest level
 
 
 ## Acknowledgements
 * Thank you to our TAs Teo Portase and Adrian Hassa.
-* Thank you to Font Awesome by Dave Gandy (http://fontawesome.io) for providing great icons
+* Thank you to Font Awesome by Dave Gandy (http://fontawesome.io) for providing great icons.
 
 ## License
 The project is licensed under the MIT License. Refer to [license](https://git.chalmers.se/courses/dit113/2024/group-1/silo-management-project/-/blob/main/LICENSE?ref_type=heads) for more information.
