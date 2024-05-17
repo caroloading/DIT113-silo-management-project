@@ -3,6 +3,8 @@ package group1.silowebapp.webSocketComponent;
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
 import group1.silowebapp.model.Temperature;
+import group1.silowebapp.schemas.GrainPercentage;
+import group1.silowebapp.schemas.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;

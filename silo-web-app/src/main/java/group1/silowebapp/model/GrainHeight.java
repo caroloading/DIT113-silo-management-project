@@ -51,7 +51,6 @@ public class GrainHeight {
     }
 
     public String getDateTime() {
-        // Todo: format dateTime
         return dateTime;
     }
 
