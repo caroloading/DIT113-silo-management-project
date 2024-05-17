@@ -1,4 +1,4 @@
-package group1.silowebapp.webSocketComponent;
+package group1.silowebapp.schemas;
 
 //Class not linked to database
 //for sending grain quantity data
