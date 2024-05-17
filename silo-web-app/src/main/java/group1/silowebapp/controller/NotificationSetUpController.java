@@ -1,4 +1,4 @@
-package group1.silowebapp.webSocketComponent;
+package group1.silowebapp.controller;
 
 import group1.silowebapp.model.GrainHeight;
 import group1.silowebapp.model.Humidity;
@@ -6,6 +6,7 @@ import group1.silowebapp.model.Temperature;
 import group1.silowebapp.repository.GrainHeightRepository;
 import group1.silowebapp.repository.HumidityRepository;
 import group1.silowebapp.repository.TemperatureRepository;
+import group1.silowebapp.webSocketComponent.WebSocketSensorUpdateComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
