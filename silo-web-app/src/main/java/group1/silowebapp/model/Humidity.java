@@ -40,7 +40,6 @@ public class Humidity {
     }
 
     public String getDateTime() {
-        //Todo: format 
         return dateTime;
     }
 
