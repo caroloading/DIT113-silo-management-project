@@ -10,6 +10,5 @@ public interface SiloRepository extends CrudRepository<Silo, Long> {
      */
     Silo findById(long id);
 
-    //for testing purposes
     Silo findByName(String name);
 }
