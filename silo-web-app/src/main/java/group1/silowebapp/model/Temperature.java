@@ -40,7 +40,6 @@ public class Temperature {
     }
 
     public String getDateTime() {
-        // Todo: format dateTime
         return dateTime;
     }
 

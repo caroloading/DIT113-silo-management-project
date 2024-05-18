@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.Year;
-
 /*
  * The @Autowired annotations allows Spring to inject beans into the controller.
  * In this case, the autowired reference allows us to query the GrainHeight
@@ -16,7 +14,6 @@ import java.time.Year;
  * The controller adds objects to the Model map. This map object is made available
  * to the view component.
  *
- * thisYear attribute is used in the footer section of the HTML page
  */
 
 @Controller
@@ -27,7 +24,6 @@ public class GrainHeightController {
     @GetMapping("/grainheights")
     public String getAllGrainHeights(Model grainHeight) {
         grainHeight.addAttribute("grainHeights", grainHeightRepository.findAllByOrderByDateTimeDesc());
-        grainHeight.addAttribute("thisYear", Year.now());
 
         return "grainheights";
     }

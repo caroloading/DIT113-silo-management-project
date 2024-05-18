@@ -1,4 +1,4 @@
-package group1.silowebapp.webSocketComponent;
+package group1.silowebapp.schemas;
 
 public class Notification {
     private String warningType;
