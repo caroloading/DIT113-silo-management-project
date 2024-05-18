@@ -5,6 +5,10 @@ The developed system is meant to help monitor and manage the conditions and leve
 
 ## Visuals
 
+The following video demonstrates the functionalities and use case of GrainGuard:
+
+[GrainGuard - Demo Video](https://youtu.be/ZmxmOqA06aw)
+
 ## Installation
 
 ### Required software
@@ -35,11 +39,11 @@ The developed system is meant to help monitor and manage the conditions and leve
 
 To avoid having potential problems with library dependencies, it is advised to install all libraries directly from the GitHub links provided above.
 
-## Usage
+## Setup
 * Before downloading the git repository, ensure that all required software and libraries are installed.
-* Connect the Battery Chassis with the Wio Terminal by inserting all pins on the battery into the back of the terminal.
-* make sure that the battery is charged by trying to turn the terminal on without connecting it with a wire. <br/>
-If it is not plug the battery into a computer using the central USB-C port on the battery.
+* Connect the Battery Chassis to the Wio Terminal by inserting all the pins on the battery into the back of the terminal.
+* If the battery is charged, the terminal should work without having to be connected to the power source with a cable. <br/>
+If the battery is not charged, plugged the battery into a computer using the central USB-C port on the battery.
 * Connect each sensor to a cable and insert them in the following sockets: 
 <div>
     <img style="margin-left: 50px" src="docs/images/WioConnections.png" width="400px" height="auto"/>
@@ -47,40 +51,51 @@ If it is not plug the battery into a computer using the central USB-C port on th
 </div>
 
 * Download the GrainGuard repository from GitLab.
-* Extract the .zip file to your choice of directory.
-* Create a secrets.h file in the /wio folder, according secrets.example.h file, replacing the example text with the correct SSID and password for your wifi network.
-* Open the Arduino IDE and open the file called wio.ino, the file is located in .../silo-management-project/wio/wio.ino:
+* Extract the `.zip` file to a directory of choice.
+* Create a `secrets.h` file in the wio directory according to the `secrets.example.h` file, and replace the example text with the correct SSID and password for your Wi-Fi network.
+* In the Arduino IDE, open the file called `wio.ino` which is located in the `silo-management-project/wio/` directory:
+
 <div>
     <img style="margin-left: 50px" src="docs/images/OpenFile.png" width="auto" height="auto"/>
     <img style="margin-left: 50px" src="docs/images/OpenWio.png" width="auto" height="auto"/>
 </div>
 
-* When you have successfully opened the wio.ino file, ensure that your terminal is connected via the USB-C port to the computer you have arduino IDE open on.
-* Now, with the terminal ON, upload the code to your terminal through the Arduino IDE by pressing the arrow button as highlighted below. <br/>
+* After opening the `wio.ino` file, ensure that the terminal is connected via the USB-C port to the computer where the Arduino IDE is opened.
+* Now, with the terminal ON, upload the code to the terminal through the Arduino IDE by pressing the arrow button as highlighted below. <br/>
 (Note that the following step will not work if the computer is connected to the battery or not at all.)
 <div>
     <img style="margin-left: 50px" src="docs/images/UploadWio.png" width=500px height=200px/>
 </div>
 
-* On your computer, open the terminal and change directory so that you end up in .../silo-management-project/silo-webapp/
-* run the command: ```mvn clean install```
-* If the build fails, you may have multiple versions of java installed. Run the line ```java -version``` <br/>
-if the output version is not JDK 21, you may need to look into changing your path [here.](https://www.java.com/en/download/help/path.html) Set the path and repeat the step.
-* Now,  run the line: ```mvn compile``` and after, ```mvn exec:java -Dexec.mainClass=group1.silowebapp.SiloWebAppApplication``` 
-* Lastly, open your webbrowser and enter: http://localhost:8080/
+* On your computer, open the terminal and navigate to the following directory `/silo-management-project/silo-webapp/`
+* Run the command: ```mvn clean install```
+* If the build fails, it might be the case that you have multiple versions of Java installed. Run the following command in the command prompt to see the currently installed Java version ```java -version``` <br/>
+If the output version is not JDK 21, you may need to change your system path. You can read more about it [here.](https://www.java.com/en/download/help/path.html) Update the path and repeat this step.
+* Now,  run the command: `mvn compile` and after, `mvn exec:java -Dexec.mainClass=group1.silowebapp.SiloWebAppApplication`
+* Lastly, open your web browser and navigate to `http://localhost:8080/`
 
-* If you wish to stop the program, simply exit your command prompt.
+* If you wish to stop the program, you can either terminate the processes by pressing `CTRL + C` in the terminal or simply closing the command prompt.
+
+## System Architecture
+
+Our system architecture is illustrated in the diagram below. Light yellow elements represent hardware components, while light blue elements represent software components.
+
+<div>
+    <img style="margin-left: 50px" src="docs/images/systemArchitecture.png" width=auto height=auto/>
+</div>
 
 
 ## Contributors:
-* Charles Jarju - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kick-started the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
-* Viktor Kolak - created a MQTT logic on the Wio terminal level; added Wi-Fi connectivity to the Wio terminal; Set up a third-party database running PostgreSQL engine; worked on the web application charts; positively contributed to the web application styling; created a wonderful logo for the "company"/website
-* Samuel Partain - added business logic for the temperature and humidity sensor; worked on the web application charts; added dynamic updates to the web application charts based on the incoming data 
-* Szymon Witt - made signifficant contributions on the refactor front (both on the sensor level as well as on the web application level); worked on the web application styling; added websockets to the web application
-* Caroline Grand-Clement - worked on the MQTT client on the web application side; added business logic for Wio terminal buttons; worked on the web application websocket connection; added dynamic pop-ups and banners to the web application; was the strongest PM of the group, coordinating responsibilities, keeping project progress information updated, and keeping team meetings on the highest level  
+* Charles Jarju (@jarju) - created a foundation for the Spring Boot Web application by adding appropriate models, controllers, and views that kicked off the development process; added a business logic to the Wio terminal for capturing reading timestamps; created a CI Pipeline for the web application using Maven for the build process (Spring Boot build); created a professionally-looking style for the Wio Terminal display
+* Viktor Kolak (@kolak) - created MQTT logic on the Wio terminal level; added Wi-Fi connectivity to the Wio terminal; Set up a third-party database running PostgreSQL engine; worked on the web application charts; positively contributed to the web application styling; created a wonderful logo for the "company"/website
+* Samuel Partain (@partains) - added business logic for the temperature and humidity sensor; worked on the web application charts; added dynamic updates to the web application charts based on the incoming data 
+* Szymon Witt (@szymonw) - made significant contributions to the refactor front (both on the sensor level and on the web application level); worked on the web application styling; added web sockets to the web application; created a silo details page with an integrated map view
+* Caroline Grand-Clement (@jeannec) - worked on the MQTT client on the web application side; added business logic for Wio terminal buttons; worked on the web application web socket connection; added dynamic pop-ups and banners to the web application; was the strongest PM of the group, coordinating responsibilities, keeping project progress information updated, and keeping team meetings on the highest level
+
 
 ## Acknowledgements
 * Thank you to our TAs Teo Portase and Adrian Hassa.
+* Thank you to Font Awesome by Dave Gandy (http://fontawesome.io) for providing great icons.
 
 ## License
 The project is licensed under the MIT License. Refer to [license](https://git.chalmers.se/courses/dit113/2024/group-1/silo-management-project/-/blob/main/LICENSE?ref_type=heads) for more information.
