@@ -78,7 +78,7 @@ If the output version is not JDK 21, you may need to change your system path. Yo
 
 ## System Architecture
 
-Our system architecture is illustrated in the diagram below. Light yellow eements represent hardware components, while light blue elements represent software components.
+Our system architecture is illustrated in the diagram below. Light yellow elements represent hardware components, while light blue elements represent software components.
 
 <div>
     <img style="margin-left: 50px" src="docs/images/systemArchitecture.png" width=auto height=auto/>
